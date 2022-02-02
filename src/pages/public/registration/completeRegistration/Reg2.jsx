@@ -1,15 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { setProfile } from "../../../../redux/reducers/profileSlice";
-import { Navigate, useNavigate } from "react-router-dom";
-import { ageToDate, dateToAge, getMaxDate, getMinDate } from "../ageCalculator";
+import { useNavigate } from "react-router-dom";
 import "../styles/completeRegistration.scss";
 import "../styles/responsive.scss";
 import { part2Schema } from "../validations/yupSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import Constants from "../../../../constants";
 
-const Reg2 = () => {
+export const Reg2 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [DOB, setDOB] = useState("");
@@ -33,10 +32,9 @@ const Reg2 = () => {
     []
   );
 
-  if (!profile) return <Navigate to="/" />;
   const onSubmit = async (values) => {
     await dispatch(setProfile({ ...profile, ...values }));
-    await navigate("/completeRegistration3");
+    await navigate("/registration/3");
   };
 
   return (
@@ -65,10 +63,7 @@ const Reg2 = () => {
                     id="DOBVALUE"
                     className="DOBVALUE1 regis-input hasDatepicker"
                     data-date-inline-picker="true"
-                    // maxLength={10}
                     name="dateOfBirth"
-                    // onChange={(e) => setDOB(e.target.value)}
-                    // value={DOB}
                   />
                   <ErrorMessage name="datOfBirth" id="dob-err">
                     {(msg) => <div className="regis-errtxt">{msg}</div>}
@@ -83,14 +78,10 @@ const Reg2 = () => {
                 <div className="regis-col2 posrelative" id="age-border">
                   <Field
                     type="text"
-                    name="Age"
-                    id="Age"
+                    name="age"
                     placeholder="Enter your age"
                     maxLength={2}
                     className="regis-input"
-                    name="age"
-                    // value={age}
-                    // onChange={(e) => setAge(e.target.value)}
                   />
                 </div>
                 <div className="clear" />
@@ -147,6 +138,11 @@ const Reg2 = () => {
                   {(msg) => <div className="regis-errtxt">{msg}</div>}
                 </ErrorMessage>
               </div>
+              {/* <SelectField name={"religion"} options={Constants.religions} />
+              <SelectField
+                name={"motherTongue"}
+                options={Constants.motherTongues}
+              /> */}
 
               {/* MOTHER TONGUE */}
               <div className="paddt10 h50">
@@ -364,5 +360,3 @@ const Reg2 = () => {
     </div>
   );
 };
-
-export default Reg2;

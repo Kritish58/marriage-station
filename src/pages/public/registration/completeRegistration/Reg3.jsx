@@ -1,54 +1,40 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { RadioField } from "../../../../components/RadioField";
+import { ShowError } from "../../../../components/ShowError";
 import Constants from "../../../../constants";
 import { setProfile } from "../../../../redux/reducers/profileSlice";
 import "../styles/completeRegistration.scss";
 import "../styles/responsive.scss";
 import { part3Schema } from "../validations/yupSchemas";
-import selectarw from "../../../../assets/selectarw.png";
 
-const Reg3 = () => {
+export const Reg3 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [ifDosh, setIfDosh] = useState("no");
-  const [marryAnotherCommunity, setMarryAnotherCommunity] = useState(false);
-  const [manglik, setManglik] = useState(false);
-  const [sarpaDosh, setSarpaDosh] = useState(false);
-  const [kalaSarpaDosh, setKalaSarpaDosh] = useState(false);
-  const [rahuDosh, setRahuDosh] = useState(false);
-  const [kethuDosh, setKethuDosh] = useState(false);
-  const [kalathraDosh, setKalathraDosh] = useState(false);
   const profile = useSelector((state) => state.profile.profile);
 
   const initialValues = useMemo(
     () => ({
       caste: "",
+      marryAnotherCommunity: "",
       subCaste: "",
       gothra: "",
+      dosh: "",
     }),
     []
   );
-  if (!profile) return <Navigate to="/" />;
 
   const onSubmit = async (values) => {
     await dispatch(
       setProfile({
         ...profile,
-        ifDosh,
-        marryAnotherCommunity,
-        manglik,
-        sarpaDosh,
-        kalaSarpaDosh,
-        rahuDosh,
-        kethuDosh,
-        kalathraDosh,
         ...values,
       })
     );
-    await navigate("/completeRegistration4");
+    await navigate("/registration/4");
   };
   return (
     <div className="rest__parts">
@@ -116,17 +102,17 @@ const Reg3 = () => {
                 </ErrorMessage>
                 <div className="clear" />
                 <div className="regis-chktxt vmiddle">
-                  <input
-                    name="SAMECASTE"
-                    id="SAMECASTE1"
+                  <Field
                     type="checkbox"
+                    name="marryAnotherCommunity"
+                    id="SAMECASTE1"
                     className="vmiddle"
-                    checked={marryAnotherCommunity}
-                    onChange={() =>
-                      setMarryAnotherCommunity(!marryAnotherCommunity)
-                    }
                   />
                   <span>Willing to marry from other communities also</span>
+                  <ErrorMessage
+                    name="marryAnotherCommunity"
+                    component={ShowError}
+                  />
                 </div>
               </div>
               {/*-SUB CASTE ---*/}
@@ -187,7 +173,8 @@ const Reg3 = () => {
               {/*-DOSHAM ---*/}
               <div className="paddt30 h50" id="MANGLIKPART">
                 <div className="regis-col1 paddt5">Dosh</div>
-                <div className="regis-col2 regis-radio" id="domainmangilk">
+                <RadioField name="dosh" options={["No", "Yes", "May be"]} />
+                {/* <div className="regis-col2 regis-radio" id="domainmangilk">
                   <div id="manglik">
                     <label
                       htmlFor="MANGLIK2"
@@ -213,7 +200,7 @@ const Reg3 = () => {
                       <input
                         type="radio"
                         className="radio"
-                        name="MANGLIK"
+                        name="manglik"
                         id="MANGLIK1"
                         onClick={() => setIfDosh("yes")}
                       />
@@ -228,17 +215,17 @@ const Reg3 = () => {
                       <input
                         type="radio"
                         className="radio"
-                        name="MANGLIK"
+                        name="manglik"
                         id="MANGLIK3"
                         onClick={() => setIfDosh("dontKnow")}
                       />
                       Don't know
                     </label>
                   </div>
-                </div>
+                </div> */}
                 <div className="clear" />
               </div>
-              <div
+              {/* <div
                 className="h50"
                 id="dosham_regdiv"
                 style={{ display: ifDosh === "yes" ? "block" : "none" }}
@@ -316,7 +303,7 @@ const Reg3 = () => {
                   style={{ display: "none", marginTop: 0 }}
                   id="errdoshacheck"
                 />
-              </div>
+              </div> */}
               {/*-DOSHAM END ---*/}
               <div className="paddt30 paddb30 txt-center">
                 <button className="hp-button" alt="Continue" type="submit">
@@ -336,5 +323,3 @@ const Reg3 = () => {
     </div>
   );
 };
-
-export default Reg3;

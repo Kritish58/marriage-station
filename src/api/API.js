@@ -9,7 +9,6 @@ const API = Axios.create({
   baseURL: Constants.env.APP_DOMAIN + "/api/v1",
   timeout: Constants.env.MAX_CONNECTION_TIMEOUT,
   headers: {
-    // Connection: "close",
     Accept: "application/json",
     "Content-Type": "application/json",
   },

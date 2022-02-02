@@ -1,12 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setProfile } from "../../../../redux/reducers/profileSlice";
 import "../styles/completeRegistration.scss";
 import { part4Schema } from "../validations/yupSchemas";
 
-const Reg4 = () => {
+export const Reg4 = () => {
   const [maritalStatus, setMaritalStatus] = useState("neverMarried");
   const [noOfChildren, setNoOfChildren] = useState("none");
   const [familyStatus, setFamilyStatus] = useState("middleClass");
@@ -19,17 +19,10 @@ const Reg4 = () => {
 
   const initialValues = useMemo(
     () => ({
-      // maritalStatus,
-      // noOfChildren,
-      // familyStatus,
-      // familyType,
-      // familyValues,
-      // disability,
       height: "",
     }),
     []
   );
-  if (!profile) return <Navigate to="/" />;
 
   const onSubmit = async (values) => {
     await dispatch(
@@ -44,7 +37,7 @@ const Reg4 = () => {
         ...values,
       })
     );
-    await navigate("/completeRegistration5");
+    await navigate("/registration/5");
   };
   return (
     <div className="rest__parts">
@@ -595,5 +588,3 @@ const Reg4 = () => {
     </div>
   );
 };
-
-export default Reg4;

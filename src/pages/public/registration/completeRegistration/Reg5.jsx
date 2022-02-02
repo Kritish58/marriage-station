@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Constants from "../../../../constants";
 import { setProfile } from "../../../../redux/reducers/profileSlice";
 import "../styles/completeRegistration.scss";
 import { part5Schema } from "../validations/yupSchemas";
 
-const Reg5 = () => {
+export const Reg5 = () => {
   const [employedIn, setEmployedIn] = useState("notWorking");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,11 +21,9 @@ const Reg5 = () => {
     }),
     []
   );
-  if (!profile) return <Navigate to="/" />;
-
   const onSubmit = async (values) => {
     await dispatch(setProfile({ ...profile, employedIn, ...values }));
-    await navigate("/completeRegistration6");
+    await navigate("/registration/6");
   };
 
   return (
@@ -298,5 +296,3 @@ const Reg5 = () => {
     </div>
   );
 };
-
-export default Reg5;

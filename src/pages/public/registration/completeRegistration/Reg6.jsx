@@ -1,32 +1,36 @@
-import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React from "react";
-import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import API from "../../../../api/API";
-import { printResponseError } from "../../../../api/logger";
-// import authRequests from "../../../../api/authRequests";
-// import useAPI from "../../../../api/useAPI";
 import Constants from "../../../../constants";
+import {
+  authFailure,
+  authFinish,
+  authPending,
+  authSuccess,
+} from "../../../../redux/reducers/authSlice";
 import "../styles/completeRegistration.scss";
 
-const Reg6 = () => {
+export const Reg6 = () => {
   const profile = useSelector((state) => state.profile.profile);
-  const navigate = useNavigate();
-  // const registerUser = useAPI(authRequests.registerUser);
+  const dispatch = useDispatch();
 
-  if (!profile) return <Navigate to="/" />;
-  const onSubmit = () => {
-    // registerUser.sendRequest(profile);
-    // axios
-    //   .post("http://localhost:4001/api/v1/user/register", profile)
-    //   .then((res) => res.data.token && navigate("/loggedin"))
-    //   .catch((err) => console.log(err.message));
-    API.post(Constants.apiEndpoint.register, profile)
+  const onSubmit = async () => {
+    await dispatch(authPending());
+    await API.post(Constants.apiEndpoint.register, profile)
       .then((res) => {
         console.log(res);
+        dispatch(authSuccess(res.token));
+        let t = jwtDecode(res.token);
+        console.log(t);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch(authFailure(err.message));
+        console.log(err.message);
+      });
+    await dispatch(authFinish());
   };
+
   return (
     <div className="rest__parts">
       <div className="regis-level aboutform">
@@ -52,7 +56,7 @@ const Reg6 = () => {
                   ? " you"
                   : " your " + profile.profileFor.toLowerCase()}
               </div>
-              <div className="regis-radiocol2 regis-radio">
+              {/* <div className="regis-radiocol2 regis-radio">
                 <textarea
                   className="regis-abttxtarea"
                   title="spellcheck"
@@ -61,7 +65,7 @@ const Reg6 = () => {
                   id="DESCRIPTION1"
                   placeholder="Write something that stands out"
                 />
-              </div>
+              </div> */}
               <div className="clear" />
             </div>
             <div className="paddt10 regis-errtxt" id="descdet_err" />
@@ -86,5 +90,3 @@ const Reg6 = () => {
     </div>
   );
 };
-
-export default Reg6;

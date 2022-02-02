@@ -43,9 +43,10 @@ export const part2Schema = yup.object().shape({
 
 export const part3Schema = yup.object().shape({
   caste: yup.string().required("Caste is required."),
+  marryAnotherCommunity: yup.string().required("Required!"),
   subCaste: yup.string(),
   gothra: yup.string(),
-  // dosh: yup.string().required(),
+  dosh: yup.string().required("Please specify if any dosh."),
 });
 
 export const part4Schema = yup.object().shape({

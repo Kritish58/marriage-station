@@ -5,7 +5,7 @@ const Constants = {
     isDevelopment: process.env?.NODE_ENV === "development",
   },
   keys: {
-    session: "session",
+    session: "_t",
   },
   apiEndpoint: {
     login: "/auth/login",
@@ -13,25 +13,19 @@ const Constants = {
     // auth: {
     //   verifyOTP: "/customers/verify-code",
     // },
-    // admin: {
-    //   clients: "/clients",
-    //   clientCreate: "/clients/create",
-    //   adSlots: "/adSlots",
-    //   customerAdSlot: "/customerAdSlot",
-    // },
-    // customer: {
-    //   adSlots: "/customerAdSlot/customer-ad-list",
-    //   changeAdSlotStatus: "/adSlots",
-    // },
-    // client: {
-    //   adSlots: "/adSlots",
-    //   adSlotCreate: "/adSlots/create",
-    //   category: "/clients/categoryForClient",
-
-    //   clients: "/clients/information",
-    //   adTypes: "/adSlots/adForClient",
-    //   createAdSlot: "/customerAdSlot/create",
-    // },
+    admin: {
+      dashboard: "/a-control/dashboard",
+    },
+    franchise: {
+      dashboard: "/a-control/dashboard",
+    },
+    user: {
+      allUser: "/user",
+    },
+  },
+  roles: {
+    Admin: "admin",
+    NormalUser: "user",
   },
   //   patterns: {
   //     password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,

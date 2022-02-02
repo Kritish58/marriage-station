@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import selectarw from "../../../assets/selectarw.png";
 import "./styles/Main.scss";
 import { useDispatch } from "react-redux";
 import { setProfile } from "../../../redux/reducers/profileSlice";
 import Constants from "../../../constants";
 
-const Registration = () => {
+export const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [profileFor, setProfileFor] = useState("");
@@ -78,7 +77,7 @@ const Registration = () => {
           mobileNumber,
         })
       );
-      navigate("/completeRegistration");
+      navigate("/registration/2");
     }
   };
 
@@ -390,5 +389,3 @@ const Registration = () => {
     </div>
   );
 };
-
-export default Registration;
