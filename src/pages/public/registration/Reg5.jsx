@@ -2,10 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Constants from "../../../../constants";
-import { setProfile } from "../../../../redux/reducers/profileSlice";
-import "../styles/completeRegistration.scss";
-import { part5Schema } from "../validations/yupSchemas";
+import Constants from "../../../constants";
+import { setProfile } from "../../../redux/reducers";
+import { part5Schema } from "../../../validations/yupSchemas";
 
 export const Reg5 = () => {
   const [employedIn, setEmployedIn] = useState("notWorking");

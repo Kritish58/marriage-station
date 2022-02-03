@@ -34,7 +34,7 @@ const Constants = {
   errorResponses: {
     profileForError: "Whom this profile is for?",
     genderError: "Please specify gender.",
-    nameError: "Please provide name.",
+    nameError: "Please provide full name.",
     noMobileNumberError: "Please provide mobile number.",
     mobileNumberLengthError: "Number must be 10 digit long.",
   },
@@ -394,6 +394,7 @@ const Constants = {
     "Vishwakarma",
     "Yadav",
   ],
+  manglik: ["No", "Yes", "Don't know"],
   education: [
     "No Degree",
     "School Level",

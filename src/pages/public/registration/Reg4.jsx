@@ -2,9 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setProfile } from "../../../../redux/reducers/profileSlice";
-import "../styles/completeRegistration.scss";
-import { part4Schema } from "../validations/yupSchemas";
+import { setProfile } from "../../../redux/reducers";
+import { part4Schema } from "../../../validations/yupSchemas";
 
 export const Reg4 = () => {
   const [maritalStatus, setMaritalStatus] = useState("neverMarried");

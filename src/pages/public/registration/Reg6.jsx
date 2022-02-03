@@ -1,15 +1,14 @@
 import jwtDecode from "jwt-decode";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import API from "../../../../api/API";
-import Constants from "../../../../constants";
+import API from "../../../api";
+import Constants from "../../../constants";
 import {
   authFailure,
   authFinish,
   authPending,
   authSuccess,
-} from "../../../../redux/reducers/authSlice";
-import "../styles/completeRegistration.scss";
+} from "../../../redux/reducers";
 
 export const Reg6 = () => {
   const profile = useSelector((state) => state.profile.profile);
@@ -18,15 +17,15 @@ export const Reg6 = () => {
   const onSubmit = async () => {
     await dispatch(authPending());
     await API.post(Constants.apiEndpoint.register, profile)
-      .then((res) => {
+      .then((res, err) => {
         console.log(res);
         dispatch(authSuccess(res.token));
         let t = jwtDecode(res.token);
         console.log(t);
       })
-      .catch((err) => {
+      .catch((err, res) => {
         dispatch(authFailure(err.message));
-        console.log(err.message);
+        console.log(res);
       });
     await dispatch(authFinish());
   };

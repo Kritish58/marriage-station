@@ -9,12 +9,11 @@ export const part1Schema = yup.object().shape({
 });
 
 export const part2Schema = yup.object().shape({
-  // dateOfBirth: yup
-  //   .date()
-  //   .min(new Date().getFullYear - 100)
-  //   .max(new Date().getFullYear - 18)
-  //   .required("Date of birth is required."),
-  age: yup.string().required("Age is required."),
+  age: yup
+    .number()
+    .required("Age is required.")
+    .min(18, "Unethical age.")
+    .max(99, "Unethical age."),
   religion: yup.string().required("Religion is required."),
   motherTongue: yup.string().required("Mother tongue is required."),
   email: yup
@@ -38,7 +37,7 @@ export const part2Schema = yup.object().shape({
         .string()
         .oneOf([yup.ref("password")], "Both password need to be the same"),
     })
-    .required("Confirm password required"),
+    .required("Password confirmation is required."),
 });
 
 export const part3Schema = yup.object().shape({
@@ -46,7 +45,7 @@ export const part3Schema = yup.object().shape({
   marryAnotherCommunity: yup.string().required("Required!"),
   subCaste: yup.string(),
   gothra: yup.string(),
-  dosh: yup.string().required("Please specify if any dosh."),
+  manglik: yup.string().required("Mangal dosh?"),
 });
 
 export const part4Schema = yup.object().shape({

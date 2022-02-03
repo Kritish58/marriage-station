@@ -1,1 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #e9d8a666 !important;
+  font-family: "Poppins" !important;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+.main {
+  height: 100vh !important;
+}
+
+input,
+button {
+  border: none !important;
+  outline: none !important;
+}

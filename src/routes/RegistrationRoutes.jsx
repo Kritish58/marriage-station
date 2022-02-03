@@ -7,11 +7,11 @@ export function RegistrationRoutes() {
   if (!profile) return <Navigate replace to="/" />;
   return (
     <Routes>
-      <Route exact path="2" element={<Reg2 />} />
-      <Route exact path="3" element={<Reg3 />} />
-      <Route exact path="4" element={<Reg4 />} />
-      <Route exact path="5" element={<Reg5 />} />
-      <Route exact path="6" element={<Reg6 />} />
+      <Route exact path="20" element={<Reg2 />} />
+      <Route exact path="40" element={<Reg3 />} />
+      <Route exact path="60" element={<Reg4 />} />
+      <Route exact path="80" element={<Reg5 />} />
+      <Route exact path="90" element={<Reg6 />} />
     </Routes>
   );
 }

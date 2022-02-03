@@ -8,7 +8,9 @@ import { part2Schema } from "../validations/yupSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import Constants from "../../../../constants";
 
-export const Reg2 = () => {
+import { Form as FormBS } from "react-bootstrap";
+import Select from "react-select";
+export const Reg5 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [DOB, setDOB] = useState("");
@@ -54,6 +56,9 @@ export const Reg2 = () => {
               <div className="paddlh2">
                 <h2>Please provide us with your basic details </h2>
               </div>
+              <FormBS.Select>
+                <option>Disabled select</option>
+              </FormBS.Select>
               {/* DATE OF BIRTH */}
               <div className="paddt40 h50">
                 <div className="regis-col1 paddt7">Date Of Birth</div>

@@ -15,15 +15,15 @@ export const routeConfig = [
     roles: [Constants.roles.NormalUser],
   },
   {
+    path: "/",
+    title: "Dashboard",
+    element: Dashboard,
+    roles: [Constants.roles.Admin],
+  },
+  {
     path: "/viewProfile/:id",
     title: "View profile",
     element: Homepage,
     roles: [Constants.roles.NormalUser],
-  },
-  {
-    path: "/dashboard",
-    title: "Dashboard",
-    element: Dashboard,
-    roles: [Constants.roles.Admin],
   },
 ];

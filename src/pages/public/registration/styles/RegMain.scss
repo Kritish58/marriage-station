@@ -1,0 +1,174 @@
+.reg__main {
+  .profileFor {
+    .dropdown-menu.show {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 12px;
+      gap: 4px;
+      transform: translate(0px, 28px) !important;
+    }
+    .dropdown-menu {
+      min-width: 20rem !important;
+      border: none !important;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+    }
+    .genDrpdwn {
+      min-width: 12rem !important;
+      border: none !important;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+    }
+    .dropdown-item {
+      display: flex !important;
+      width: initial !important;
+      border-radius: 16px !important;
+      &:focus {
+        background: #239488 !important;
+        color: aliceblue;
+      }
+      &:hover {
+        background: #239488 !important;
+        color: aliceblue;
+      }
+    }
+  }
+  .numberDropdown {
+    .dropdown-menu.show {
+      transform: translate(-30px, 24px) !important;
+    }
+    .dropdown-menu {
+      min-width: 2rem !important;
+      border: none !important;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+    }
+    .dropdown-item {
+      &:focus {
+        background: #239488 !important;
+        color: aliceblue;
+      }
+      &:hover {
+        background: #239488 !important;
+        color: aliceblue;
+      }
+    }
+    .buttonStyle {
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+  .dropdown-toggle::after {
+    vertical-align: middle;
+  }
+  .logInButton {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #239488;
+    background: #23948846;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    // box-shadow: 0 0 10px #23948822, 0 2px 4px -2px #23948844;
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+  .divStyle {
+    position: relative;
+  }
+  .errorStyle {
+    position: absolute;
+    top: 105%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .reg__main {
+    display: block !important;
+    width: 100vw;
+
+    .dropdown-toggle {
+      padding: 10px !important;
+      background: white !important;
+      border-radius: 12px !important;
+    }
+    .profileFor {
+      .dropdown-menu.show {
+        transform: translate(0px, 50px) !important;
+      }
+      .genDrpdwn.show {
+        transform: translate(0px, 4px) !important;
+      }
+    }
+    .numberDropdown {
+      .dropdown-menu.show {
+        transform: translate(-16px, 48px) !important;
+      }
+    }
+    .logInHeader {
+      position: initial !important;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px !important;
+    }
+    .msTitle {
+      margin: 16px !important;
+      font-size: 20px !important;
+    }
+    .formStyle {
+      display: block !important;
+      height: initial !important;
+      margin: 0 12px !important;
+      padding: 10px 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .divStyle {
+      position: initial !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .inputStyle {
+      width: 100% !important;
+      padding: 10px 12px !important;
+      border-radius: 12px;
+      border: 2px solid white !important;
+      &:focus {
+        border-color: #23948866 !important;
+      }
+    }
+    .ctryStyle {
+      background: white;
+      border-radius: 12px;
+      width: initial !important;
+      padding: 12px !important;
+    }
+
+    .mobileDiv {
+      display: flex !important;
+    }
+
+    .mobileInput {
+      display: inline !important;
+    }
+
+    .buttonStyle {
+      display: block !important;
+      width: 100% !important;
+      padding: 12px 0 !important;
+      border-radius: 12px !important;
+      margin-top: 2rem !important;
+      box-shadow: #23948866 0px 2px 8px 0px !important;
+    }
+    .errorStyle {
+      position: initial !important;
+      margin: 12px 2px !important;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.input__field {
+  width: 100% !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 12px;
+  border: 2px solid white !important;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+  &:focus {
+    border-color: #23948866 !important;
+  }
+}

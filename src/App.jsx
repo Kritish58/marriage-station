@@ -14,7 +14,6 @@ const App = () => {
             </ProtectedRoutes>
           }
         />
-        <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route exact path="/privacy-policies" element={<Policies />} />
         <Route exact path="/terms-conditions" element={<Terms />} />
         <Route path="*" element={<>Not available</>} />

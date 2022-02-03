@@ -1,0 +1,15 @@
+.btn__submit {
+  display: block !important;
+  width: initial !important;
+  padding: 12px 32px !important;
+  border-radius: 12px !important;
+  margin-top: 2rem !important;
+  color: white !important;
+  background: #239488 !important;
+  //   box-shadow: #23948866 0px 2px 8px 0px !important;
+}
+@media only screen and (max-width: 767px) {
+  .btn__submit {
+    width: 100% !important;
+  }
+}

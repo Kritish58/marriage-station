@@ -4,7 +4,7 @@ import { RegistrationRoutes } from "./RegistrationRoutes";
 import { routeConfig } from "./routeConfig";
 
 export function ProtectedRoutes({ children }) {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const routes = useMemo(() => {
     return routeConfig.filter((c) => c.roles.length === 0);
   }, []);
@@ -22,6 +22,7 @@ export function ProtectedRoutes({ children }) {
             />
           );
         })}
+        <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>

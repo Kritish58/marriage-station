@@ -1,0 +1,43 @@
+.d-flex.flex__box {
+  //   padding: 16rem 8rem;
+  max-width: 1200px;
+  margin: auto;
+  gap: 6rem;
+  .btn__clr {
+    background: #239488 !important;
+    color: white;
+    box-shadow: #23948844 0 6px 20px 0 !important;
+  }
+  .adbox {
+    width: 400px;
+    display: grid;
+    font-size: 40px;
+    color: white;
+    place-items: center;
+    padding: 3rem;
+  }
+  .form-check-input {
+    border: 2px solid #23948866 !important;
+    &:focus {
+      box-shadow: none;
+    }
+    &:active {
+      background: #000 !important;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .d-flex.flex__box {
+    flex-direction: column !important;
+
+    .flex__form {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .adbox {
+      margin-top: 2rem !important;
+      width: 100% !important;
+      padding: 0 !important;
+    }
+  }
+}

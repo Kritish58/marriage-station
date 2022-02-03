@@ -105,7 +105,7 @@ export const Reg3 = () => {
                   <Field
                     type="checkbox"
                     name="marryAnotherCommunity"
-                    id="SAMECASTE1"
+                    id="sameCaste"
                     className="vmiddle"
                   />
                   <span>Willing to marry from other communities also</span>
