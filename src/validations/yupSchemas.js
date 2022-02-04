@@ -49,17 +49,17 @@ export const part3Schema = yup.object().shape({
 });
 
 export const part4Schema = yup.object().shape({
-  // maritalStatus: yup.string().required(),
-  // noOfChildren: yup.string().required(),
+  maritalStatus: yup.string().required(),
+  noOfChildren: yup.string().required(),
   height: yup.string().required("Height is required."),
-  // familyStatus: yup.string().required(),
-  // familyType: yup.string().required(),
-  // familyValues: yup.string().required(),
-  // disability: yup.string().required(),
+  familyStatus: yup.string().required(),
+  familyType: yup.string().required(),
+  familyValues: yup.string().required(),
+  disability: yup.string().required(),
 });
 
 export const part5Schema = yup.object().shape({
-  heightestEducation: yup.string().required("Education field is required."),
+  highestEducation: yup.string().required("Education field is required."),
   // employedIn: yup.string().required(),
   occupation: yup.string().required(),
   // incomeCurrency: yup.string().required(),
@@ -70,5 +70,18 @@ export const part5Schema = yup.object().shape({
 });
 
 export const part6Schema = yup.object().shape({
-  description: yup.string().min(100).max(300).required(),
+  description: yup
+    .string()
+    .min(100)
+    .max(300)
+    .required("Write somthing interesting for more profile reach."),
+});
+
+export const logInSchema = yup.object().shape({
+  userID: yup.string().required("Required."),
+  password: yup.string().required("Required."),
+});
+
+export const forgotPasswordSchema = yup.object().shape({
+  userID: yup.string().required("Required."),
 });

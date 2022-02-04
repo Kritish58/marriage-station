@@ -1,3 +1,5 @@
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Policies, Terms } from "./pages";
 import { ProtectedRoutes, UserRoutes } from "./routes";
@@ -5,6 +7,7 @@ import { ProtectedRoutes, UserRoutes } from "./routes";
 const App = () => {
   return (
     <Router>
+      <ToastContainer />
       <Routes>
         <Route
           path="/*"

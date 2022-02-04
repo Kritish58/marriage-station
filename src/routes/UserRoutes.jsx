@@ -2,9 +2,10 @@ import { useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { routeConfig } from "./routeConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useSelector } from "react-redux";
 
 export function UserRoutes() {
-  const user = { name: "Aashish", role: "admin" };
+  const { user } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) => c.roles.some((idx) => idx === user.role));
   }, [user.role]);

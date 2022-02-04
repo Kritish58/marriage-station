@@ -5,7 +5,7 @@ export const Radio = ({ name, label, value, values, onChange, error }) => {
   return (
     <div className="radioField py-2">
       <Label name={name} label={label} />
-      <div className="radios my-2">
+      <div className="radios">
         {values.map((option) => (
           <RadioPill
             key={option}

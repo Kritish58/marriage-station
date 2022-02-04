@@ -1,10 +1,11 @@
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RegistrationRoutes } from "./RegistrationRoutes";
 import { routeConfig } from "./routeConfig";
 
 export function ProtectedRoutes({ children }) {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) => c.roles.length === 0);
   }, []);

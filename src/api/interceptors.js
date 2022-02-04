@@ -1,4 +1,4 @@
-import { printRequest, printResponseError } from "./logger";
+import { printRequest } from "./logger";
 import Constants from "../constants";
 
 export const StatusCode = {

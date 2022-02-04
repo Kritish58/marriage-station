@@ -1,90 +1,74 @@
-import jwtDecode from "jwt-decode";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import { useMemo } from "react";
+import { Input, Submit } from "../../../components";
+import "./styles/RegCont.scss";
+import { part6Schema } from "../../../validations/yupSchemas";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import API from "../../../api";
 import Constants from "../../../constants";
-import {
-  authFailure,
-  authFinish,
-  authPending,
-  authSuccess,
-} from "../../../redux/reducers";
+import { toast } from "react-toastify";
 
 export const Reg6 = () => {
-  const profile = useSelector((state) => state.profile.profile);
+  const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = async () => {
-    await dispatch(authPending());
-    await API.post(Constants.apiEndpoint.register, profile)
-      .then((res, err) => {
-        console.log(res);
-        dispatch(authSuccess(res.token));
-        let t = jwtDecode(res.token);
-        console.log(t);
-      })
-      .catch((err, res) => {
-        dispatch(authFailure(err.message));
-        console.log(res);
+  // FORM INITIAL VALUES
+  const initialValues = useMemo(
+    () => ({
+      description: "",
+    }),
+    []
+  );
+
+  // USE FORMIK
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: part6Schema,
+    onSubmit: () => handleSubmit(formik.values),
+  });
+
+  const handleSubmit = async (values) => {
+    // try {
+    await API.post(Constants.apiEndpoint.register, {
+      ...profile,
+      ...values,
+    })
+      .then((res) => console.log(res))
+      .catch((error) => {
+        toast.error(
+          error.response?.data?.message ??
+            error.message ??
+            "Internal server error."
+        );
       });
-    await dispatch(authFinish());
   };
 
   return (
-    <div className="rest__parts">
-      <div className="regis-level aboutform">
-        Great! You have completed <span className="fs30">90% </span>{" "}
-      </div>
-      <div className="regis-container aboutform">
-        <div className="txt-center regis-left">ADVERTISEMENT</div>
-        <div className="regis-right">
-          <div className="paddl5 paddt35 mob-rgtpadd">
-            <div className="paddlh2">
-              <h2>
-                Let's write something interesting about
-                {profile.profileFor === "Myself"
-                  ? " you"
-                  : " your " + profile.profileFor.toLowerCase()}
-                &nbsp;
-              </h2>
-            </div>
-            <div className="paddt25">
-              <div className="regis-col1 paddt5">
-                About
-                {profile.profileFor === "Myself"
-                  ? " you"
-                  : " your " + profile.profileFor.toLowerCase()}
-              </div>
-              {/* <div className="regis-radiocol2 regis-radio">
-                <textarea
-                  className="regis-abttxtarea"
-                  title="spellcheck"
-                  accessKey="/spell_checker/spell_checker.php"
-                  name="DESCDET"
-                  id="DESCRIPTION1"
-                  placeholder="Write something that stands out"
-                />
-              </div> */}
-              <div className="clear" />
-            </div>
-            <div className="paddt10 regis-errtxt" id="descdet_err" />
-            <div className="paddt30 paddb30 txt-center">
-              <button
-                className="hp-button"
-                alt="Continue"
-                type="submit"
-                onClick={onSubmit}
-              >
-                Continue
-              </button>
-            </div>
+    <div className="main reg2 p-4">
+      <h2 style={{ textAlign: "end" }}>80% completed</h2>
+      <div className="d-flex flex-row-reverse flex__box">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="m-4 p-4 container-lg rounded-3 flex__form"
+        >
+          {/* DESCRIPTION INPUT */}
+          <Input
+            type="textbox"
+            name="description"
+            label={`Tell about ${profile.firstName}`}
+            placeholder="Write something interesting"
+            value={formik.values.description}
+            onChange={(value) => formik.setFieldValue("description", value)}
+            error={formik.touched.description && formik.errors.description}
+          />
+          <div className="d-flex justify-content-center mt-4">
+            <Submit text="Continue" />
           </div>
-        </div>
-        <div className="clear" />
-      </div>
-      {/* Container End*/}
-      <div align="center" className="paddt20 paddb20">
-        Copyright © 2021. All rights reserved.
+        </form>
+        <div className="adbox flex-grow-1 bg-success">ADVERTISEMENT</div>
       </div>
     </div>
   );
