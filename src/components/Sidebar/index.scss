@@ -1,0 +1,32 @@
+.sidebar {
+  width: 20vw;
+  height: 100vh;
+  .circular__container {
+    width: 200px;
+    height: 200px;
+    .avatar__image {
+      object-fit: cover;
+    }
+    margin-bottom: 40px;
+  }
+  .sidebar__item {
+    color: #909090;
+    &:hover {
+      cursor: pointer;
+      background: #23948844 !important;
+      color: #239488 !important;
+    }
+    height: 40px !important;
+  }
+  .sidebar__item.active {
+    background: #239488 !important;
+    color: #fefae0;
+    &:hover {
+      background: #239488 !important;
+      color: #fefae0 !important;
+    }
+  }
+  .sidebar__item.highlight {
+    color: #239488 !important;
+  }
+}

@@ -19,7 +19,7 @@ export const Reg3 = () => {
   const initialValues = useMemo(
     () => ({
       caste: "",
-      marryAnotherCommunity: "",
+      marryAnotherCommunity: false,
       subcaste: "",
       gothra: "",
       manglik: "",

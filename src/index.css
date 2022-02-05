@@ -3,7 +3,7 @@
 body {
   margin: 0 !important;
   padding: 0 !important;
-  background: #e9d8a666 !important;
+  background: #f3efe0 !important;
   font-family: "Poppins" !important;
 }
 
@@ -12,6 +12,7 @@ body {
 }
 
 .main {
+  width: 100vw !important;
   height: 100vh !important;
 }
 

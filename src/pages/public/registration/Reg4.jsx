@@ -18,7 +18,7 @@ export const Reg4 = () => {
   const initialValues = useMemo(
     () => ({
       maritalStatus: "",
-      noOfChildren: "",
+      noOfChildren: "None",
       height: "",
       familyStatus: "",
       familyType: "",
@@ -59,14 +59,21 @@ export const Reg4 = () => {
           />
 
           {/* NO OF CHILDREN RADIO FIELD */}
-          <Radio
-            name="noOfChildren"
-            label="No of children"
-            values={Constants.noOfChildren}
-            value={formik.values.noOfChildren}
-            onChange={(value) => formik.setFieldValue("noOfChildren", value)}
-            error={formik.touched.noOfChildren && formik.errors.noOfChildren}
-          />
+          {formik.values.maritalStatus !== "Never married" &&
+            formik.values.maritalStatus !== "" && (
+              <Radio
+                name="noOfChildren"
+                label="No of children"
+                values={Constants.noOfChildren}
+                value={formik.values.noOfChildren}
+                onChange={(value) =>
+                  formik.setFieldValue("noOfChildren", value)
+                }
+                error={
+                  formik.touched.noOfChildren && formik.errors.noOfChildren
+                }
+              />
+            )}
 
           {/* HEIGHT SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}

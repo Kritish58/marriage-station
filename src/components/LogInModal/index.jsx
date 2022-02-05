@@ -78,7 +78,8 @@ export const LogInModal = ({
     await API.post(Constants.apiEndpoint.forgotPassword, {
       email: values.userID,
     })
-      .then((res) => {
+      .then(async (res) => {
+        await localStorage.setItem("_rt", res.resetToken);
         toast.success("Reset link has been sent.", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -114,7 +115,7 @@ export const LogInModal = ({
     <Modal show={showLogIn} onHide={handleLogInClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>
-          {forgotPassword ? "Reset password" : <>Log In</>}
+          {forgotPassword ? "Reset password" : "Log In"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

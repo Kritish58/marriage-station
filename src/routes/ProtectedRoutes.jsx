@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ResetPassword } from "../pages/ResetPassword";
 import { RegistrationRoutes } from "./RegistrationRoutes";
 import { routeConfig } from "./routeConfig";
 
@@ -23,6 +24,7 @@ export function ProtectedRoutes({ children }) {
             />
           );
         })}
+        <Route exact path="/reset" element={<ResetPassword />} />
         <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
         <Route path="*" element={<Navigate replace to="/" />} />

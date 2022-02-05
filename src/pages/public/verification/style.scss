@@ -1,0 +1,24 @@
+.otpContainer {
+  width: 100%;
+}
+
+.otpInput {
+  height: 4rem;
+  width: 4rem;
+  margin: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 2px solid white !important;
+  &:focus-visible {
+    border: 2px solid #23948866 !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .otpInput {
+    height: 3rem;
+    margin: 4px;
+    width: 3rem;
+  }
+}

@@ -14,6 +14,7 @@ const Constants = {
     //   verifyOTP: "/customers/verify-code",
     // },
     forgotPassword: "/auth/forgetpassword",
+    resetPassword: "/auth/resetpassword",
     admin: {
       dashboard: "/a-control/dashboard",
     },

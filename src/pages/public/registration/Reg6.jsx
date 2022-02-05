@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
-import { Input, Submit } from "../../../components";
+import { Submit, Textarea } from "../../../components";
 import "./styles/RegCont.scss";
 import { part6Schema } from "../../../validations/yupSchemas";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,9 @@ import { useSelector } from "react-redux";
 import API from "../../../api";
 import Constants from "../../../constants";
 import { toast } from "react-toastify";
+import { signInWithPhoneNumber } from "firebase/auth";
+import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
+import { firebaseAuth } from "../../../firebase";
 
 export const Reg6 = () => {
   const { profile } = useSelector((state) => state.profile);
@@ -31,12 +34,24 @@ export const Reg6 = () => {
   });
 
   const handleSubmit = async (values) => {
-    // try {
     await API.post(Constants.apiEndpoint.register, {
       ...profile,
       ...values,
     })
-      .then((res) => console.log(res))
+      .then(async (res) => {
+        generateRecaptcha();
+        let appVerifier = window.recaptchaVerifier;
+        await signInWithPhoneNumber(
+          firebaseAuth,
+          profile.mobileNumber,
+          appVerifier
+        )
+          .then((res) => {
+            window.otpConfirmation = res;
+            navigate("/verifyOTP");
+          })
+          .catch((err) => toast.error("Something went wrong."));
+      })
       .catch((error) => {
         toast.error(
           error.response?.data?.message ??
@@ -55,8 +70,7 @@ export const Reg6 = () => {
           className="m-4 p-4 container-lg rounded-3 flex__form"
         >
           {/* DESCRIPTION INPUT */}
-          <Input
-            type="textbox"
+          <Textarea
             name="description"
             label={`Tell about ${profile.firstName}`}
             placeholder="Write something interesting"
@@ -64,10 +78,12 @@ export const Reg6 = () => {
             onChange={(value) => formik.setFieldValue("description", value)}
             error={formik.touched.description && formik.errors.description}
           />
+
           <div className="d-flex justify-content-center mt-4">
             <Submit text="Continue" />
           </div>
         </form>
+        <div id="recaptcha"></div>
         <div className="adbox flex-grow-1 bg-success">ADVERTISEMENT</div>
       </div>
     </div>

@@ -5,12 +5,17 @@ export const part1Schema = yup.object().shape({
   gender: yup.string().required(),
   name: yup.string().required(),
   countryCode: yup.string().required(),
-  mobileNumber: yup.string().length(10).required(),
+  mobileNumber: yup
+    .string()
+    .min(8, "Doesn't seem to be a valid number.")
+    .max(12, "Doesn't seem to be a valid number.")
+    .required(),
 });
 
 export const part2Schema = yup.object().shape({
   age: yup
     .number()
+    .typeError("Age must be a number.")
     .required("Age is required.")
     .min(18, "Unethical age.")
     .max(99, "Unethical age."),
@@ -42,7 +47,7 @@ export const part2Schema = yup.object().shape({
 
 export const part3Schema = yup.object().shape({
   caste: yup.string().required("Caste is required."),
-  marryAnotherCommunity: yup.string().required("Required!"),
+  marryAnotherCommunity: yup.string(),
   subCaste: yup.string(),
   gothra: yup.string(),
   manglik: yup.string().required("Mangal dosh?"),
@@ -72,8 +77,6 @@ export const part5Schema = yup.object().shape({
 export const part6Schema = yup.object().shape({
   description: yup
     .string()
-    .min(100)
-    .max(300)
     .required("Write somthing interesting for more profile reach."),
 });
 
@@ -84,4 +87,25 @@ export const logInSchema = yup.object().shape({
 
 export const forgotPasswordSchema = yup.object().shape({
   userID: yup.string().required("Required."),
+});
+
+export const resetPasswordSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(8)
+    .max(20)
+    .required("Password is required.")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+    ),
+  confirmPassword: yup
+    .string()
+    .when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: yup
+        .string()
+        .oneOf([yup.ref("password")], "Both password need to be the same"),
+    })
+    .required("Password confirmation is required."),
 });
