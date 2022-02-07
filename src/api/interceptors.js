@@ -18,15 +18,17 @@ async function responseInterceptor(error, API) {
     !originalRequest._retry
   ) {
     originalRequest._retry = true;
-    const _token = localStorage.getItem(Constants.keys.session) ?? "";
-    if (_token) {
+    const session = JSON.parse(
+      localStorage.getItem(Constants.keys.session) ?? "{}"
+    );
+    if (session?.token) {
       API.defaults.headers = API.defaults.headers || {};
       API.defaults.headers.common = {
         ...(API.defaults.headers.common ?? {}),
-        authorization: _token,
+        authorization: session.token,
       };
       originalRequest.headers = {
-        authorization: _token,
+        authorization: `Bearer ${session.token}`,
       };
       return API(originalRequest);
     }
@@ -35,10 +37,12 @@ async function responseInterceptor(error, API) {
 }
 
 async function requestInterceptor(config) {
-  const _token = localStorage.getItem(Constants.keys.session) ?? "";
-  if (_token) {
+  const session = JSON.parse(
+    localStorage.getItem(Constants.keys.session) ?? "{}"
+  );
+  if (session?.token) {
     config.headers = {
-      authorization: _token,
+      authorization: `Bearer ${session.token}`,
     };
   }
   printRequest(config);

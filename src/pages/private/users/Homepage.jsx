@@ -1,19 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Submit } from "../../../components";
-import { authFailure, authPending } from "../../../redux/reducers";
+import { Navigate } from "react-router-dom";
+// import { Sidebar } from "../../../components/Sidebar";
 
 export const Homepage = () => {
   const { user } = useSelector((state) => state.authState);
-  const dispatch = useDispatch();
-  const onClick = () => {
-    dispatch(authPending());
-    dispatch(authFailure());
-  };
+  if (!user) return <Navigate replace to="/" />;
   return (
     <div>
-      Welcome to Marriage Station, {user.email}
-      <Submit text="Logout" onClick={onClick} />
+      {/* <Sidebar user={user} /> */}
+      <h2>Hello, {user.firstName} </h2>
     </div>
   );
 };

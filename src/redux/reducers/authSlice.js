@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Constants from "../../constants";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -14,16 +15,20 @@ export const authSlice = createSlice({
     authSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.isAuthenticated = true;
-      state.user = payload;
+      state.user = payload.user;
+      localStorage.setItem(Constants.keys.session, JSON.stringify(payload));
     },
     authFailure: (state) => {
       state.isLoading = false;
       state.isAuthenticated = false;
       state.user = null;
+      localStorage.removeItem(Constants.keys.session);
     },
     logout: (state) => {
       state.isLoading = false;
       state.isAuthenticated = false;
+      state.user = null;
+      localStorage.removeItem(Constants.keys.session);
     },
   },
 });

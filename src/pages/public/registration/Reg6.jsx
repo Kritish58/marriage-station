@@ -1,20 +1,23 @@
-import { useFormik } from "formik";
 import { useMemo } from "react";
-import { Submit, Textarea } from "../../../components";
-import "./styles/RegCont.scss";
-import { part6Schema } from "../../../validations/yupSchemas";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import API from "../../../api";
-import Constants from "../../../constants";
+import { useFormik } from "formik";
 import { toast } from "react-toastify";
+import { firebaseAuth } from "../../../firebase";
 import { signInWithPhoneNumber } from "firebase/auth";
 import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
-import { firebaseAuth } from "../../../firebase";
+
+import "./styles/RegCont.scss";
+
+import { Spinner, Submit, Textarea } from "../../../components";
+import { part6Schema } from "../../../validations/yupSchemas";
+import API from "../../../api";
+import Constants from "../../../constants";
+import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
 
 export const Reg6 = () => {
   const { profile } = useSelector((state) => state.profile);
+  const { isLoading } = useSelector((state) => state.authState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,12 +36,15 @@ export const Reg6 = () => {
     onSubmit: () => handleSubmit(formik.values),
   });
 
+  // HANDLE FORM SUBMIT
   const handleSubmit = async (values) => {
-    await API.post(Constants.apiEndpoint.register, {
+    dispatch(authPending());
+    await API.post(Constants.apiEndpoint.user.register, {
       ...profile,
       ...values,
     })
       .then(async (res) => {
+        dispatch(authSuccess(res));
         generateRecaptcha();
         let appVerifier = window.recaptchaVerifier;
         await signInWithPhoneNumber(
@@ -53,11 +59,13 @@ export const Reg6 = () => {
           .catch((err) => toast.error("Something went wrong."));
       })
       .catch((error) => {
+        dispatch(authFailure());
         toast.error(
           error.response?.data?.message ??
             error.message ??
             "Internal server error."
         );
+        navigate("/registration/retry");
       });
   };
 
@@ -80,7 +88,7 @@ export const Reg6 = () => {
           />
 
           <div className="d-flex justify-content-center mt-4">
-            <Submit text="Continue" />
+            {isLoading ? <Spinner /> : <Submit text="Continue" />}
           </div>
         </form>
         <div id="recaptcha"></div>

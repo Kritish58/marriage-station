@@ -1,0 +1,40 @@
+.countryCode {
+  //   align-self: flex-end !important;
+  //   margin: 1.5rem 0 !important;
+  .countryCode__dropdown {
+    background: white !important;
+    width: 100% !important;
+    padding: 0.8rem 1rem !important;
+    border-radius: 12px;
+    border: 2px solid white !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+    &:focus {
+      border-color: #23948866 !important;
+    }
+    .toggle {
+      cursor: pointer !important;
+    }
+    .dropdown__menu {
+      width: 1rem !important;
+      background: white !important;
+      border-radius: 12px;
+      border: 2px solid white !important;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.2);
+      &:focus {
+        border-color: #23948866 !important;
+      }
+      .dropdown__item {
+        display: inline-block !important;
+        min-width: initial !important;
+        &:hover {
+          background: #239488;
+          color: aliceblue;
+        }
+        &:focus {
+          background: #239488;
+          color: aliceblue;
+        }
+      }
+    }
+  }
+}

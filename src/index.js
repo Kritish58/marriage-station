@@ -14,12 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <OtpVerification /> */}
-      {/* <MobileVerification /> */}
       <App />
-      {/* <Sidebar /> */}
-      {/* <Main /> */}
-      {/* <Signin /> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

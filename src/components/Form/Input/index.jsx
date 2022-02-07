@@ -1,9 +1,8 @@
 import "./index.scss";
 import { Error, Label } from "..";
-import { useEffect, useRef } from "react";
 
 export const Input = ({
-  focus,
+  className,
   name,
   label,
   style,
@@ -14,16 +13,10 @@ export const Input = ({
   onChange,
   error,
 }) => {
-  const ref = useRef();
-  useEffect(() => {
-    focus && ref.current.focus();
-  }, [focus]);
   return (
-    <div className="inputField my-4">
-      <Label label={label} name={name} />
+    <div className={`inputField my-4 ${className}`}>
+      {label && <Label label={label} name={name} />}
       <input
-        style={style}
-        ref={ref}
         type={type}
         name={name}
         label={label}
@@ -32,6 +25,7 @@ export const Input = ({
         maxLength={max}
         onChange={(event) => onChange(event.target.value)}
         className="input__field"
+        style={style}
       />
       {error && <Error>{error}</Error>}
     </div>

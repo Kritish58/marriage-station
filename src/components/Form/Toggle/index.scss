@@ -1,0 +1,11 @@
+.toggle {
+  .togglebar {
+    cursor: pointer !important;
+    .active {
+      // color: #bed6c8 !important;
+      background-color: #239488 !important;
+    }
+    color: white !important;
+    background: #7fb394 !important;
+  }
+}

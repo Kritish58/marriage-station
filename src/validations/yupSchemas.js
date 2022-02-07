@@ -80,13 +80,44 @@ export const part6Schema = yup.object().shape({
     .required("Write somthing interesting for more profile reach."),
 });
 
-export const logInSchema = yup.object().shape({
-  userID: yup.string().required("Required."),
+export const retrySchema = yup.object().shape({
+  email: yup.string().email().required("Email is required."),
+  mobileNumber: yup.string().required("Mobile number is required"),
+  password: yup
+    .string()
+    .min(8)
+    .max(20)
+    .required("Password is required.")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+    ),
+  confirmPassword: yup
+    .string()
+    .when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: yup
+        .string()
+        .oneOf([yup.ref("password")], "Both password need to be the same"),
+    })
+    .required("Password confirmation is required."),
+});
+
+export const logInWithEmailSchema = yup.object().shape({
+  email: yup.string().email().required("Required."),
   password: yup.string().required("Required."),
 });
 
-export const forgotPasswordSchema = yup.object().shape({
-  userID: yup.string().required("Required."),
+export const logInWithMobileSchema = yup.object().shape({
+  mobileNumber: yup.string().required("Required."),
+  password: yup.string().required("Required."),
+});
+
+export const forgotPasswordEmailSchema = yup.object().shape({
+  email: yup.string().email().required("Required."),
+});
+export const forgotPasswordMobileSchema = yup.object().shape({
+  mobileNumber: yup.string().required("Required."),
 });
 
 export const resetPasswordSchema = yup.object().shape({

@@ -4,3 +4,4 @@ export { Reg4 } from "./Reg4";
 export { Reg5 } from "./Reg5";
 export { Reg6 } from "./Reg6";
 export { Registration } from "./Registration";
+export { Retry } from "./Retry";

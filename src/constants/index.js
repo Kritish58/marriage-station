@@ -5,24 +5,25 @@ const Constants = {
     isDevelopment: process.env?.NODE_ENV === "development",
   },
   keys: {
-    session: "_t",
+    session: "_msuinfo",
+    resetToken: "_msrst",
   },
   apiEndpoint: {
-    login: "/auth/login",
-    register: "/user/register",
-    // auth: {
-    //   verifyOTP: "/customers/verify-code",
-    // },
-    forgotPassword: "/auth/forgetpassword",
-    resetPassword: "/auth/resetpassword",
+    auth: {
+      login: "/auth/login",
+      forgotPassword: "/auth/forgetpassword",
+      resetPassword: "/auth/resetpassword",
+    },
+    user: {
+      getAllUser: "/user",
+      register: "/user/register",
+      otpVerified: "/user/verified",
+    },
     admin: {
       dashboard: "/a-control/dashboard",
     },
     franchise: {
       dashboard: "/a-control/dashboard",
-    },
-    user: {
-      allUser: "/user",
     },
   },
   roles: {
@@ -481,27 +482,20 @@ const Constants = {
     "90 - 1 Crore",
     "1 Crore & Above",
   ],
-  session: {
-    userInfo: {
-      userId: "b0c89310-196c-4b74-86d2-9ce679888c20",
-      email: "ab9@yopmail.com",
-      role: "customer",
-      createdAt: "2022-01-29T17:16:08.000Z",
-      updatedAt: "2022-01-29T17:16:08.000Z",
+  countryCode: [
+    {
+      code: "np",
+      value: "+977",
     },
-    profile: {
-      customerId: "0c2ba7ec-46a9-4755-b0d1-f3983b57afaa",
-      name: "Aashish Sunuwar",
-      mobileNumber: null,
-      phoneNumber: "9823413241",
-      userId: "b0c89310-196c-4b74-86d2-9ce679888c20",
-      verified: true,
-      createdAt: "2022-01-29T17:16:08.000Z",
-      updatedAt: "2022-01-29T17:16:26.000Z",
+    {
+      code: "in",
+      value: "+91",
     },
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXJyZW50VXNlciI6eyJ1c2VySWQiOiJiMGM4OTMxMC0xOTZjLTRiNzQtODZkMi05Y2U2Nzk4ODhjMjAiLCJlbWFpbCI6ImFiOUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImNyZWF0ZWRBdCI6IjIwMjItMDEtMjlUMTc6MTY6MDguMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjItMDEtMjlUMTc6MTY6MDguMDAwWiJ9LCJpYXQiOjE2NDM0NzY2MzIsImV4cCI6MTY0MzUxOTgzMn0.6ELhcjVauTNWa1DrpOb9sfdH_NU_c1tSHFE_vQ_rV_I",
-  },
+    {
+      code: "au",
+      value: "+61",
+    },
+  ],
 };
 
 export default Constants;

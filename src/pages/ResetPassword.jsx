@@ -12,7 +12,7 @@ export const ResetPassword = () => {
   const navigate = useNavigate("");
 
   useEffect(() => {
-    let _t = localStorage.getItem("_rt");
+    let _t = localStorage.getItem(Constants.keys.resetToken);
     if (_t) {
       setToken(_t);
     } else {
@@ -34,8 +34,9 @@ export const ResetPassword = () => {
       password,
     })
       .then((res) => {
-        localStorage.removeItem("_rt");
-        toast.success("Success", { position: toast.POSITION.TOP_CENTER });
+        localStorage.removeItem(Constants.keys.resetToken);
+        toast.success(res.status, { position: toast.POSITION.TOP_CENTER });
+        console.log(res);
         navigate("/");
       })
       .catch((err) =>

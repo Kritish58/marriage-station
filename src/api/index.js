@@ -6,7 +6,7 @@ import { printResponse, printResponseError } from "./logger";
 import { requestInterceptor, responseInterceptor } from "./interceptors";
 
 const API = Axios.create({
-  baseURL: Constants.env.APP_DOMAIN + "/api/v1",
+  baseURL: Constants.env.APP_DOMAIN,
   timeout: Constants.env.MAX_CONNECTION_TIMEOUT,
   headers: {
     Accept: "application/json",

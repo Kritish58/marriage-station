@@ -1,32 +1,31 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API from "../../../api";
 import { Submit } from "../../../components";
 import { OtpBox } from "./OtpInput";
 import "./style.scss";
 
 export const MobileVerification = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.authState);
   const [otp, setOtp] = useState("");
-  // const handleChange = (element, index) => {
-  //   console.log(element);
-  //   // if (element.value === 8) {
-  //   // }
-  //   if (isNaN(element.value)) return false;
-  //   setOtp([...otp.map((d, i) => (i === index ? element.value : d))]);
-  //   if (element.nextSibling) {
-  //     element.nextSibling.focus();
-  //   }
-  // };
-
   const handleSubmit = async () => {
     let result = window.otpConfirmation;
-    console.log(result);
     await result
       .confirm(otp)
-      .then((res) => {
+      .then(async (res) => {
         toast.success("Verified", { position: toast.POSITION.TOP_CENTER });
-        navigate("/");
+        console.log(res);
+        await API.patch(
+          `Constants.apiEndpoint.user.otpVerified/${user && user.userDetail_id}`
+        )
+          .then((res) => {
+            toast.success(res);
+            navigate("/");
+          })
+          .catch((err) => toast.error(err));
       })
       .catch((err) =>
         toast.error("Wrong OTP!", { position: toast.POSITION.TOP_CENTER })

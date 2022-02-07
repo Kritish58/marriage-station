@@ -1,12 +1,11 @@
-import { Dropdown, Modal } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./styles/RegMain.scss";
 import Constants from "../../../constants";
 import { setProfile } from "../../../redux/reducers";
-import { IconButton, Input, LogInModal, Submit } from "../../../components";
-import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { LogInModal } from "../../../components";
 
 const labelStyle = {
   display: "block",
