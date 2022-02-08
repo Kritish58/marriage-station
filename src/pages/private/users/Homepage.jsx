@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 export const Homepage = () => {
   const { user } = useSelector((state) => state.authState);
-  if (!user) return <Navigate replace to="/" />;
+  if (!user) return <Navigate replace to="/privacy-policies" />;
   return (
     <div>
       {/* <Sidebar user={user} /> */}

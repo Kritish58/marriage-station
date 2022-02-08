@@ -1,12 +1,28 @@
 import Constants from "../constants";
-import { Dashboard, Homepage, Landing } from "../pages";
+import { Dashboard, Error404, Homepage, Landing } from "../pages";
 import Search from "../pages/private/users/search/Search";
+import {
+  RegisterVerification,
+  ResetVerification,
+} from "../pages/public/verification";
 
 export const routeConfig = [
   {
     path: "/",
     title: "Marriage Station",
     element: Landing,
+    roles: [],
+  },
+  {
+    path: "/verifyOTP",
+    title: "OTP",
+    element: ResetVerification,
+    roles: [],
+  },
+  {
+    path: "/verifyNumber",
+    title: "Register Number",
+    element: RegisterVerification,
     roles: [],
   },
   {
@@ -32,5 +48,11 @@ export const routeConfig = [
     title: "View profile",
     element: Homepage,
     roles: [Constants.roles.NormalUser],
+  },
+  {
+    path: "*",
+    title: "Page not found",
+    element: Error404,
+    roles: [],
   },
 ];

@@ -4,12 +4,20 @@ import { routeConfig } from "./routeConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
 import { Sidebar } from "../components/Sidebar";
+import Constants from "../constants";
+import { useEffect } from "react";
+import API from "../api";
 
 export function UserRoutes() {
   const { user } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
-    return routeConfig.filter((c) => c.roles.some((idx) => idx === user.role));
-  }, [user.role]);
+    return routeConfig.filter((c) =>
+      c.roles.some((idx) => idx === Constants.roles.NormalUser)
+    );
+  }, []);
+
+  useEffect(() => {}, []);
+
   return (
     <div className="d-flex">
       <Sidebar user={user} />
@@ -25,7 +33,8 @@ export function UserRoutes() {
             />
           );
         })}
-        <Route path="*" element={<h1>Not available</h1>} />
+
+        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
       </Routes>
     </div>
   );

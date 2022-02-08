@@ -12,7 +12,7 @@ const Search = () => {
 
   const fetchUsers = async () => {
     await API.get(
-      `${Constants.apiEndpoint.user.allUser}`
+      `${Constants.apiEndpoint.user.getAllUser}`
       // {
       //   params: { count, page },
       // }
@@ -70,7 +70,7 @@ const ProfileCard = ({ user }) => {
             }}
             bg={user.verified === "true" ? "success" : "secondary"}
           >
-            {user.verified === "true" ? "Active" : "Inactive"}
+            {user.verified === "true" ? "Verified" : "Not verrified"}
           </Badge>
         </h4>
       </div>

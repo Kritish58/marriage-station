@@ -10,7 +10,6 @@ export const StatusCode = {
   CONFLICT: 409,
   UNPROCESSABLE_ENTITY: 422,
 };
-
 async function responseInterceptor(error, API) {
   const originalRequest = error.request;
   if (
@@ -32,6 +31,8 @@ async function responseInterceptor(error, API) {
       };
       return API(originalRequest);
     }
+  } else if (error.response?.status === StatusCode.UNAUTHORIZED) {
+    localStorage.removeItem(Constants.keys.session);
   }
   return Promise.reject(error);
 }

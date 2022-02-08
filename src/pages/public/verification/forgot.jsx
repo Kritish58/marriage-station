@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../../api";
-import { Submit } from "../../../components";
-import { OtpBox } from "./OtpInput";
+import { OtpBox, Submit } from "../../../components";
+import Constants from "../../../constants";
+import { authSuccess } from "../../../redux/reducers";
 import "./style.scss";
 
-export const MobileVerification = () => {
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.authState);
+export const ResetVerification = () => {
+  const dispatch = useDispatch();
+  //   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const handleSubmit = async () => {
     let result = window.otpConfirmation;
@@ -18,12 +19,13 @@ export const MobileVerification = () => {
       .then(async (res) => {
         toast.success("Verified", { position: toast.POSITION.TOP_CENTER });
         console.log(res);
-        await API.patch(
-          `Constants.apiEndpoint.user.otpVerified/${user && user.userDetail_id}`
-        )
+        await API.put(`${Constants.apiEndpoint.auth.resetPassword}/${_t}`)
           .then((res) => {
             toast.success(res);
-            navigate("/");
+            dispatch(authSuccess(res));
+            // navigate("/", {
+            //   replace: true,
+            // });
           })
           .catch((err) => toast.error(err));
       })
@@ -32,6 +34,16 @@ export const MobileVerification = () => {
       );
   };
 
+  //   const [token, setToken] = useState(null);
+  //   useEffect(() => {
+  //     if (_t) {
+  //       setToken(_t);
+  //     } else {
+  //       navigate("/", { replace: true });
+  //     }
+  //   }, [token]);
+  let _t = localStorage.getItem(Constants.keys.resetToken);
+  if (!_t) return <Navigate replace to="/" />;
   return (
     <div className="main d-flex justify-content-center align-items-center">
       <div>

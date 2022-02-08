@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -17,7 +17,9 @@ import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
 
 export const Reg6 = () => {
   const { profile } = useSelector((state) => state.profile);
-  const { isLoading } = useSelector((state) => state.authState);
+  const { isLoading, isAuthenticated } = useSelector(
+    (state) => state.authState
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,34 +41,31 @@ export const Reg6 = () => {
   // HANDLE FORM SUBMIT
   const handleSubmit = async (values) => {
     dispatch(authPending());
-    await API.post(Constants.apiEndpoint.user.register, {
-      ...profile,
-      ...values,
-    })
-      .then(async (res) => {
-        dispatch(authSuccess(res));
-        generateRecaptcha();
-        let appVerifier = window.recaptchaVerifier;
-        await signInWithPhoneNumber(
-          firebaseAuth,
-          profile.mobileNumber,
-          appVerifier
-        )
-          .then((res) => {
-            window.otpConfirmation = res;
-            navigate("/verifyOTP");
-          })
-          .catch((err) => toast.error("Something went wrong."));
-      })
-      .catch((error) => {
-        dispatch(authFailure());
-        toast.error(
-          error.response?.data?.message ??
-            error.message ??
-            "Internal server error."
-        );
-        navigate("/registration/retry");
+    try {
+      let res = await API.post(Constants.apiEndpoint.user.register, {
+        ...profile,
+        ...values,
       });
+      generateRecaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      let fireRes = await signInWithPhoneNumber(
+        firebaseAuth,
+        profile.mobileNumber,
+        appVerifier
+      );
+
+      window.otpConfirmation = fireRes;
+      dispatch(authSuccess(res));
+      navigate("/verifyNumber", { replace: true });
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ??
+          error.message ??
+          "Internal server error."
+      );
+      dispatch(authFailure());
+      navigate("/registration/retry", { replace: true });
+    }
   };
 
   return (

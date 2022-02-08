@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Constants from "../../constants";
+import decode from "jwt-decode";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -13,9 +14,11 @@ export const authSlice = createSlice({
       state.isLoading = true;
     },
     authSuccess: (state, { payload }) => {
+      let data = decode(payload?.token || payload?.tokens);
       state.isLoading = false;
       state.isAuthenticated = true;
-      state.user = payload.user;
+      state.user = data.payload?.data || data.payload?.user;
+      localStorage.removeItem(Constants.keys.resetToken);
       localStorage.setItem(Constants.keys.session, JSON.stringify(payload));
     },
     authFailure: (state) => {

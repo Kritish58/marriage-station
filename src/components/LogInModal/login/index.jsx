@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Input, Label, Spinner, Submit, Toggle } from "../..";
+import { Error, Input, Label, Spinner, Submit, Toggle } from "../..";
 import API from "../../../api";
 import Constants from "../../../constants";
 import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
@@ -37,23 +37,20 @@ const LoginForm = ({ handleForgotPassword }) => {
           mobileNumber: `${countryCode}${values.mobileNumber}`,
           password: values.password,
         };
-
-    await API.post(Constants.apiEndpoint.auth.login, data)
-      .then((res) => {
-        console.log(res);
-        dispatch(authSuccess(res));
-      })
-      .catch((error) => {
-        dispatch(authFailure());
-        toast.error(
-          error.response?.data?.message ??
-            error.message ??
-            "Internal server error.",
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      });
+    try {
+      let res = await API.post(Constants.apiEndpoint.auth.login, data);
+      dispatch(authSuccess(res));
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ??
+          error.message ??
+          "Internal server error.",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
+      dispatch(authFailure());
+    }
   };
 
   // USE FORMIK
@@ -100,12 +97,15 @@ const LoginForm = ({ handleForgotPassword }) => {
                 onChange={(value) =>
                   logInForm.setFieldValue("mobileNumber", value)
                 }
-                error={
-                  logInForm.touched.mobileNumber &&
-                  logInForm.errors.mobileNumber
-                }
+                // error={
+                //   logInForm.touched.mobileNumber &&
+                //   logInForm.errors.mobileNumber
+                // }
               />
             </div>
+            {logInForm.touched && logInForm.errors.mobileNumber && (
+              <Error>{logInForm.errors.mobileNumber}</Error>
+            )}
           </div>
         )}
         <Input

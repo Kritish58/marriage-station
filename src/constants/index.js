@@ -2,6 +2,13 @@ const Constants = {
   env: {
     MAX_CONNECTION_TIMEOUT: 20000, // twenty second
     APP_DOMAIN: process.env?.REACT_APP_API_BASE,
+    FIREBASE_API_KEY: process.env?.REACT_APP_FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN: process.env?.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    FIREBASE_PROJECT_ID: process.env?.REACT_APP_FIREBASE_PROJECT_ID,
+    FIREBASE_STORAGE_BUCKET: process.env?.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    FIREBASE_MESSAGING_SENDER_ID:
+      process.env?.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    FIREBASE_APP_ID: process.env?.REACT_APP_FIREBASE_APP_ID,
     isDevelopment: process.env?.NODE_ENV === "development",
   },
   keys: {
@@ -29,6 +36,7 @@ const Constants = {
   roles: {
     Admin: "admin",
     NormalUser: "User",
+    All: "all",
   },
   //   patterns: {
   //     password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,

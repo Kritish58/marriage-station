@@ -20,6 +20,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers";
 import { useNavigate } from "react-router-dom";
+import { Badge } from "react-bootstrap";
 
 const menus = [
   {
@@ -57,14 +58,19 @@ export const Sidebar = ({ user }) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/", { replace: true });
   };
   return (
     <div className="p-4 sidebar d-flex flex-column justify-content-between align-tems-center">
       <div className="d-flex flex-column">
         <CircularAvatar image="image" color="color" />
         <h4 className=" d-flex align-self-center">
-          {user.firstName} {user.lastName}
+          {/* {user.firstName} {user.lastName} */}
         </h4>
+
+        <Badge bg={user.verified === "true" ? "success" : "secondary"}>
+          {user.verified === "true" ? "Verified" : "Not verified"}
+        </Badge>
         {menus.map((menu) => (
           <SidebarItem
             key={menu.label}

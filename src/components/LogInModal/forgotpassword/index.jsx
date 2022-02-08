@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Input, Label, Spinner, Submit, Toggle } from "../..";
+import { Error, Input, Label, Spinner, Submit, Toggle } from "../..";
 import API from "../../../api";
 import Constants from "../../../constants";
 import { firebaseAuth } from "../../../firebase";
@@ -28,40 +28,45 @@ const ResetPasswordForm = ({ handleLogInClose }) => {
     }),
     []
   );
+
   // HANDLE FORGOT PASSWORD SUBMIT
   const onForgotPassword = async (values) => {
     setForgotPasswordLoading(true);
     if (email) {
-      await API.post(Constants.apiEndpoint.auth.forgotPassword, {
-        email: values.email,
-      })
-        .then(async (res) => {
-          await localStorage.setItem(Constants.keys.resetToken, res.resetToken);
-          toast.success(res.status, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-          handleLogInClose();
-        })
-        .catch((error) => {
-          toast.error(
-            error.response?.data?.message ??
-              error.message ??
-              "Internal server error.",
-            {
-              position: toast.POSITION.TOP_CENTER,
-            }
-          );
+      try {
+        let res = await API.post(Constants.apiEndpoint.auth.forgotPassword, {
+          email: values.email,
         });
+        await localStorage.setItem(Constants.keys.resetToken, res.resetToken);
+        toast.success(res.status, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        handleLogInClose();
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message ??
+            error.message ??
+            "Internal server error.",
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+      }
     } else {
       let number = `${countryCode}${values.mobileNumber}`;
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      await signInWithPhoneNumber(firebaseAuth, number, appVerifier)
-        .then((res) => {
-          window.otpConfirmation = res;
-          navigate("/verifyOTP");
-        })
-        .catch((err) => toast.error(err));
+      try {
+        generateRecaptcha();
+        let appVerifier = window.recaptchaVerifier;
+        let res = await signInWithPhoneNumber(
+          firebaseAuth,
+          number,
+          appVerifier
+        );
+        window.otpConfirmation = res;
+        navigate("/verifyOTP", { replace: true });
+      } catch (err) {
+        toast.error(err);
+      }
     }
     setForgotPasswordLoading(false);
   };
@@ -116,12 +121,16 @@ const ResetPasswordForm = ({ handleLogInClose }) => {
                 onChange={(value) =>
                   forgotPasswordForm.setFieldValue("mobileNumber", value)
                 }
-                error={
-                  forgotPasswordForm.touched.mobileNumber &&
-                  forgotPasswordForm.errors.mobileNumber
-                }
+                // error={
+                //   forgotPasswordForm.touched.mobileNumber &&
+                //   forgotPasswordForm.errors.mobileNumber
+                // }
               />
             </div>
+            {forgotPasswordForm.touched &&
+              forgotPasswordForm.errors.mobileNumber && (
+                <Error>{forgotPasswordForm.errors.mobileNumber}</Error>
+              )}
           </div>
         )}
         {forgotPasswordLoading ? (

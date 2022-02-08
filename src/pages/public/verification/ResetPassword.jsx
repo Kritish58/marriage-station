@@ -1,22 +1,25 @@
 import { useFormik } from "formik";
 import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import API from "../api";
-import { Input, Submit } from "../components";
-import Constants from "../constants";
-import { resetPasswordSchema } from "../validations/yupSchemas";
+import API from "../../../api";
+import { Input, Submit } from "../../../components";
+import Constants from "../../../constants";
+import { authSuccess } from "../../../redux/reducers/authSlice";
+import { resetPasswordSchema } from "../../../validations/yupSchemas";
 
 export const ResetPassword = () => {
-  const [token, setToken] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate("");
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     let _t = localStorage.getItem(Constants.keys.resetToken);
     if (_t) {
       setToken(_t);
     } else {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   }, [token, navigate]);
   // FORM INITIAL VALUES
@@ -30,18 +33,20 @@ export const ResetPassword = () => {
 
   // HANDLE FORM SUBMIT
   const handleSubmit = async ({ password, ...rest }) => {
-    await API.patch(`${Constants.apiEndpoint.resetPassword}/${token}`, {
-      password,
-    })
-      .then((res) => {
-        localStorage.removeItem(Constants.keys.resetToken);
-        toast.success(res.status, { position: toast.POSITION.TOP_CENTER });
-        console.log(res);
-        navigate("/");
-      })
-      .catch((err) =>
-        toast.error(err, { position: toast.POSITION.TOP_CENTER })
+    try {
+      let res = await API.patch(
+        `${Constants.apiEndpoint.auth.resetPassword}/${token}`,
+        {
+          password,
+        }
       );
+      localStorage.removeItem(Constants.keys.resetToken);
+      toast.success(res.status, { position: toast.POSITION.TOP_CENTER });
+      dispatch(authSuccess(res));
+      navigate("/", { replace: true });
+    } catch (err) {
+      toast.error(err, { position: toast.POSITION.TOP_CENTER });
+    }
   };
 
   // USE FORMIK

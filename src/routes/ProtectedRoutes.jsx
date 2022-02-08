@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { MobileVerification } from "../pages/public/verification/Mobile";
-import { ResetPassword } from "../pages/ResetPassword";
+import { ResetPassword } from "../pages/public/verification";
 import { RegistrationRoutes } from "./RegistrationRoutes";
 import { routeConfig } from "./routeConfig";
 
@@ -25,10 +24,10 @@ export function ProtectedRoutes({ children }) {
             />
           );
         })}
-        <Route exact path="/verifyOTP" element={<MobileVerification />} />
         <Route exact path="/reset" element={<ResetPassword />} />
         <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
+        {/*TODO: ERROR 404 PAGE */}
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     );

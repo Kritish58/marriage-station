@@ -5,7 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../../api";
-import { Input, Label, LogInModal, Spinner, Submit } from "../../../components";
+import {
+  Error,
+  Input,
+  Label,
+  LogInModal,
+  Spinner,
+  Submit,
+} from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
 import { firebaseAuth } from "../../../firebase";
@@ -18,6 +25,7 @@ export const Retry = () => {
   const { isLoading } = useSelector((state) => state.authState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [registered, setRegistered] = useState(false);
 
   // FORM INITIAL VALUES
   const initialValues = useMemo(
@@ -33,34 +41,30 @@ export const Retry = () => {
   // HANDLE FORM SUBMIT
   const handleSubmit = async ({ confirmPassword, mobileNumber, ...rest }) => {
     dispatch(authPending());
-    await API.post(Constants.apiEndpoint.user.register, {
-      ...profile,
-      mobileNumber: `${countryCode}${mobileNumber}`,
-      ...rest,
-    })
-      .then(async (res) => {
-        dispatch(authSuccess(res));
-        generateRecaptcha();
-        let appVerifier = window.recaptchaVerifier;
-        await signInWithPhoneNumber(
-          firebaseAuth,
-          profile.mobileNumber,
-          appVerifier
-        )
-          .then((res) => {
-            window.otpConfirmation = res;
-            navigate("/verifyOTP");
-          })
-          .catch((err) => toast.error("Something went wrong."));
-      })
-      .catch((error) => {
-        dispatch(authFailure());
-        toast.error(
-          error.response?.data?.message ??
-            error.message ??
-            "Internal server error."
-        );
+    try {
+      let res = await API.post(Constants.apiEndpoint.user.register, {
+        ...profile,
+        mobileNumber: `${countryCode}${mobileNumber}`,
+        ...rest,
       });
+      generateRecaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      let fireRes = await signInWithPhoneNumber(
+        firebaseAuth,
+        profile.mobileNumber,
+        appVerifier
+      );
+      window.otpConfirmation = fireRes;
+      dispatch(authSuccess(res));
+      navigate("/verifyNumber", { replace: true });
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ??
+          error.message ??
+          "Internal server error."
+      );
+      dispatch(authFailure());
+    }
   };
 
   // USE FORMIK
@@ -140,11 +144,14 @@ export const Retry = () => {
                 onChange={(value) =>
                   formik.setFieldValue("mobileNumber", value)
                 }
-                error={
-                  formik.touched.mobileNumber && formik.errors.mobileNumber
-                }
+                // error={
+                //   formik.touched.mobileNumber && formik.errors.mobileNumber
+                // }
               />
             </div>
+            {formik.touched && formik.errors.mobileNumber && (
+              <Error>{formik.errors.mobileNumber}</Error>
+            )}
           </div>
 
           {/* PASSWORD FIELD */}

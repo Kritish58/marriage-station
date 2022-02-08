@@ -9,12 +9,12 @@ import { authSuccess } from "./redux/reducers";
 import { useDispatch } from "react-redux";
 
 const App = () => {
-  const dispatch = useDispatch("");
+  const dispatch = useDispatch();
   useEffect(() => {
     let session = JSON.parse(
       localStorage.getItem(Constants.keys.session) || "{}"
     );
-    if (session?.token && session?.user) {
+    if (session?.token) {
       dispatch(authSuccess(session));
     }
   }, [dispatch]);
@@ -30,9 +30,10 @@ const App = () => {
             </ProtectedRoutes>
           }
         />
+
         <Route exact path="/privacy-policies" element={<Policies />} />
         <Route exact path="/terms-conditions" element={<Terms />} />
-        <Route path="*" element={<>Not available</>} />
+        <Route path="*" element={<h2>Not available</h2>} />
       </Routes>
     </Router>
   );
