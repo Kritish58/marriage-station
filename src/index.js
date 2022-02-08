@@ -1,20 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+// import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { MobileVerification } from "./pages/public/verification/Mobile";
-// import OtpVerification from "./pages/OtpVerification";
-// import { Sidebar } from "./components/Sidebar";
-// import Signin from "./Signin";
-// import Main from "./pages/public/registration/Registration";
+import { Hobbies } from "./pages/public/complete_profile/hobbies";
+import { BasicInfo } from "./pages/public/complete_profile/basic";
+import { LifestyleInfo } from "./pages/public/complete_profile/lifestyle";
+import { ReligionInfo } from "./pages/public/complete_profile/religion";
+import { FamilyInfo } from "./pages/public/complete_profile/family";
+import { ImageUpload } from "./pages/public/complete_profile/image";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      {/* <App /> */}
+      {/* <Hobbies /> */}
+      {/* <BasicInfo /> */}
+      {/* <LifestyleInfo /> */}
+      {/* <ReligionInfo /> */}
+      {/* <FamilyInfo /> */}
+      <ImageUpload />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,0 +1,1 @@
+export { generateOptions } from "./optionsgenerator";

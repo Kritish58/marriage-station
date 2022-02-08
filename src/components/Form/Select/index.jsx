@@ -24,7 +24,15 @@ const customStyles = {
     return { ...provided, opacity, transition };
   },
 };
-export const Select = ({ name, label, value, options, onChange, error }) => {
+export const Select = ({
+  name,
+  label,
+  value,
+  isMulti,
+  options,
+  onChange,
+  error,
+}) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
@@ -32,6 +40,7 @@ export const Select = ({ name, label, value, options, onChange, error }) => {
     <div className="select__with__search my-2">
       <Label name={name} label={label} />
       <SelectField
+        isMulti={isMulti}
         styles={customStyles}
         value={defaultValue(options, value)}
         onChange={(value) => onChange(value)}

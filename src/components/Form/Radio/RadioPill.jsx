@@ -1,8 +1,7 @@
-export const RadioPill = ({ option, value, onChange }) => {
+export const RadioPill = ({ name, option, value, onChange }) => {
   return (
     <label
-      key={option}
-      htmlFor={option}
+      htmlFor={`${option}-${name}`}
       className={`m-2 rounded-pill shadow-sm px-4 py-2 cursor-pointer`}
       style={{
         cursor: "pointer",
@@ -11,10 +10,10 @@ export const RadioPill = ({ option, value, onChange }) => {
       }}
     >
       <input
+        name={name}
         className="d-none"
         type="radio"
-        id={option}
-        value={option}
+        id={`${option}-${name}`}
         checked={value === option}
         onChange={() => onChange(option)}
       />
