@@ -1,22 +1,18 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
-import { routeConfig } from "./routeConfig";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
-import { Sidebar } from "../components/Sidebar";
+import { Sidebar } from "../components";
 import Constants from "../constants";
-import { useEffect } from "react";
-import "./main.scss";
+import { routeConfig } from "../utils";
 
-export function UserRoutes() {
+export const UserRoutes = () => {
   const { user } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) =>
       c.roles.some((idx) => idx === Constants.roles.NormalUser)
     );
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <div className="d-flex user__main">
@@ -38,4 +34,4 @@ export function UserRoutes() {
       </Routes>
     </div>
   );
-}
+};

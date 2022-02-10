@@ -2,10 +2,10 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ResetPassword } from "../pages/public/verification";
+import { routeConfig } from "../utils";
 import { RegistrationRoutes } from "./RegistrationRoutes";
-import { routeConfig } from "./routeConfig";
 
-export function ProtectedRoutes({ children }) {
+export function AuthProtection({ children }) {
   const { isAuthenticated } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) => c.roles.length === 0);

@@ -22,6 +22,7 @@ export const ResetPassword = () => {
       navigate("/", { replace: true });
     }
   }, [token, navigate]);
+
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({

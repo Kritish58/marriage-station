@@ -20,12 +20,6 @@ export const routeConfig = [
     roles: [],
   },
   {
-    path: "/verifyNumber",
-    title: "Register Number",
-    element: RegisterVerification,
-    roles: [],
-  },
-  {
     path: "/",
     title: "Homepage",
     element: Homepage,

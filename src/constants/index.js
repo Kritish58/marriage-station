@@ -38,6 +38,8 @@ const Constants = {
   },
   roles: {
     Admin: "admin",
+    UnverifiedUser: "Unverified",
+    NoProfileUser: "NoProfileUser",
     NormalUser: "User",
     All: "all",
   },

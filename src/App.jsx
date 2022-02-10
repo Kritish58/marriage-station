@@ -2,11 +2,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Policies, Terms } from "./pages";
-import { ProtectedRoutes, UserRoutes } from "./routes";
+import { UserRoutes } from "./routes";
 import { useEffect } from "react";
 import Constants from "./constants";
 import { authSuccess } from "./redux/reducers";
 import { useDispatch } from "react-redux";
+import { MobileVerification } from "./routes/MobileVerification";
+import { ImageVerification } from "./routes/ImageVerification";
+import { AuthProtection } from "./routes/Protected";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,9 +28,13 @@ const App = () => {
         <Route
           path="/*"
           element={
-            <ProtectedRoutes>
-              <UserRoutes />
-            </ProtectedRoutes>
+            <AuthProtection>
+              <MobileVerification>
+                <ImageVerification>
+                  <UserRoutes />
+                </ImageVerification>
+              </MobileVerification>
+            </AuthProtection>
           }
         />
 
