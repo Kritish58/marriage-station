@@ -52,7 +52,7 @@ export const Sidebar = ({ user }) => {
     navigate("/", { replace: true });
   };
   return (
-    <div className="p-4 sidebar d-flex flex-column justify-content-between align-tems-center">
+    <div className="sidebar d-flex flex-column justify-content-between align-tems-center">
       <div className="d-flex flex-column sidebar__icons__box">
         <CircularAvatar image="image" color="color" />
         {menus.map((menu) => (

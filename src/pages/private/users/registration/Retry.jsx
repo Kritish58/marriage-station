@@ -1,6 +1,9 @@
+import { signInWithPhoneNumber } from "firebase/auth";
 import { useFormik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import API from "../../../api";
 import {
   Error,
@@ -12,8 +15,9 @@ import {
 } from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
+import { firebaseAuth } from "../../../firebase";
+import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
 import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
-import { toaster } from "../../../utils";
 import { retrySchema } from "../../../validations/yupSchemas";
 
 export const Retry = () => {
@@ -41,10 +45,21 @@ export const Retry = () => {
         mobileNumber: `${countryCode}${mobileNumber}`,
         ...rest,
       });
-      toaster("success", res.status);
+      generateRecaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      let fireRes = await signInWithPhoneNumber(
+        firebaseAuth,
+        profile.mobileNumber,
+        appVerifier
+      );
+      window.otpConfirmation = fireRes;
       dispatch(authSuccess(res));
     } catch (error) {
-      toaster("fail", error);
+      toast.error(
+        error.response?.data?.message ??
+          error.message ??
+          "Internal server error."
+      );
       dispatch(authFailure());
     }
   };

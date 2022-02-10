@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { RegisterVerification } from "../pages";
 
 export function MobileVerification({ children }) {
-  let verified = false;
+  let verified = true;
 
   if (!verified)
     return (
