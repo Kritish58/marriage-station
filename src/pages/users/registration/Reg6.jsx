@@ -1,11 +1,7 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
-import { firebaseAuth } from "../../../firebase";
-import { signInWithPhoneNumber } from "firebase/auth";
-import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
 
 import "./styles/RegCont.scss";
 
@@ -14,12 +10,11 @@ import { part6Schema } from "../../../validations/yupSchemas";
 import API from "../../../api";
 import Constants from "../../../constants";
 import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
+import { toaster } from "../../../utils";
 
 export const Reg6 = () => {
   const { profile } = useSelector((state) => state.profile);
-  const { isLoading, isAuthenticated } = useSelector(
-    (state) => state.authState
-  );
+  const { isLoading } = useSelector((state) => state.authState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,25 +41,11 @@ export const Reg6 = () => {
         ...profile,
         ...values,
       });
-
-      // FIXME:DEBUG RECAPTCHA
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      let fireRes = await signInWithPhoneNumber(
-        firebaseAuth,
-        profile.mobileNumber,
-        appVerifier
-      );
-
-      window.otpConfirmation = fireRes;
-      navigate("/verifyNumber", { replace: true });
+      toaster("success", res.status);
       dispatch(authSuccess(res));
+      navigate("/", { replace: true });
     } catch (error) {
-      toast.error(
-        error.response?.data?.message ??
-          error.message ??
-          "Internal server error."
-      );
+      toaster("fail", error);
       dispatch(authFailure());
       navigate("/registration/retry", { replace: true });
     }

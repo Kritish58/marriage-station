@@ -15,17 +15,14 @@ import {
 } from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
-import { firebaseAuth } from "../../../firebase";
-import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
 import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
+import { toaster } from "../../../utils";
 import { retrySchema } from "../../../validations/yupSchemas";
 
 export const Retry = () => {
   const { profile } = useSelector((state) => state.profile);
   const { isLoading } = useSelector((state) => state.authState);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [registered, setRegistered] = useState(false);
 
   // FORM INITIAL VALUES
   const initialValues = useMemo(
@@ -47,22 +44,10 @@ export const Retry = () => {
         mobileNumber: `${countryCode}${mobileNumber}`,
         ...rest,
       });
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      let fireRes = await signInWithPhoneNumber(
-        firebaseAuth,
-        profile.mobileNumber,
-        appVerifier
-      );
-      window.otpConfirmation = fireRes;
+      toaster("success", res.status);
       dispatch(authSuccess(res));
-      navigate("/verifyNumber", { replace: true });
     } catch (error) {
-      toast.error(
-        error.response?.data?.message ??
-          error.message ??
-          "Internal server error."
-      );
+      toaster("fail", error);
       dispatch(authFailure());
     }
   };

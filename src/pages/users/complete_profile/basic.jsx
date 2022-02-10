@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
-import { Input, Radio, Select, Submit } from "../../../components";
-import Constants from "../../../constants";
+import { Input, Radio, Select, Submit } from "../../../../components";
+import Constants from "../../../../constants";
 
 // GENERATE OPTIONS FOR MOTHER TONGUE SELECTION
 const weightOptions = Constants.weight.map((mt) => {

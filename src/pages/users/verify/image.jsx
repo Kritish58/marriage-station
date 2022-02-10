@@ -2,13 +2,12 @@ import "./style.scss";
 import { Field, Form, Formik } from "formik";
 import { useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import Constants from "../../../../constants";
-import API from "../../../../api";
-
-import placeholderImage from "../../../../assets/placeholder.jpg";
-import { Submit } from "../../../../components";
-import { imageUplaodSchema } from "../../../../validations/yupSchemas";
 import { useNavigate } from "react-router-dom";
+import Constants from "../../../constants";
+import API from "../../../api";
+import { imageUplaodSchema } from "../../../validations/yupSchemas";
+import placeholderImage from "../../../assets/placeholder.jpg";
+import { Submit } from "../../../components";
 
 export const ImageUpload = () => {
   const navigate = useNavigate();

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Sidebar } from "../components";
 import Constants from "../constants";
 import { routeConfig } from "../utils";
+import "./main.scss";
+import { Error404 } from "../pages";
 
 export const UserRoutes = () => {
   const { user } = useSelector((state) => state.authState);
@@ -30,7 +32,7 @@ export const UserRoutes = () => {
           );
         })}
 
-        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

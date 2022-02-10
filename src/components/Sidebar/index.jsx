@@ -7,20 +7,11 @@ import {
   CogIcon,
   LoginIcon,
 } from "@heroicons/react/outline";
-// import {
-//   HomeIcon as HomeIconSolid,
-//   MailIcon as MailIconSolid,
-//   SearchIcon as SearchIconSolid,
-//   UsersIcon as UsersIconSolid,
-//   CogIcon as CogIconSolid,
-//   LoginIcon as LoginIconSolid,
-// } from "@heroicons/react/solid";
 import "./index.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "react-bootstrap";
 
 const menus = [
   {
@@ -64,9 +55,6 @@ export const Sidebar = ({ user }) => {
     <div className="p-4 sidebar d-flex flex-column justify-content-between align-tems-center">
       <div className="d-flex flex-column sidebar__icons__box">
         <CircularAvatar image="image" color="color" />
-        {/* <h4 className=" d-flex align-self-center">
-          {user.firstName} {user.lastName}
-        </h4> */}
         {menus.map((menu) => (
           <SidebarItem
             key={menu.label}

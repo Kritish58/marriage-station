@@ -1,4 +1,4 @@
-import { Registration } from ".";
+import { Registration } from "..";
 
 export const Landing = () => {
   return (

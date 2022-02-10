@@ -14,8 +14,17 @@
     border: 2px solid #23948866 !important;
   }
 }
-
+.main {
+  .reset__form {
+    width: 25% !important;
+  }
+}
 @media only screen and (max-width: 767px) {
+  .main {
+    .reset__form {
+      width: 100% !important;
+    }
+  }
   .otpInput {
     height: 3rem;
     margin: 4px;

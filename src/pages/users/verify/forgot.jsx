@@ -8,7 +8,7 @@ import Constants from "../../../constants";
 import { authSuccess } from "../../../redux/reducers";
 import "./style.scss";
 
-export const ResetVerification = () => {
+export const FirebaseResetVerification = () => {
   const dispatch = useDispatch();
   //   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
@@ -23,9 +23,6 @@ export const ResetVerification = () => {
           .then((res) => {
             toast.success(res);
             dispatch(authSuccess(res));
-            // navigate("/", {
-            //   replace: true,
-            // });
           })
           .catch((err) => toast.error(err));
       })
@@ -34,14 +31,6 @@ export const ResetVerification = () => {
       );
   };
 
-  //   const [token, setToken] = useState(null);
-  //   useEffect(() => {
-  //     if (_t) {
-  //       setToken(_t);
-  //     } else {
-  //       navigate("/", { replace: true });
-  //     }
-  //   }, [token]);
   let _t = localStorage.getItem(Constants.keys.resetToken);
   if (!_t) return <Navigate replace to="/" />;
   return (

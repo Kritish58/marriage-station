@@ -1,27 +1,18 @@
 import { useFormik } from "formik";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import API from "../../../api";
 import { Input, Submit } from "../../../components";
 import Constants from "../../../constants";
-import { authSuccess } from "../../../redux/reducers/authSlice";
+import { authSuccess } from "../../../redux/reducers";
+import { toaster } from "../../../utils";
 import { resetPasswordSchema } from "../../../validations/yupSchemas";
+import "./style.scss";
 
-export const ResetPassword = () => {
+export const ResetPassword = ({ token }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate("");
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    let _t = localStorage.getItem(Constants.keys.resetToken);
-    if (_t) {
-      setToken(_t);
-    } else {
-      navigate("/", { replace: true });
-    }
-  }, [token, navigate]);
+  const navigate = useNavigate();
 
   // FORM INITIAL VALUES
   const initialValues = useMemo(
@@ -41,13 +32,13 @@ export const ResetPassword = () => {
           password,
         }
       );
-      localStorage.removeItem(Constants.keys.resetToken);
-      toast.success(res.status, { position: toast.POSITION.TOP_CENTER });
+      toaster("success", res.status);
       dispatch(authSuccess(res));
       navigate("/", { replace: true });
     } catch (err) {
-      toast.error(err, { position: toast.POSITION.TOP_CENTER });
+      toaster("fail", err);
     }
+    localStorage.removeItem(Constants.keys.resetToken);
   };
 
   // USE FORMIK
@@ -61,7 +52,7 @@ export const ResetPassword = () => {
     <div className="main d-flex align-items-center justify-content-center">
       <form
         onSubmit={formik.handleSubmit}
-        className="m-4 p-4 w-25 container rounded-3"
+        className="m-4 p-4 container rounded-3 reset__form"
       >
         <h2>Reset Password</h2>
         {/* PASSWORD FIELD */}

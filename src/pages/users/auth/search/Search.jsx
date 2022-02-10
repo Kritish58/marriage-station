@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Badge } from "react-bootstrap";
 import { toast } from "react-toastify";
-import API from "../../../../api";
-import Constants from "../../../../constants";
+import API from "../../../../../api";
+import Constants from "../../../../../constants";
 import "../styles.scss";
 
 const Search = () => {

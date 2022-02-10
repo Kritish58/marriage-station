@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { ImageUpload } from "../pages/private/users/verify";
+import { ImageUpload } from "../pages";
 
 export function ImageVerification({ children }) {
-  const profilePic = "null";
+  const profilePic = null;
 
   if (!profilePic)
     return (
