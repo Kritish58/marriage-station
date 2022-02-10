@@ -1,22 +1,12 @@
 import Constants from "../constants";
 import { Dashboard, Error404, Homepage, Landing } from "../pages";
 import Search from "../pages/private/users/search/Search";
-import {
-  RegisterVerification,
-  ResetVerification,
-} from "../pages/public/verification";
 
 export const routeConfig = [
   {
     path: "/",
     title: "Marriage Station",
     element: Landing,
-    roles: [],
-  },
-  {
-    path: "/verifyOTP",
-    title: "OTP",
-    element: ResetVerification,
     roles: [],
   },
   {

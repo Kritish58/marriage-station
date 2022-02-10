@@ -140,3 +140,7 @@ export const resetPasswordSchema = yup.object().shape({
     })
     .required("Password confirmation is required."),
 });
+
+export const imageUplaodSchema = yup.object().shape({
+  photo1: yup.string().required("Image is required to comlplete profile."),
+});

@@ -1,2 +1,2 @@
 export { ImageUpload } from "./image";
-export { RegisterVerification } from "./new";
+export { RegisterVerification } from "./mobile";
