@@ -57,8 +57,8 @@ export const Reg6 = () => {
       );
 
       window.otpConfirmation = fireRes;
-      dispatch(authSuccess(res));
       navigate("/verifyNumber", { replace: true });
+      dispatch(authSuccess(res));
     } catch (error) {
       toast.error(
         error.response?.data?.message ??

@@ -62,15 +62,11 @@ export const Sidebar = ({ user }) => {
   };
   return (
     <div className="p-4 sidebar d-flex flex-column justify-content-between align-tems-center">
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column sidebar__icons__box">
         <CircularAvatar image="image" color="color" />
-        <h4 className=" d-flex align-self-center">
-          {/* {user.firstName} {user.lastName} */}
-        </h4>
-
-        <Badge bg={user.verified === "true" ? "success" : "secondary"}>
-          {user.verified === "true" ? "Verified" : "Not verified"}
-        </Badge>
+        {/* <h4 className=" d-flex align-self-center">
+          {user.firstName} {user.lastName}
+        </h4> */}
         {menus.map((menu) => (
           <SidebarItem
             key={menu.label}
@@ -84,7 +80,7 @@ export const Sidebar = ({ user }) => {
           />
         ))}
       </div>
-      <div>
+      <div className="logout">
         <SidebarItem
           highlight
           icon={LoginIcon}

@@ -30,3 +30,42 @@
     color: #239488 !important;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .sidebar {
+    width: 100vw;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row !important;
+    height: 50px !important;
+    .circular__container {
+      display: none;
+    }
+    .sidebar__icons__box {
+      border-top: 1px solid rgb(228, 227, 227);
+      margin: 0 !important;
+      // padding: 16px !important;
+      height: 100% !important;
+      flex-grow: 1;
+      justify-content: space-between !important;
+      align-items: center !important;
+      flex-direction: row !important;
+    }
+
+    .sidebar__item {
+      margin: 0 !important;
+      // padding: 10px !important;
+      display: inline;
+      height: 100% !important;
+      border-radius: 0 !important;
+      color: #909090;
+      h5 {
+        display: none;
+      }
+    }
+    .logout {
+      display: none !important;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { Badge } from "react-bootstrap";
 import { toast } from "react-toastify";
 import API from "../../../../api";
 import Constants from "../../../../constants";
+import "../styles.scss";
 
 const Search = () => {
   // const [page, setPage] = useState(0);
@@ -32,12 +33,8 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="h2 my-4">Search for profiles</div>
-      {users.map((user) => (
-        // <h2 key={user.userDetail_id}>{user.User.firstName}</h2>
-        <ProfileCard key={user.userDetail_id} user={user} />
-      ))}
+    <div className="user__pages">
+      <h2 className="user__pages__title">Search for profiles</h2>
     </div>
   );
 };

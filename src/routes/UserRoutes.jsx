@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Sidebar } from "../components/Sidebar";
 import Constants from "../constants";
 import { useEffect } from "react";
-import API from "../api";
+import "./main.scss";
 
 export function UserRoutes() {
   const { user } = useSelector((state) => state.authState);
@@ -19,7 +19,7 @@ export function UserRoutes() {
   useEffect(() => {}, []);
 
   return (
-    <div className="d-flex">
+    <div className="d-flex user__main">
       <Sidebar user={user} />
       <Routes>
         {routes.map((idx) => {

@@ -15,13 +15,13 @@ import { ImageUpload } from "./pages/public/complete_profile/image";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <App /> */}
+      <App />
       {/* <Hobbies /> */}
       {/* <BasicInfo /> */}
       {/* <LifestyleInfo /> */}
       {/* <ReligionInfo /> */}
       {/* <FamilyInfo /> */}
-      <ImageUpload />
+      {/* <ImageUpload /> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

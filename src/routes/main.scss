@@ -1,0 +1,7 @@
+@media only screen and (max-width: 767px) {
+  .user__main {
+    display: flexbox;
+    flex-direction: column-reverse;
+    height: 100vh;
+  }
+}
