@@ -46,6 +46,8 @@ export const Reg6 = () => {
         ...profile,
         ...values,
       });
+
+      // FIXME:DEBUG RECAPTCHA
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
       let fireRes = await signInWithPhoneNumber(

@@ -26,6 +26,9 @@ const Constants = {
       register: "/user/register",
       otpVerified: "/user/verified",
     },
+    photo: {
+      uploadProfilePic: "/pic",
+    },
     admin: {
       dashboard: "/a-control/dashboard",
     },
