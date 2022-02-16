@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { MobileVerification } from "./routes/MobileVerification";
 import { ImageVerification } from "./routes/ImageVerification";
 import { AuthProtection } from "./routes/Protected";
+import { CompleteProfile } from "./routes/CompleteProfile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const App = () => {
             <AuthProtection>
               <MobileVerification>
                 <ImageVerification>
-                  <UserRoutes />
+                  <CompleteProfile>
+                    <UserRoutes />
+                  </CompleteProfile>
                 </ImageVerification>
               </MobileVerification>
             </AuthProtection>

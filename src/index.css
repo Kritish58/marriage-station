@@ -21,3 +21,7 @@ button {
   border: none !important;
   outline: none !important;
 }
+
+.pointer {
+  cursor: pointer !important;
+}

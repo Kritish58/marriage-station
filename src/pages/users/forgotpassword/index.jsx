@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../../api";
 import {
   Error,
   Input,
@@ -11,6 +12,7 @@ import {
 } from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
+import { toaster } from "../../../utils";
 import {
   forgotPasswordEmailSchema,
   forgotPasswordMobileSchema,
@@ -31,8 +33,35 @@ export const ForgotPasswordPage = () => {
   );
 
   // HANDLE FORGOT PASSWORD SUBMIT
+  // HANDLE FORGOT PASSWORD SUBMIT
   const onForgotPassword = async (values) => {
     setIsLoading(true);
+    if (useEmail) {
+      try {
+        let res = await API.post(Constants.apiEndpoint.auth.forgotPassword, {
+          email: values.email,
+        });
+        await localStorage.setItem(Constants.keys.resetToken, res.resetToken);
+        toaster("success", "Mail sent.");
+      } catch (error) {
+        toaster("error", error);
+      }
+    } else {
+      // let number = `${countryCode}${values.mobileNumber}`;
+      // try {
+      //   generateRecaptcha();
+      //   let appVerifier = window.recaptchaVerifier;
+      //   let res = await signInWithPhoneNumber(
+      //     firebaseAuth,
+      //     number,
+      //     appVerifier
+      //   );
+      //   window.otpConfirmation = res;
+      //   navigate("/verifyOTP", { replace: true });
+      // } catch (err) {
+      //   toast.error(err);
+      // }
+    }
     setIsLoading(false);
   };
 
@@ -96,7 +125,7 @@ export const ForgotPasswordPage = () => {
         ) : (
           <>
             <div className="d-grid place-items-center mt-4 mb-2">
-              <Submit text="Log in" />
+              <Submit text="Send mail" />
             </div>
           </>
         )}

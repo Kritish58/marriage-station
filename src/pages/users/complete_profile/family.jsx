@@ -40,8 +40,15 @@ export const FamilyInfo = () => {
   return (
     <div className="main reg2 p-4">
       {/* <h2 style={{ textAlign: "end" }}>Let's know more about you</h2> */}
-      <div className="d-flex flex-row-reverse flex__box"></div>
-      <h1>Family Information</h1>
+      <div className="d-flex align-items-center justify-content-between">
+        <h1>Family Information</h1>
+        <span
+          className="text-primary pointer text-decoration-underline"
+          // onClick={() => navigate("/lifestyleinfo")}
+        >
+          Skip
+        </span>
+      </div>
       <form onSubmit={formik.handleSubmit}>
         {/* FATHER STATUS SELECT INPUT */}
         <Select
@@ -49,7 +56,7 @@ export const FamilyInfo = () => {
           name="fatherStatus"
           options={fatherStatusOptions}
           value={formik.values.fatherStatus}
-          onChange={(v) => formik.setFieldValue("fatherStatus", v.value)}
+          onChange={(v) => formik.setFieldValue("fatherStatus", v)}
           error={formik.touched.fatherStatus && formik.errors.fatherStatus}
         />
 
@@ -59,7 +66,7 @@ export const FamilyInfo = () => {
           name="motherStatus"
           options={motherStatusOptions}
           value={formik.values.motherStatus}
-          onChange={(v) => formik.setFieldValue("motherStatus", v.value)}
+          onChange={(v) => formik.setFieldValue("motherStatus", v)}
           error={formik.touched.motherStatus && formik.errors.motherStatus}
         />
 
@@ -129,7 +136,10 @@ export const FamilyInfo = () => {
           error={formik.touched.familyLocation && formik.errors.familyLocation}
         />
 
-        <Submit text="Continue" />
+        <div className="d-flex justify-content-center mt-4">
+          {/* {isLoading ? <Spinner /> : <Submit text="Continue" />} */}
+          <Submit text="Continue" />
+        </div>
       </form>
     </div>
   );

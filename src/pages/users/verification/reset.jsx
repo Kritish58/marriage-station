@@ -78,8 +78,10 @@ export const ResetPassword = ({ token }) => {
             formik.touched.confirmPassword && formik.errors.confirmPassword
           }
         />
-        
-        <Submit text="Submit" />
+        <div className="d-flex justify-content-center mt-4">
+          {/* {isLoading ? <Spinner /> : <Submit text="Continue" />} */}
+          <Submit text="Submit" />
+        </div>
       </form>
     </div>
   );

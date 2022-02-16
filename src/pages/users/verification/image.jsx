@@ -27,7 +27,8 @@ export const ImageUpload = () => {
     })
       .then((res) => {
         toast.success(res.status);
-        navigate("/", { replace: true });
+        console.log("hey");
+        navigate("/basicinfo", { replace: true });
       })
       .catch((error) =>
         toast.error(

@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Select, Submit } from "../../../components";
 import Constants from "../../../constants";
 import { generateOptions } from "../../../utils";
 
 export const ReligionInfo = () => {
+  const navigate = useNavigate();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
@@ -24,7 +26,7 @@ export const ReligionInfo = () => {
   const formik = useFormik({
     initialValues: initialValues,
     //   validationSchema: part4Schema,
-    onSubmit: () => console.log(formik.values),
+    onSubmit: () => navigate("/familyinfo", { replace: true }),
   });
 
   const [province, setProvince] = useState("");
@@ -39,7 +41,6 @@ export const ReligionInfo = () => {
 
   useEffect(() => {
     if (province !== "") {
-      console.log(Object.keys(Constants["Bagmati Province"]));
       setDistrictOptions(generateOptions(Object.keys(Constants[province])));
     }
     if (district !== "") {
@@ -50,8 +51,15 @@ export const ReligionInfo = () => {
   return (
     <div className="main reg2 p-4">
       {/* <h2 style={{ textAlign: "end" }}>Let's know more about you</h2> */}
-      <div className="d-flex flex-row-reverse flex__box"></div>
-      <h1>Religion Information</h1>
+      <div className="d-flex align-items-center justify-content-between">
+        <h1>Religion Information</h1>
+        <span
+          className="text-primary pointer text-decoration-underline"
+          onClick={() => navigate("/familyinfo", { replace: true })}
+        >
+          Skip
+        </span>
+      </div>
       <form onSubmit={formik.handleSubmit}>
         {/* STAR SELECT INPUT */}
         <Select
@@ -59,7 +67,7 @@ export const ReligionInfo = () => {
           name="star"
           options={starOptions}
           value={formik.values.star}
-          onChange={(v) => formik.setFieldValue("star", v.value)}
+          onChange={(v) => formik.setFieldValue("star", v)}
           error={formik.touched.star && formik.errors.star}
         />
 
@@ -69,7 +77,7 @@ export const ReligionInfo = () => {
           name="horoscope"
           options={raasiOptions}
           value={formik.values.horoscope}
-          onChange={(v) => formik.setFieldValue("horoscope", v.value)}
+          onChange={(v) => formik.setFieldValue("horoscope", v)}
           error={formik.touched.horoscope && formik.errors.horoscope}
         />
 
@@ -79,7 +87,7 @@ export const ReligionInfo = () => {
           name="province"
           options={provinceOptions}
           value={province}
-          onChange={(v) => setProvince(v.value)}
+          onChange={(v) => setProvince(v)}
           error={formik.touched.horoscope && formik.errors.horoscope}
         />
 
@@ -89,7 +97,7 @@ export const ReligionInfo = () => {
           name="district"
           options={districtOptions}
           value={district}
-          onChange={(v) => setDistrict(v.value)}
+          onChange={(v) => setDistrict(v)}
           //   error={formik.touched.dis && formik.errors.district}
         />
 
@@ -99,11 +107,14 @@ export const ReligionInfo = () => {
           name="placeOfBirth"
           options={muniOptions}
           value={formik.values.placeOfBirth}
-          onChange={(v) => formik.setFieldValue("placeOfBirth", v.value)}
+          onChange={(v) => formik.setFieldValue("placeOfBirth", v)}
           error={formik.touched.placeOfBirth && formik.errors.placeOfBirth}
         />
 
-        <Submit text="Continue" />
+        <div className="d-flex justify-content-center mt-4">
+          {/* {isLoading ? <Spinner /> : <Submit text="Continue" />} */}
+          <Submit text="Continue" />
+        </div>
       </form>
     </div>
   );

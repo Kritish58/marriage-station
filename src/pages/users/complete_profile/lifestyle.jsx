@@ -1,9 +1,11 @@
-import { useFormik } from "formik";
+import { replace, useFormik } from "formik";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Radio, Submit } from "../../../components";
 import Constants from "../../../constants";
 
 export const LifestyleInfo = () => {
+  const navigate = useNavigate();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
@@ -18,14 +20,21 @@ export const LifestyleInfo = () => {
   const formik = useFormik({
     initialValues: initialValues,
     //   validationSchema: part4Schema,
-    onSubmit: () => console.log(formik.values),
+    onSubmit: () => navigate("/religioninfo", { replace: true }),
   });
 
   return (
     <div className="main reg2 p-4">
       {/* <h2 style={{ textAlign: "end" }}>Let's know more about you</h2> */}
-      <div className="d-flex flex-row-reverse flex__box"></div>
-      <h1>Lifestyle Information</h1>
+      <div className="d-flex align-items-center justify-content-between">
+        <h1>Lifestyle Information</h1>
+        <span
+          className="text-primary pointer text-decoration-underline"
+          onClick={() => navigate("/religioninfo", { replace: true })}
+        >
+          Skip
+        </span>
+      </div>
       <form onSubmit={formik.handleSubmit}>
         {/* EATING HABIT RADIO FIELD */}
         <Radio
@@ -57,7 +66,10 @@ export const LifestyleInfo = () => {
           error={formik.touched.smokingHabit && formik.errors.smokingHabit}
         />
 
-        <Submit text="Continue" />
+        <div className="d-flex justify-content-center mt-4">
+          {/* {isLoading ? <Spinner /> : <Submit text="Continue" />} */}
+          <Submit text="Continue" />
+        </div>
       </form>
     </div>
   );

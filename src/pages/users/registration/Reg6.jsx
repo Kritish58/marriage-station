@@ -9,7 +9,7 @@ import { Spinner, Submit, Textarea } from "../../../components";
 import { part6Schema } from "../../../validations/yupSchemas";
 import API from "../../../api";
 import Constants from "../../../constants";
-import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
+import { authFailure, authPending } from "../../../redux/reducers";
 import { toaster } from "../../../utils";
 
 export const Reg6 = () => {
@@ -42,13 +42,12 @@ export const Reg6 = () => {
         ...values,
       });
       toaster("success", res.status);
-      dispatch(authSuccess(res));
-      navigate("/", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       toaster("fail", error);
-      dispatch(authFailure());
-      navigate("/registration/retry", { replace: true });
+      navigate("/login", { replace: true });
     }
+    dispatch(authFailure());
   };
 
   return (
@@ -59,7 +58,6 @@ export const Reg6 = () => {
           onSubmit={formik.handleSubmit}
           className="m-4 p-4 container-lg rounded-3 flex__form"
         >
-          
           {/* DESCRIPTION INPUT */}
           <Textarea
             name="description"
