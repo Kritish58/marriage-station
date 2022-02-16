@@ -15,8 +15,9 @@ import "./style.scss";
 export const RegisterVerification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [verify, setVerify] = useState(false);
   const { user } = useSelector((state) => state.authState);
-  const [resend, setResend]  = useState(false);
+  const [resend, setResend] = useState(false);
   const [otp, setOtp] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,9 +30,9 @@ export const RegisterVerification = () => {
         ).then((res) => {
           toaster("success", res);
           dispatch(authSuccess(res));
-          navigate("/", {
-            replace: true,
-          });
+          // navigate("/", {
+          //   replace: true,
+          // });
         });
       } catch (err) {
         toaster("error", err);
@@ -45,43 +46,61 @@ export const RegisterVerification = () => {
       let appVerifier = window.recaptchaVerifier;
       let fireRes = await signInWithPhoneNumber(
         firebaseAuth,
+        // "+9779823618124",
         user.mobileNumber,
         appVerifier
       );
       window.otpConfirmation = fireRes;
     };
-    sendOTP();
-  }, [user.mobileNumber, resend]);
+    if (verify) sendOTP();
+  }, [user.mobileNumber, verify, resend]);
 
   return (
     <div className="main d-flex justify-content-center align-items-center">
-      <form onSubmit={handleSubmit}>
-        <h2 className="text-center">Verify your mobile number</h2>
-        <h5 className="text-center text-secondary">
-          Please check OTP on your mobile
-          <div className="m-4">
-            <OtpBox
-              autoFocus
-              isNumberInput
-              length={6}
-              className="otpContainer"
-              inputClassName="otpInput"
-              onChangeOTP={(otp) => setOtp(otp)}
-            />
-          </div>
-          <Submit text="Submit" />
-        </h5>
-        <p className="text-muted text-center mt-4  user-select-none">
-          Didn't get a code?{" "}
+      {!verify ? (
+        <div className="d-flex flex-column">
+          <h2 className="text-center">Verify your mobile number</h2>
+          <Submit
+            className="my-2"
+            text="Send OTP"
+            onClick={() => setVerify(true)}
+          />
           <span
-            className="text-primary  user-select-none"
-            style={{ cursor: "pointer", textDecoration: "underline" }}
-            onClick={() => setResend(true)}
+            className="my-2 text-center text-primary pointer text-decoration-underline"
+            onClick={() => navigate("/basicinfo", { replace: true })}
           >
-            Resend?
+            Skip
           </span>
-        </p>
-      </form>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-center">Verify your mobile number</h2>
+          <h5 className="text-center text-secondary">
+            Please check OTP on your mobile
+            <div className="m-4">
+              <OtpBox
+                autoFocus
+                isNumberInput
+                length={6}
+                className="otpContainer"
+                inputClassName="otpInput"
+                onChangeOTP={(otp) => setOtp(otp)}
+              />
+            </div>
+            <Submit text="Submit" />
+          </h5>
+          <p className="text-muted text-center mt-4  user-select-none">
+            Didn't get a code?{" "}
+            <span
+              className="text-primary  user-select-none"
+              style={{ cursor: "pointer", textDecoration: "underline" }}
+              onClick={() => setResend(true)}
+            >
+              Resend?
+            </span>
+          </p>
+        </form>
+      )}
       <span
         className="text-primary  user-select-none"
         style={{ cursor: "pointer", position: "fixed", bottom: "10%" }}
@@ -92,6 +111,7 @@ export const RegisterVerification = () => {
       >
         Logout
       </span>
+      <div id="recaptcha"></div>
     </div>
   );
 };

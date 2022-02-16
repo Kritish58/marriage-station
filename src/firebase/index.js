@@ -11,6 +11,8 @@ const firebaseConfig = {
   appId: Constants.env.FIREBASE_APP_ID,
 };
 
+console.log(firebaseConfig);
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(app);

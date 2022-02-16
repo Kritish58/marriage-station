@@ -30,13 +30,13 @@ const App = () => {
           path="/*"
           element={
             <AuthProtection>
-              <MobileVerification>
-                <ImageVerification>
-                  <CompleteProfile>
-                    <UserRoutes />
-                  </CompleteProfile>
-                </ImageVerification>
-              </MobileVerification>
+              {/* <MobileVerification> */}
+              <ImageVerification>
+                <CompleteProfile>
+                  <UserRoutes />
+                </CompleteProfile>
+              </ImageVerification>
+              {/* </MobileVerification> */}
             </AuthProtection>
           }
         />
