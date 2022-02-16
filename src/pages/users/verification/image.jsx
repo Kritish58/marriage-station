@@ -66,7 +66,6 @@ export const ImageUpload = () => {
             id="photo1"
             placeholder=""
           >
-            {/* TODO: COMPLETE IMAGE UPLOADER */}
             {({ field, meta }) => (
               <>
                 <div className="div">

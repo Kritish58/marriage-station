@@ -82,7 +82,7 @@ export const Reg4 = () => {
             label="Height"
             options={heightOptions}
             value={formik.values.height}
-            onChange={(value) => formik.setFieldValue("height", value.value)}
+            onChange={(value) => formik.setFieldValue("height", value)}
             error={formik.touched.height && formik.errors.height}
           />
 

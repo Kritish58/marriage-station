@@ -1,0 +1,10 @@
+.loginform {
+    width: 25%;
+    padding: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+    .loginform {
+        width: 100%;
+    }
+  }

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Constants from "../constants";
 import { Error404, ResetPassword } from "../pages";
+import { ForgotPasswordPage } from "../pages/users/forgotpassword";
+import { LogInPage } from "../pages/users/login";
 import { routeConfig } from "../utils";
 import { RegistrationRoutes } from "./RegistrationRoutes";
 
@@ -28,6 +30,8 @@ export function AuthProtection({ children }) {
         })}
         <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
+        <Route exact path='/login' element={<LogInPage />} />
+        <Route exact path='/forgot' element={<ForgotPasswordPage />} />
         {token && (
           <Route
             exact

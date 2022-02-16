@@ -56,7 +56,7 @@ export const Reg5 = () => {
             options={educationOptions}
             value={formik.values.highestEducation}
             onChange={(value) =>
-              formik.setFieldValue("highestEducation", value.value)
+              formik.setFieldValue("highestEducation", value)
             }
             error={
               formik.touched.highestEducation && formik.errors.highestEducation
@@ -81,9 +81,7 @@ export const Reg5 = () => {
             label="Annual Income"
             options={incomeOptions}
             value={formik.values.annualIncome}
-            onChange={(value) =>
-              formik.setFieldValue("annualIncome", value.value)
-            }
+            onChange={(value) => formik.setFieldValue("annualIncome", value)}
             error={formik.touched.annualIncome && formik.errors.annualIncome}
           />
 

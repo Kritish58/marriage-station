@@ -54,7 +54,7 @@ export const Reg3 = () => {
             label="Caste"
             options={casteOptions}
             value={formik.values.caste}
-            onChange={(value) => formik.setFieldValue("caste", value.value)}
+            onChange={(value) => formik.setFieldValue("caste", value)}
             error={formik.touched.caste && formik.errors.caste}
           />
 

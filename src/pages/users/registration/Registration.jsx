@@ -154,74 +154,17 @@ export const Registration = () => {
         <button
           className="logInButton"
           style={{ marginLeft: "20px" }}
-          onClick={handleLogInShow}
+          onClick={()=>navigate('/login')}
         >
           Log In
         </button>
       </span>
-      <LogInModal
+      {/* <LogInModal
         forgotPassword={forgotPassword}
         handleForgotPassword={handleForgotPassword}
         showLogIn={showLogIn}
         handleLogInClose={handleLogInClose}
-      />
-      {/* <Modal show={showLogIn} onHide={handleLogInClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {forgotPassword ? (
-              "Reset password"
-            ) : (
-              <>
-                Log In
-                <span className="mx-2 text-danger h6">
-                  * Invalid credentials! *
-                </span>
-              </>
-            )}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {!forgotPassword ? (
-            <>
-              <Input
-                type="test"
-                name="userID"
-                label="Email / Mobile No."
-                placeholder="Enter email or number"
-              />
-              <Input
-                type="password"
-                name="password"
-                label="Password"
-                placeholder="Enter your password"
-              />
-              <div className="d-flex align-items-center gap-4 m-2">
-                <Submit text="Log in" />
-                <span
-                  className="text-primary"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setForgotPassword(true)}
-                >
-                  Forgot password?
-                </span>
-              </div>
-            </>
-          ) : (
-            <>
-              <Input
-                focus
-                type="test"
-                name="userID"
-                label="Email or mobile no."
-                placeholder="Enter email or number"
-              />
-              <div className="d-grid place-items-center">
-                <Submit text="Reset password" />
-              </div>
-            </>
-          )}
-        </Modal.Body>
-      </Modal> */}
+      /> */}
       <div>
         <h5 className="msTitle" style={{ marginBottom: "4rem" }}>
           Find your perfect match at <br />

@@ -1,5 +1,6 @@
+import { useState } from "react";
 import SelectField from "react-select";
-import { Error, Label } from "..";
+import { Input, Error, Label } from "..";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -33,6 +34,7 @@ export const Select = ({
   onChange,
   error,
 }) => {
+  const [others, setOthers] = useState(false);
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
@@ -43,10 +45,21 @@ export const Select = ({
         isMulti={isMulti}
         styles={customStyles}
         value={defaultValue(options, value)}
-        onChange={(value) => onChange(value)}
+        onChange={(value) =>
+          value.value === "Others" ? setOthers(!others) : onChange(value.value)
+        }
         options={options}
         className="shadow-sm"
       />
+      {others && (
+        <Input
+          className="my-2"
+          type="text"
+          name={name}
+          placeholder={`Enter ${label}`}
+          onChange={(value) => onChange(value)}
+        />
+      )}
       {error && <Error>{error}</Error>}
     </div>
   );

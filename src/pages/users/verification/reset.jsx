@@ -78,6 +78,7 @@ export const ResetPassword = ({ token }) => {
             formik.touched.confirmPassword && formik.errors.confirmPassword
           }
         />
+        
         <Submit text="Submit" />
       </form>
     </div>

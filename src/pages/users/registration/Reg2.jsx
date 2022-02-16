@@ -77,7 +77,7 @@ export const Reg2 = () => {
             label="Religion"
             options={religionOptions}
             value={formik.values.religion}
-            onChange={(value) => formik.setFieldValue("religion", value.value)}
+            onChange={(value) => formik.setFieldValue("religion", value)}
             error={formik.touched.religion && formik.errors.religion}
           />
 
@@ -87,9 +87,7 @@ export const Reg2 = () => {
             label="Mother Tongue"
             options={motherTongueOptions}
             value={formik.values.motherTongue}
-            onChange={(value) =>
-              formik.setFieldValue("motherTongue", value.value)
-            }
+            onChange={(value) => formik.setFieldValue("motherTongue", value)}
             error={formik.touched.motherTongue && formik.errors.motherTongue}
           />
 

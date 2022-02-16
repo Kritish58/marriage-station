@@ -10,7 +10,6 @@ import "./style.scss";
 
 export const FirebaseResetVerification = () => {
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const handleSubmit = async () => {
     let result = window.otpConfirmation;

@@ -59,6 +59,7 @@ export const Reg6 = () => {
           onSubmit={formik.handleSubmit}
           className="m-4 p-4 container-lg rounded-3 flex__form"
         >
+          
           {/* DESCRIPTION INPUT */}
           <Textarea
             name="description"

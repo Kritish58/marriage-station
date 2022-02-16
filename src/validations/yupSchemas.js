@@ -29,11 +29,11 @@ export const part2Schema = yup.object().shape({
     .string()
     .min(8)
     .max(20)
-    .required("Password is required.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    ),
+    .required("Password is required."),
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+    // ),
   confirmPassword: yup
     .string()
     .when("password", {
@@ -65,11 +65,11 @@ export const part4Schema = yup.object().shape({
 
 export const part5Schema = yup.object().shape({
   highestEducation: yup.string().required("Education field is required."),
-  // employedIn: yup.string().required(),
   occupation: yup.string().required(),
-  // incomeCurrency: yup.string().required(),
   annualIncome: yup.string().required(),
   workLocation: yup.string().required(),
+  // employedIn: yup.string().required(),
+  // incomeCurrency: yup.string().required(),
   // citizenship: yup.string().required(),
   // residentStatus: yup.string().required(),
 });
@@ -87,11 +87,11 @@ export const retrySchema = yup.object().shape({
     .string()
     .min(8)
     .max(20)
-    .required("Password is required.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    ),
+    .required("Password is required."),
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+    // ),
   confirmPassword: yup
     .string()
     .when("password", {
@@ -125,11 +125,11 @@ export const resetPasswordSchema = yup.object().shape({
     .string()
     .min(8)
     .max(20)
-    .required("Password is required.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    ),
+    .required("Password is required."),
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+    // ),
   confirmPassword: yup
     .string()
     .when("password", {

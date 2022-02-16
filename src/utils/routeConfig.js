@@ -1,5 +1,6 @@
 import Constants from "../constants";
 import { Dashboard, Homepage, Landing } from "../pages";
+import Search from "../pages/users/auth/search/Search";
 
 export const routeConfig = [
   {
@@ -14,12 +15,12 @@ export const routeConfig = [
     element: Homepage,
     roles: [Constants.roles.NormalUser],
   },
-  // {
-  //   path: "/search",
-  //   title: "Search",
-  //   element: Search,
-  //   roles: [Constants.roles.NormalUser],
-  // },
+  {
+    path: "/search",
+    title: "Search",
+    element: Search,
+    roles: [Constants.roles.NormalUser],
+  },
   {
     path: "/",
     title: "Dashboard",

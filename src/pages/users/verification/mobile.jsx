@@ -16,7 +16,7 @@ export const RegisterVerification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.authState);
-  const { resend, setResend } = useState(false);
+  const [resend, setResend]  = useState(false);
   const [otp, setOtp] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +45,6 @@ export const RegisterVerification = () => {
       let appVerifier = window.recaptchaVerifier;
       let fireRes = await signInWithPhoneNumber(
         firebaseAuth,
-        //FIXME: GET USER MOBILE NUMBER
         user.mobileNumber,
         appVerifier
       );
