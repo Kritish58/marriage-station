@@ -1,11 +1,14 @@
 import { useFormik } from "formik";
 import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import API from "../../../api";
 import { Select, Submit } from "../../../components";
 import Constants from "../../../constants";
-import { generateOptions } from "../../../utils";
+import { generateOptions, toaster } from "../../../utils";
 
 export const ReligionInfo = () => {
+  const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
@@ -15,18 +18,33 @@ export const ReligionInfo = () => {
       tobHH: "",
       tobMM: "",
       tobAoP: "",
-      placeOfBirth: "",
+      birthPlace: "",
       state: "",
       city: "",
     }),
     []
   );
 
+  const handleSubmit = async (values) => {
+    console.log(values); //FIXME:
+    try {
+      await API.put(
+        `${Constants.apiEndpoint.user.updateDetails}/${
+          user && user.UserDetail.userDetail_id
+        }`,
+        values
+      );
+      navigate("/familyinfo", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
+  };
+
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
     //   validationSchema: part4Schema,
-    onSubmit: () => navigate("/familyinfo", { replace: true }),
+    onSubmit: handleSubmit,
   });
 
   const [province, setProvince] = useState("");
@@ -42,9 +60,11 @@ export const ReligionInfo = () => {
   useEffect(() => {
     if (province !== "") {
       setDistrictOptions(generateOptions(Object.keys(Constants[province])));
+      formik.setFieldValue("state", province);
     }
     if (district !== "") {
       setMuniOptions(generateOptions(Constants[province][district]));
+      formik.setFieldValue("city", district);
     }
   }, [district, province]);
 
@@ -104,11 +124,11 @@ export const ReligionInfo = () => {
         {/* MUNICIPALITY SELECT INPUT */}
         <Select
           label="Municipality"
-          name="placeOfBirth"
+          name="birthPlace"
           options={muniOptions}
-          value={formik.values.placeOfBirth}
-          onChange={(v) => formik.setFieldValue("placeOfBirth", v)}
-          error={formik.touched.placeOfBirth && formik.errors.placeOfBirth}
+          value={formik.values.birthPlace}
+          onChange={(v) => formik.setFieldValue("birthPlace", v)}
+          error={formik.touched.birthPlace && formik.errors.birthPlace}
         />
 
         <div className="d-flex justify-content-center mt-4">

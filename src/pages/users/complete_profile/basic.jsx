@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import API from "../../../api";
 import { Input, Radio, Select, Submit } from "../../../components";
 import Constants from "../../../constants";
-import { generateOptions } from "../../../utils";
+import { generateOptions, toaster } from "../../../utils";
+import { basicInfoSchema } from "../../../validations/yupSchemas";
 
 // GENERATE OPTIONS FOR HOBBIES
 const hobbiesOptions = generateOptions(Constants.hobbies);
@@ -13,26 +15,39 @@ const hobbiesOptions = generateOptions(Constants.hobbies);
 const weightOptions = generateOptions(Constants.weight);
 
 export const BasicInfo = () => {
+  const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      hobbies: "",
-      bodyType: "",
+      hobby: "",
       weight: "",
+      bodyType: "",
       college: "",
     }),
     []
   );
 
-  // const handleSubmit = async () => {
-  //   await API.put(Constants.apiEndpoint.user);
-  // };
+  const handleSubmit = async (values) => {
+    console.log(values); //FIXME:
+    try {
+      await API.put(
+        `${Constants.apiEndpoint.user.updateDetails}/${
+          user && user.UserDetail.userDetail_id
+        }`,
+        values
+      );
+      navigate("/lifestyleinfo", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
+  };
 
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: () => navigate("/lifestyleinfo", { replace: true }),
+    // validationSchema: basicInfoSchema,
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -52,11 +67,11 @@ export const BasicInfo = () => {
         <Select
           isMulti={true}
           label="Hobbies"
-          name="hobbies"
+          name="hobby"
           options={hobbiesOptions}
-          value={formik.values.hobbies}
-          onChange={(value) => formik.setFieldValue("hobbies", value)}
-          error={formik.touched.hobbies && formik.errors.hobbies}
+          value={formik.values.hobby}
+          onChange={(value) => formik.setFieldValue("hobby", value.toString())}
+          error={formik.touched.hobby && formik.errors.hobby}
         />
 
         {/* WEIGHT SELECT INPUT */}
@@ -65,7 +80,7 @@ export const BasicInfo = () => {
           name="weight"
           options={weightOptions}
           value={formik.values.weight}
-          onChange={(v) => formik.setFieldValue("weight", v.value)}
+          onChange={(value) => formik.setFieldValue("weight", value)}
           error={formik.touched.weight && formik.errors.weight}
         />
 

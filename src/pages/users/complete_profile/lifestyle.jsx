@@ -1,26 +1,45 @@
-import { replace, useFormik } from "formik";
+import { useFormik } from "formik";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import API from "../../../api";
 import { Radio, Submit } from "../../../components";
 import Constants from "../../../constants";
+import { toaster } from "../../../utils";
 
 export const LifestyleInfo = () => {
+  const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      eatingHabit: "",
-      drinkingHabit: "",
-      smokingHabit: "",
+      diet: "",
+      drink: "",
+      smoke: "",
     }),
     []
   );
+
+  const handleSubmit = async (values) => {
+    console.log(values); //FIXME:
+    try {
+      await API.put(
+        `${Constants.apiEndpoint.user.updateDetails}/${
+          user && user.UserDetail.userDetail_id
+        }`,
+        values
+      );
+      navigate("/religioninfo", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
+  };
 
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
     //   validationSchema: part4Schema,
-    onSubmit: () => navigate("/religioninfo", { replace: true }),
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -38,32 +57,32 @@ export const LifestyleInfo = () => {
       <form onSubmit={formik.handleSubmit}>
         {/* EATING HABIT RADIO FIELD */}
         <Radio
-          name="eatingHabit"
+          name="diet"
           label="Eating Habit"
-          values={Constants.eatingHabit}
-          value={formik.values.eatingHabit}
-          onChange={(value) => formik.setFieldValue("eatingHabit", value)}
-          error={formik.touched.eatingHabit && formik.errors.eatingHabit}
+          values={Constants.diet}
+          value={formik.values.diet}
+          onChange={(value) => formik.setFieldValue("diet", value)}
+          error={formik.touched.diet && formik.errors.diet}
         />
 
         {/* DRINKING HABIT RADIO FIELD */}
         <Radio
-          name="drinkingHabit"
+          name="drink"
           label="Drinking Habit"
-          values={Constants.drinkingHabit}
-          value={formik.values.drinkingHabit}
-          onChange={(value) => formik.setFieldValue("drinkingHabit", value)}
-          error={formik.touched.drinkingHabit && formik.errors.drinkingHabit}
+          values={Constants.drink}
+          value={formik.values.drink}
+          onChange={(value) => formik.setFieldValue("drink", value)}
+          error={formik.touched.drink && formik.errors.drink}
         />
 
         {/* SMOKING HABIT RADIO FIELD */}
         <Radio
-          name="smokingHabit"
+          name="smoke"
           label="Smoking Habit"
-          values={Constants.smokingHabit}
-          value={formik.values.smokingHabit}
-          onChange={(value) => formik.setFieldValue("smokingHabit", value)}
-          error={formik.touched.smokingHabit && formik.errors.smokingHabit}
+          values={Constants.smoke}
+          value={formik.values.smoke}
+          onChange={(value) => formik.setFieldValue("smoke", value)}
+          error={formik.touched.smoke && formik.errors.smoke}
         />
 
         <div className="d-flex justify-content-center mt-4">

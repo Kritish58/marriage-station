@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RegisterVerification } from "../pages";
 
 export function MobileVerification({ children }) {
-  let verified = true;
+  const { user } = useSelector((state) => state.authState);
+  let verified = user && user.UserDetail.verified === "true";
 
   if (!verified)
     return (

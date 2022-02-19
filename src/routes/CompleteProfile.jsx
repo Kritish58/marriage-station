@@ -13,12 +13,12 @@ export function CompleteProfile({ children }) {
   if (!profilePic)
     return (
       <Routes>
-        <Route path="/verifyNumber" element={<RegisterVerification />} />
+        {/* <Route path="/verifyNumber" element={<RegisterVerification />} /> */}
         <Route path="/basicinfo" element={<BasicInfo />} />
         <Route path="/familyinfo" element={<FamilyInfo />} />
         <Route path="/religioninfo" element={<ReligionInfo />} />
         <Route path="/lifestyleinfo" element={<LifestyleInfo />} />
-        <Route path="*" element={<Navigate replace to="/verifyNumber" />} />
+        <Route path="*" element={<Navigate replace to="/basicinfo" />} />
       </Routes>
     );
   return children;

@@ -8,7 +8,7 @@ import { OtpBox, Submit } from "../../../components";
 import Constants from "../../../constants";
 import { firebaseAuth } from "../../../firebase";
 import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
-import { authSuccess, logout } from "../../../redux/reducers";
+import { logout } from "../../../redux/reducers";
 import { toaster } from "../../../utils";
 import "./style.scss";
 
@@ -26,10 +26,12 @@ export const RegisterVerification = () => {
         let result = window.otpConfirmation;
         await result.confirm(otp);
         await API.put(
-          `${Constants.apiEndpoint.user.otpVerified}/${user && user.user_id}`
+          `${Constants.apiEndpoint.user.otpVerified}/${
+            user && user.UserDetail.userDetail_id
+          }`
         ).then((res) => {
-          toaster("success", res);
-          dispatch(authSuccess(res));
+          toaster("success", res.status);
+          // dispatch(authSuccess(res));
           navigate("/basicinfo", {
             replace: true,
           });

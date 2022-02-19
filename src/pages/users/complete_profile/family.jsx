@@ -1,10 +1,16 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import API from "../../../api";
 import { Radio, Select, Submit } from "../../../components";
 import Constants from "../../../constants";
-import { generateOptions } from "../../../utils";
+import { generateOptions, toaster } from "../../../utils";
 
 export const FamilyInfo = () => {
+  const { user } = useSelector((state) => state.authState);
+  const navigate = useNavigate();
+
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
@@ -19,11 +25,26 @@ export const FamilyInfo = () => {
     []
   );
 
+  const handleSubmit = async (values) => {
+    console.log(values); //FIXME:
+    try {
+      await API.put(
+        `${Constants.apiEndpoint.user.updateDetails}/${
+          user && user.UserDetail.userDetail_id
+        }`,
+        values
+      );
+      // navigate("/lifestyleinfo", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
+  };
+
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
     //   validationSchema: part4Schema,
-    onSubmit: () => console.log(formik.values),
+    onSubmit: handleSubmit,
   });
 
   // GENERATE OPTIONS FOR SELECT INPUTS
@@ -88,7 +109,10 @@ export const FamilyInfo = () => {
             <Radio
               name="marriedBrother"
               label="No of married brothers"
-              values={Constants.noOfMarriedBrothers}
+              values={Constants.noOfMarriedBrothers.slice(
+                0,
+                parseInt(formik.values.noOfBrothers) + 1
+              )}
               value={formik.values.marriedBrother}
               onChange={(value) =>
                 formik.setFieldValue("marriedBrother", value)
@@ -117,7 +141,10 @@ export const FamilyInfo = () => {
             <Radio
               name="marriedSister"
               label="No of married sisters"
-              values={Constants.noOfMarriedSisters}
+              values={Constants.noOfMarriedSisters.slice(
+                0,
+                parseInt(formik.values.noOfSisters) + 1
+              )}
               value={formik.values.marriedSister}
               onChange={(value) => formik.setFieldValue("marriedSister", value)}
               error={

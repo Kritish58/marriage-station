@@ -9,7 +9,6 @@ import { routeConfig } from "../utils";
 import { RegistrationRoutes } from "./RegistrationRoutes";
 
 export function AuthProtection({ children }) {
-  let token = localStorage.getItem(Constants.keys.resetToken);
   const { isAuthenticated } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) => c.roles.length === 0);
@@ -30,15 +29,9 @@ export function AuthProtection({ children }) {
         })}
         <Route exact path="/a-control" element={<div>Admin</div>} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
-        <Route exact path='/login' element={<LogInPage />} />
-        <Route exact path='/forgot' element={<ForgotPasswordPage />} />
-        {token && (
-          <Route
-            exact
-            path="/reset"
-            element={<ResetPassword token={token} />}
-          />
-        )}
+        <Route exact path="/login" element={<LogInPage />} />
+        <Route exact path="/forgot" element={<ForgotPasswordPage />} />
+        <Route path="/reset/:token" element={<ResetPassword />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     );

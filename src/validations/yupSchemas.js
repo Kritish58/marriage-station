@@ -25,15 +25,11 @@ export const part2Schema = yup.object().shape({
     .string()
     .email("Please provide valid email.")
     .required("Email id is required."),
-  password: yup
-    .string()
-    .min(8)
-    .max(20)
-    .required("Password is required."),
-    // .matches(
-    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    // ),
+  password: yup.string().min(8).max(20).required("Password is required."),
+  // .matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+  // ),
   confirmPassword: yup
     .string()
     .when("password", {
@@ -83,15 +79,11 @@ export const part6Schema = yup.object().shape({
 export const retrySchema = yup.object().shape({
   email: yup.string().email().required("Email is required."),
   mobileNumber: yup.string().required("Mobile number is required"),
-  password: yup
-    .string()
-    .min(8)
-    .max(20)
-    .required("Password is required."),
-    // .matches(
-    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    // ),
+  password: yup.string().min(8).max(20).required("Password is required."),
+  // .matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+  // ),
   confirmPassword: yup
     .string()
     .when("password", {
@@ -121,15 +113,11 @@ export const forgotPasswordMobileSchema = yup.object().shape({
 });
 
 export const resetPasswordSchema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8)
-    .max(20)
-    .required("Password is required."),
-    // .matches(
-    //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
-    // ),
+  password: yup.string().min(8).max(20).required("Password is required."),
+  // .matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must contain 8 characters, One uppercase, One lowercase, One number and one special case character !"
+  // ),
   confirmPassword: yup
     .string()
     .when("password", {
@@ -148,3 +136,10 @@ export const otpSchema = yup.object().shape({
 export const imageUplaodSchema = yup.object().shape({
   photo1: yup.string().required("Image is required to comlplete profile."),
 });
+
+// export const basicInfoSchema = yup.object().shape({
+//   hobby: yup.string().required('Hobbies are required.'),
+//   weight: yup.string().required('Weight is required.'),
+//   bodyType: yup.string().required('Body type is required'),
+//   college: yup.string().required(),
+// });

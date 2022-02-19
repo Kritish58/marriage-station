@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import API from "../../../api";
 import { Input, Submit } from "../../../components";
 import Constants from "../../../constants";
@@ -10,10 +10,10 @@ import { toaster } from "../../../utils";
 import { resetPasswordSchema } from "../../../validations/yupSchemas";
 import "./style.scss";
 
-export const ResetPassword = ({ token }) => {
+export const ResetPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { token } = useParams();
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
@@ -33,8 +33,8 @@ export const ResetPassword = ({ token }) => {
         }
       );
       toaster("success", res.status);
-      dispatch(authSuccess(res));
-      navigate("/", { replace: true });
+      // dispatch(authSuccess(res));
+      navigate("/login", { replace: true });
     } catch (err) {
       toaster("fail", err);
     }

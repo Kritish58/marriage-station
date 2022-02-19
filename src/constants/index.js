@@ -25,6 +25,7 @@ const Constants = {
       getAllUser: "/user",
       register: "/user/register",
       otpVerified: "/user/verified",
+      updateDetails: "/user",
     },
     photo: {
       uploadProfilePic: "/pic",
@@ -224,9 +225,9 @@ const Constants = {
     "98kg",
     "99kg",
   ],
-  eatingHabit: ["Vegeterian", "Non-Vegeterian", "Eggetarian"],
-  drinkingHabit: ["No", "Drink socially", "Yes"],
-  smokingHabit: ["No", "Occasionally", "Yes"],
+  diet: ["Vegeterian", "Non-Vegeterian", "Eggetarian"],
+  drink: ["No", "Drink socially", "Yes"],
+  smoke: ["No", "Occasionally", "Yes"],
   star: [
     "Aswini",
     "Bharani",

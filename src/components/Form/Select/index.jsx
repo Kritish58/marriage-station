@@ -46,7 +46,11 @@ export const Select = ({
         styles={customStyles}
         value={defaultValue(options, value)}
         onChange={(value) =>
-          value.value === "Others" ? setOthers(!others) : onChange(value.value)
+          value.value === "Others"
+            ? setOthers(!others)
+            : isMulti
+            ? onChange(value.map((v) => v.value))
+            : onChange(value.value)
         }
         options={options}
         className="shadow-sm"
