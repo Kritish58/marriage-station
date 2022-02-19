@@ -30,9 +30,9 @@ export const RegisterVerification = () => {
         ).then((res) => {
           toaster("success", res);
           dispatch(authSuccess(res));
-          // navigate("/", {
-          //   replace: true,
-          // });
+          navigate("/basicinfo", {
+            replace: true,
+          });
         });
       } catch (err) {
         toaster("error", err);
