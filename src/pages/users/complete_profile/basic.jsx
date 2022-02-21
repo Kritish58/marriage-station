@@ -46,7 +46,7 @@ export const BasicInfo = () => {
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    // validationSchema: basicInfoSchema,
+    validationSchema: basicInfoSchema,
     onSubmit: handleSubmit,
   });
 

@@ -1,5 +1,5 @@
+import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RegisterVerification } from "../pages";
 import {
   BasicInfo,
   FamilyInfo,
@@ -8,12 +8,11 @@ import {
 } from "../pages/users/complete_profile";
 
 export function CompleteProfile({ children }) {
-  const profilePic = null;
+  const { isNew } = useSelector((state) => state.newUser);
 
-  if (!profilePic)
+  if (isNew)
     return (
       <Routes>
-        {/* <Route path="/verifyNumber" element={<RegisterVerification />} /> */}
         <Route path="/basicinfo" element={<BasicInfo />} />
         <Route path="/familyinfo" element={<FamilyInfo />} />
         <Route path="/religioninfo" element={<ReligionInfo />} />

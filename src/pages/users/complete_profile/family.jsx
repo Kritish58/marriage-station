@@ -1,14 +1,18 @@
 import { useFormik } from "formik";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import API from "../../../api";
 import { Radio, Select, Submit } from "../../../components";
 import Constants from "../../../constants";
+import { updateNewUser } from "../../../redux/reducers/newUserSlice";
 import { generateOptions, toaster } from "../../../utils";
+import { familyInfoSchema } from "../../../validations/yupSchemas";
 
 export const FamilyInfo = () => {
   const { user } = useSelector((state) => state.authState);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // FORM INITIAL VALUES
@@ -34,7 +38,8 @@ export const FamilyInfo = () => {
         }`,
         values
       );
-      // navigate("/lifestyleinfo", { replace: true });
+      dispatch(updateNewUser());
+      navigate("/", { replace: true });
     } catch (error) {
       toaster("error", error);
     }
@@ -43,7 +48,7 @@ export const FamilyInfo = () => {
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    //   validationSchema: part4Schema,
+    validationSchema: familyInfoSchema,
     onSubmit: handleSubmit,
   });
 
@@ -65,7 +70,10 @@ export const FamilyInfo = () => {
         <h1>Family Information</h1>
         <span
           className="text-primary pointer text-decoration-underline"
-          // onClick={() => navigate("/lifestyleinfo")}
+          onClick={() => {
+            dispatch(updateNewUser());
+            navigate("/", { replace: true });
+          }}
         >
           Skip
         </span>

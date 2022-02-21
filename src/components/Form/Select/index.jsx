@@ -38,6 +38,28 @@ export const Select = ({
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
+
+  const handleChange = (value) => {
+    if (value.value === "Others") {
+      setOthers(!others);
+      if (isMulti) {
+        onChange(value.map((v) => ""));
+      } else {
+        onChange("");
+      }
+    } else {
+      if (others) {
+        setOthers(!others);
+      }
+      if (isMulti) {
+        onChange(value.map((v) => v.value));
+      } else {
+        onChange(value.value);
+      }
+    }
+    // ? setOthers(!others)
+    // : isMulti
+  };
   return (
     <div className="select__with__search my-2">
       <Label name={name} label={label} />
@@ -45,13 +67,7 @@ export const Select = ({
         isMulti={isMulti}
         styles={customStyles}
         value={defaultValue(options, value)}
-        onChange={(value) =>
-          value.value === "Others"
-            ? setOthers(!others)
-            : isMulti
-            ? onChange(value.map((v) => v.value))
-            : onChange(value.value)
-        }
+        onChange={handleChange}
         options={options}
         className="shadow-sm"
       />

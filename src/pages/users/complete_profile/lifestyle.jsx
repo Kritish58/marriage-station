@@ -6,6 +6,7 @@ import API from "../../../api";
 import { Radio, Submit } from "../../../components";
 import Constants from "../../../constants";
 import { toaster } from "../../../utils";
+import { lifestyleInfoSchema } from "../../../validations/yupSchemas";
 
 export const LifestyleInfo = () => {
   const { user } = useSelector((state) => state.authState);
@@ -38,7 +39,7 @@ export const LifestyleInfo = () => {
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    //   validationSchema: part4Schema,
+    validationSchema: lifestyleInfoSchema,
     onSubmit: handleSubmit,
   });
 

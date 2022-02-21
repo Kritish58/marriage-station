@@ -137,9 +137,33 @@ export const imageUplaodSchema = yup.object().shape({
   photo1: yup.string().required("Image is required to comlplete profile."),
 });
 
-// export const basicInfoSchema = yup.object().shape({
-//   hobby: yup.string().required('Hobbies are required.'),
-//   weight: yup.string().required('Weight is required.'),
-//   bodyType: yup.string().required('Body type is required'),
-//   college: yup.string().required(),
-// });
+export const basicInfoSchema = yup.object().shape({
+  hobby: yup.string().required("Hobbies are required."),
+  weight: yup.string().required("Weight is required."),
+  bodyType: yup.string().required("Body type is required."),
+  college: yup.string().required("College is required."),
+});
+export const lifestyleInfoSchema = yup.object().shape({
+  diet: yup.string().required("Eating habit is required."),
+  drink: yup.string().required("Drinking habit is required."),
+  smoke: yup.string().required("Smoke habit is required."),
+});
+export const religionInfoSchema = yup.object().shape({
+  star: yup.string().required("Star is required."),
+  horoscope: yup.string().required("Horoscope is required."),
+  tobHH: yup.string(),
+  tobMM: yup.string(),
+  tobAoP: yup.string(),
+  birthPlace: yup.string().required("Birth place is required."),
+  state: yup.string().required("State is required."),
+  city: yup.string().required("City is required."),
+});
+export const familyInfoSchema = yup.object().shape({
+  fatherStatus: yup.string().required("Father status is required."),
+  motherStatus: yup.string().required("Mother status is required."),
+  noOfBrothers: yup.string().required("No. of brothers is required."),
+  marriedBrother: yup.string().required("No. of married brothers is required."),
+  noOfSisters: yup.string().required("No. of sisters is required."),
+  marriedSister: yup.string().required("No. of married sisters is required."),
+  familyLocation: yup.string().required("Family location is required."),
+});

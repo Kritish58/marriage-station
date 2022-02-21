@@ -1,42 +1,52 @@
 import "./style.scss";
 import { Field, Form, Formik } from "formik";
 import { useMemo, useState } from "react";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Constants from "../../../constants";
 import API from "../../../api";
 import { imageUplaodSchema } from "../../../validations/yupSchemas";
 import placeholderImage from "../../../assets/placeholder.jpg";
 import { Submit } from "../../../components";
+import { useSelector } from "react-redux";
+import { toaster } from "../../../utils";
+import { useDispatch } from "react-redux";
+import { initializeNewUser } from "../../../redux/reducers";
 
-export const ImageUpload = () => {
+export const ImageUpload = ({ setProfilePic }) => {
+  const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [photo1, setPhoto1] = useState("");
   const [displayImage, setDisplayImage] = useState("");
   const initialValues = useMemo(() => ({ photo1: "" }), []);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async () => {
     const files = new FormData();
-    const userDetailId = "6fbc5237-914d-474a-86c0-e77474ebb9b3";
-    files.append("userDetailId", userDetailId);
+    files.append("userDetailId", user.UserDetail.userDetail_id);
     files.append("photo1", photo1);
-    await API.post(Constants.apiEndpoint.photo.uploadProfilePic, files, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-      .then((res) => {
-        toast.success(res.status);
-        console.log("hey");
-        navigate("/basicinfo", { replace: true });
-      })
-      .catch((error) =>
-        toast.error(
-          error.response?.data?.message ??
-            error.message ??
-            "Internal server error."
-        )
+    try {
+      let uploadResponse = await API.post(
+        Constants.apiEndpoint.photo.uploadProfilePic,
+        files,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
+      toaster("success", uploadResponse.status);
+      dispatch(initializeNewUser());
+      setProfilePic(true);
+      // await API.put(
+      //   `${Constants.apiEndpoint.user.updateDetails}/${user.UserDetail.userDetail_id}`,
+      //   {
+      //     active: "true",
+      //   }
+      // );
+      navigate("/verifyNumber", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
   };
 
   const imageHandler = (e) => {

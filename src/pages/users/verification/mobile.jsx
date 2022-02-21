@@ -31,7 +31,6 @@ export const RegisterVerification = () => {
           }`
         ).then((res) => {
           toaster("success", res.status);
-          // dispatch(authSuccess(res));
           navigate("/basicinfo", {
             replace: true,
           });

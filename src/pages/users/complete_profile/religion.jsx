@@ -6,6 +6,7 @@ import API from "../../../api";
 import { Select, Submit } from "../../../components";
 import Constants from "../../../constants";
 import { generateOptions, toaster } from "../../../utils";
+import { religionInfoSchema } from "../../../validations/yupSchemas";
 
 export const ReligionInfo = () => {
   const { user } = useSelector((state) => state.authState);
@@ -43,7 +44,7 @@ export const ReligionInfo = () => {
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    //   validationSchema: part4Schema,
+    validationSchema: religionInfoSchema,
     onSubmit: handleSubmit,
   });
 
@@ -104,21 +105,21 @@ export const ReligionInfo = () => {
         {/* PROVINCE SELECT INPUT */}
         <Select
           label="Province"
-          name="province"
+          name="state"
           options={provinceOptions}
-          value={province}
+          value={formik.state}
           onChange={(v) => setProvince(v)}
-          error={formik.touched.horoscope && formik.errors.horoscope}
+          error={formik.touched.state && formik.errors.state}
         />
 
         {/* DISTRICT SELECT INPUT */}
         <Select
           label="District"
-          name="district"
+          name="city"
           options={districtOptions}
-          value={district}
+          value={formik.city}
           onChange={(v) => setDistrict(v)}
-          //   error={formik.touched.dis && formik.errors.district}
+          error={formik.touched.city && formik.errors.city}
         />
 
         {/* MUNICIPALITY SELECT INPUT */}
