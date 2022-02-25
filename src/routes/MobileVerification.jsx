@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { RegisterVerification } from "../pages";
 
 export function MobileVerification() {
@@ -12,4 +12,5 @@ export function MobileVerification() {
         <Route path="/verifyNumber" element={<RegisterVerification />} />
       </Routes>
     );
+  return <Navigate replace to="/" />;
 }

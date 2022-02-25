@@ -18,10 +18,12 @@ const Constants = {
   apiEndpoint: {
     auth: {
       login: "/auth/login",
+      loginWithOtp: "/auth/loginWithOtp",
       forgotPassword: "/auth/forgetpassword",
       resetPassword: "/auth/resetpassword",
     },
     user: {
+      getSelf: "/user",
       getAllUser: "/user",
       register: "/user/register",
       otpVerified: "/user/verified",
@@ -145,6 +147,10 @@ const Constants = {
     "1 Crore & Above",
   ],
   countryCode: [
+    {
+      code: "us",
+      value: "+1",
+    },
     {
       code: "np",
       value: "+977",

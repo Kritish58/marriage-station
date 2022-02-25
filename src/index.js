@@ -16,3 +16,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+// TODO: DATA AAYENA VANE N/A
+
+// TODO: PARTNER PREFERENCES

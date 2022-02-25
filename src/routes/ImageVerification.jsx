@@ -7,8 +7,9 @@ import { ImageUpload } from "../pages";
 import { toaster } from "../utils";
 
 export function ImageVerification({ children }) {
-  const [profilePic, setProfilePic] = useState(false);
   const { user } = useSelector((state) => state.authState);
+  const [profilePic, setProfilePic] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPhoto = async () => {
@@ -22,9 +23,12 @@ export function ImageVerification({ children }) {
         toaster("error", error);
       }
     };
+    setLoading(true);
     fetchPhoto();
+    setLoading(false);
   }, [profilePic, user]);
 
+  if (loading) return <h1>Loading</h1>;
   if (!profilePic)
     return (
       <Routes>

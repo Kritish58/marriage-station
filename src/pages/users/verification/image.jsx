@@ -87,7 +87,7 @@ export const ImageUpload = ({ setProfilePic }) => {
                       background: displayImage
                         ? `url(${displayImage})`
                         : `url(${placeholderImage})`,
-                      border: displayImage ? "none" : "2px solid #239488",
+                      border: displayImage ? "none" : "4px dashed #239488",
                     }}
                   >
                     <input

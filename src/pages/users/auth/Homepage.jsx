@@ -8,7 +8,10 @@ export const Homepage = () => {
   if (!user) return <Navigate replace to="/privacy-policies" />;
   return (
     <div className="user__pages">
-      <h2 className="user__pages__title">Hello, {user.firstName} </h2>
+      <h2 className="user__pages__title">
+        Hello, {user.firstName} -{" "}
+        {user.UserDetail.verified ? "Verified" : "Unverified"}
+      </h2>
     </div>
   );
 };

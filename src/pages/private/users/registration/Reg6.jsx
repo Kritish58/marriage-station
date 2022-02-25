@@ -47,16 +47,16 @@ export const Reg6 = () => {
         ...values,
       });
 
-      // FIXME:DEBUG RECAPTCHA
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      let fireRes = await signInWithPhoneNumber(
-        firebaseAuth,
-        profile.mobileNumber,
-        appVerifier
-      );
+      // // FIXME:DEBUG RECAPTCHA
+      // generateRecaptcha();
+      // let appVerifier = window.recaptchaVerifier;
+      // let fireRes = await signInWithPhoneNumber(
+      //   firebaseAuth,
+      //   profile.mobileNumber,
+      //   appVerifier
+      // );
 
-      window.otpConfirmation = fireRes;
+      // window.otpConfirmation = fireRes;
       dispatch(authSuccess(res));
     } catch (error) {
       toast.error(

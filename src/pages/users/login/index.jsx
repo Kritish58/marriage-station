@@ -14,7 +14,13 @@ import {
 } from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
-import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
+import {
+  authFailure,
+  authPending,
+  authSuccess,
+  setMobileNumber,
+} from "../../../redux/reducers";
+import { toaster } from "../../../utils";
 import {
   logInWithEmailSchema,
   logInWithMobileSchema,
@@ -44,26 +50,20 @@ export const LogInPage = ({
 
   // HANDLE LOG IN SUBMIT
   const onLogIn = async (values) => {
-    dispatch(authPending());
-    let data = useEmail
-      ? { email: values.email, password: values.password }
-      : {
-          mobileNumber: `${countryCode}${values.mobileNumber}`,
-          password: values.password,
-        };
-    try {
-      let res = await API.post(Constants.apiEndpoint.auth.login, data);
-      dispatch(authSuccess(res));
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message ??
-          error.message ??
-          "Internal server error.",
-        {
-          position: toast.POSITION.TOP_CENTER,
-        }
-      );
-      dispatch(authFailure());
+    if (useEmail) {
+      dispatch(authPending());
+      let data = { email: values.email, password: values.password };
+      try {
+        let res = await API.post(Constants.apiEndpoint.auth.login, data);
+        dispatch(authSuccess(res));
+        navigate("/", { replace: true });
+      } catch (error) {
+        toaster("error", error);
+        dispatch(authFailure());
+      }
+    } else {
+      dispatch(setMobileNumber(`${countryCode}${values.mobileNumber}`));
+      navigate("/", { replace: true });
     }
   };
 
@@ -84,15 +84,27 @@ export const LogInPage = ({
           onClick={() => setUseEmail(!useEmail)}
         />
         {useEmail ? (
-          <Input
-            type="text"
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-            values={logInForm.values.email}
-            onChange={(value) => logInForm.setFieldValue("email", value)}
-            error={logInForm.touched.email && logInForm.errors.email}
-          />
+          <>
+            <Input
+              type="text"
+              name="email"
+              label="Email"
+              placeholder="Enter your email"
+              values={logInForm.values.email}
+              onChange={(value) => logInForm.setFieldValue("email", value)}
+              error={logInForm.touched.email && logInForm.errors.email}
+            />
+            <Input
+              className="mt-4"
+              type="password"
+              name="password"
+              label="Password"
+              placeholder="Enter your password"
+              values={logInForm.values.password}
+              onChange={(value) => logInForm.setFieldValue("password", value)}
+              error={logInForm.touched.password && logInForm.errors.password}
+            />
+          </>
         ) : (
           <div className="container-fluid p-0">
             <Label name="mobileNumber" label="Mobile number" className="mt-4" />
@@ -102,6 +114,8 @@ export const LogInPage = ({
                 options={Constants.countryCode}
                 onChange={(value) => setCountryCode(value)}
               />
+
+              {/* TODO: LOGIN WITH OTP  */}
               <Input
                 type="text"
                 name="mobileNumber"
@@ -119,16 +133,7 @@ export const LogInPage = ({
             )}
           </div>
         )}
-        <Input
-          className="mt-4"
-          type="password"
-          name="password"
-          label="Password"
-          placeholder="Enter your password"
-          values={logInForm.values.password}
-          onChange={(value) => logInForm.setFieldValue("password", value)}
-          error={logInForm.touched.password && logInForm.errors.password}
-        />
+
         {isLoading ? (
           <Spinner />
         ) : (

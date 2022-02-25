@@ -2,21 +2,22 @@ import { signInWithPhoneNumber } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import API from "../../../api";
 import { OtpBox, Submit } from "../../../components";
 import Constants from "../../../constants";
 import { firebaseAuth } from "../../../firebase";
 import { generateRecaptcha } from "../../../firebase/recaptcha-generator";
-import { logout } from "../../../redux/reducers";
+import { authSuccess } from "../../../redux/reducers";
 import { toaster } from "../../../utils";
 import "./style.scss";
 
-export const RegisterVerification = () => {
+export const VerifyOTP = () => {
+  const { mobileNumber } = useSelector((state) => state.otpLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [verify, setVerify] = useState(false);
-  const { user } = useSelector((state) => state.authState);
+  //   const [verify, setVerify] = useState(false);
+  // const { user } = useSelector((state) => state.authState);
   const [resend, setResend] = useState(false);
   const [otp, setOtp] = useState("");
   const handleSubmit = async (e) => {
@@ -25,42 +26,40 @@ export const RegisterVerification = () => {
       try {
         let result = window.otpConfirmation;
         await result.confirm(otp);
-        await API.put(
-          `${Constants.apiEndpoint.user.otpVerified}/${
-            user && user.UserDetail.userDetail_id
-          }`
-        ).then((res) => {
-          toaster("success", res.status);
-          navigate("/basicinfo", {
-            replace: true,
-          });
+        let res = await API.post(Constants.apiEndpoint.auth.loginWithOtp, {
+          mobileNumber,
         });
+        toaster("success", res.status);
+        dispatch(authSuccess(res));
       } catch (err) {
+        console.log(err);
         toaster("error", err);
       }
     }
   };
 
   useEffect(() => {
-    const sendOTP = async () => {
-      window.recaptchaVerifier.clear();
+    if (!resend) {
       generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
+    }
+    let appVerifier = window.recaptchaVerifier;
+    const sendOTP = async () => {
       let fireRes = await signInWithPhoneNumber(
         firebaseAuth,
-        user.mobileNumber,
+        mobileNumber,
         appVerifier
       );
       window.otpConfirmation = fireRes;
     };
-    if (verify) sendOTP();
-  }, [user.mobileNumber, verify, resend]);
-
+    sendOTP();
+  }, [mobileNumber, resend]);
   return (
     <div className="main d-flex justify-content-center align-items-center">
-      {!verify ? (
+      {/* {!verify ? (
         <div className="d-flex flex-column">
-          <h2 className="text-center">Verify your mobile number</h2>
+          <h2 className="text-center">
+            Please enter OTP sent on your mobile number
+          </h2>
           <Submit
             className="my-2"
             text="Send OTP"
@@ -73,36 +72,36 @@ export const RegisterVerification = () => {
             Skip
           </span>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2 className="text-center">Verify your mobile number</h2>
-          <h5 className="text-center text-secondary">
-            Please check OTP on your mobile
-            <div className="m-4">
-              <OtpBox
-                autoFocus
-                isNumberInput
-                length={6}
-                className="otpContainer"
-                inputClassName="otpInput"
-                onChangeOTP={(otp) => setOtp(otp)}
-              />
-            </div>
-            <Submit text="Submit" />
-          </h5>
-          <p className="text-muted text-center mt-4  user-select-none">
-            Didn't get a code?{" "}
-            <span
-              className="text-primary  user-select-none"
-              style={{ cursor: "pointer", textDecoration: "underline" }}
-              onClick={() => setResend(true)}
-            >
-              Resend?
-            </span>
-          </p>
-        </form>
-      )}
-      <span
+      ) : ( */}
+      <form onSubmit={handleSubmit}>
+        <h2 className="text-center">Verify your mobile number</h2>
+        <h5 className="text-center text-secondary">
+          Please check OTP on your mobile
+          <div className="m-4">
+            <OtpBox
+              autoFocus
+              isNumberInput
+              length={6}
+              className="otpContainer"
+              inputClassName="otpInput"
+              onChangeOTP={(otp) => setOtp(otp)}
+            />
+          </div>
+          <Submit text="Submit" />
+        </h5>
+        <p className="text-muted text-center mt-4  user-select-none">
+          Didn't get a code?
+          <span
+            className="text-primary  user-select-none"
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={() => setResend(!resend)}
+          >
+            Resend?
+          </span>
+        </p>
+      </form>
+      {/* )} */}
+      {/* <span
         className="text-primary  user-select-none"
         style={{ cursor: "pointer", position: "fixed", bottom: "10%" }}
         onClick={() => {
@@ -111,7 +110,7 @@ export const RegisterVerification = () => {
         }}
       >
         Logout
-      </span>
+      </span> */}
       <div id="recaptcha"></div>
     </div>
   );

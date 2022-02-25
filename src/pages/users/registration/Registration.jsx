@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "./styles/RegMain.scss";
 import Constants from "../../../constants";
 import { setProfile } from "../../../redux/reducers";
-import { LogInModal } from "../../../components";
 
 const labelStyle = {
   display: "block",
@@ -105,8 +104,7 @@ export const Registration = () => {
       gender !== "" &&
       name !== "" &&
       countryCode !== "" &&
-      mobileNumber !== "" &&
-      mobileNumber.length === 10
+      mobileNumber !== ""
     ) {
       let temp = name.split(" ");
       let firstName = temp[0];
@@ -123,18 +121,6 @@ export const Registration = () => {
       navigate("/registration/20");
     }
   };
-
-  const [forgotPassword, setForgotPassword] = useState(false);
-
-  const [showLogIn, setShowLogIn] = useState(false);
-
-  const handleLogInClose = () => setShowLogIn(false);
-  const handleLogInShow = () => {
-    setShowLogIn(true);
-    setForgotPassword(false);
-  };
-
-  const handleForgotPassword = () => setForgotPassword(true);
 
   return (
     <div
@@ -154,7 +140,7 @@ export const Registration = () => {
         <button
           className="logInButton"
           style={{ marginLeft: "20px" }}
-          onClick={()=>navigate('/login')}
+          onClick={() => navigate("/login")}
         >
           Log In
         </button>
@@ -264,6 +250,16 @@ export const Registration = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setCountryCode("+1")}>
+                    <img
+                      src="https://flagcdn.com/16x12/us.png"
+                      srcSet="https://flagcdn.com/32x24/us.png 2x,https://flagcdn.com/48x36/us.png 3x"
+                      width="16"
+                      height="12"
+                      alt="US"
+                    />
+                    +1
+                  </Dropdown.Item>
                   <Dropdown.Item onClick={() => setCountryCode("+977")}>
                     <img
                       src="https://flagcdn.com/16x12/np.png"

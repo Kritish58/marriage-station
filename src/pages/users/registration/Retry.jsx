@@ -2,14 +2,7 @@ import { useFormik } from "formik";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../../api";
-import {
-  Error,
-  Input,
-  Label,
-  LogInModal,
-  Spinner,
-  Submit,
-} from "../../../components";
+import { Error, Input, Label, Spinner, Submit } from "../../../components";
 import { CountryCode } from "../../../components/Form/MobileNumber";
 import Constants from "../../../constants";
 import { authFailure, authPending, authSuccess } from "../../../redux/reducers";
@@ -87,12 +80,12 @@ export const Retry = () => {
             >
               Log in
             </span>
-            <LogInModal
+            {/* <LogInModal
               forgotPassword={forgotPassword}
               handleForgotPassword={handleForgotPassword}
               showLogIn={showLogIn}
               handleLogInClose={handleLogInClose}
-            />
+            /> */}
           </div>
 
           {/* EMAIL FIELD */}

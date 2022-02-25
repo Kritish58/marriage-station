@@ -102,7 +102,7 @@ export const logInWithEmailSchema = yup.object().shape({
 
 export const logInWithMobileSchema = yup.object().shape({
   mobileNumber: yup.string().required("Required."),
-  password: yup.string().required("Required."),
+  // password: yup.string().required("Required."),
 });
 
 export const forgotPasswordEmailSchema = yup.object().shape({
@@ -159,8 +159,8 @@ export const religionInfoSchema = yup.object().shape({
   city: yup.string().required("City is required."),
 });
 export const familyInfoSchema = yup.object().shape({
-  fatherStatus: yup.string().required("Father status is required."),
-  motherStatus: yup.string().required("Mother status is required."),
+  fatherOccupation: yup.string().required("Father status is required."),
+  motherOccupation: yup.string().required("Mother status is required."),
   noOfBrothers: yup.string().required("No. of brothers is required."),
   marriedBrother: yup.string().required("No. of married brothers is required."),
   noOfSisters: yup.string().required("No. of sisters is required."),

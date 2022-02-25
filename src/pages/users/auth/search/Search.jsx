@@ -39,9 +39,9 @@ const Search = () => {
       style={{ maxHeight: "100vh", overflow: "auto" }}
     >
       <h2 className="user__pages__title">Search for profiles</h2>
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
+      {users.map((user) => (
+        <ProfileCard key={user.User.user_id} user={user} />
+      ))}
     </div>
   );
 };

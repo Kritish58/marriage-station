@@ -18,8 +18,8 @@ export const FamilyInfo = () => {
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      fatherStatus: "",
-      motherStatus: "",
+      fatherOccupation: "", // TODO : FATHER OCCUPATION API
+      motherOccupation: "", // TODO : MOTHER OCCUPATION API
       noOfBrothers: "",
       marriedBrother: "None",
       noOfSisters: "",
@@ -84,9 +84,11 @@ export const FamilyInfo = () => {
           label="Father Status"
           name="fatherStatus"
           options={fatherStatusOptions}
-          value={formik.values.fatherStatus}
-          onChange={(v) => formik.setFieldValue("fatherStatus", v)}
-          error={formik.touched.fatherStatus && formik.errors.fatherStatus}
+          value={formik.values.fatherOccupation}
+          onChange={(v) => formik.setFieldValue("fatherOccupation", v)}
+          error={
+            formik.touched.fatherOccupation && formik.errors.fatherOccupation
+          }
         />
 
         {/* MOTHER STATUS SELECT INPUT */}
@@ -94,9 +96,11 @@ export const FamilyInfo = () => {
           label="Mother Status"
           name="motherStatus"
           options={motherStatusOptions}
-          value={formik.values.motherStatus}
-          onChange={(v) => formik.setFieldValue("motherStatus", v)}
-          error={formik.touched.motherStatus && formik.errors.motherStatus}
+          value={formik.values.motherOccupation}
+          onChange={(v) => formik.setFieldValue("motherOccupation", v)}
+          error={
+            formik.touched.motherOccupation && formik.errors.motherOccpation
+          }
         />
 
         {/* NO OF BROTHERS RADIO FIELD */}
