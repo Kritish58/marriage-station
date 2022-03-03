@@ -12,13 +12,13 @@ import { useEffect } from "react";
 import Constants from "./constants";
 import { authFailure, authPending, authSuccess } from "./redux/reducers";
 import { useDispatch } from "react-redux";
-import { MobileVerification } from "./routes/MobileVerification";
 import { ImageVerification } from "./routes/ImageVerification";
 import { AuthProtection } from "./routes/Protected";
 import { CompleteProfile } from "./routes/CompleteProfile";
 import API from "./api";
 import jwtDecode from "jwt-decode";
 import { useSelector } from "react-redux";
+import { Spinner } from "./components";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,9 +29,8 @@ const App = () => {
     );
     const tryLogIn = async (token) => {
       let data = jwtDecode(token);
-      console.log(data.payload.user);
       try {
-        let res = await API.get(
+        await API.get(
           `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
         );
         dispatch(authSuccess(session));
@@ -44,7 +43,12 @@ const App = () => {
       tryLogIn(session?.token);
     }
   }, [dispatch]);
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   return (
     <Router>
       <ToastContainer />

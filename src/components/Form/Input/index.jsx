@@ -14,7 +14,7 @@ export const Input = ({
   error,
 }) => {
   return (
-    <div className={`inputField ${className}`}>
+    <div className={`input inputField ${className}`}>
       {label && <Label label={label} name={name} />}
       <input
         type={type}

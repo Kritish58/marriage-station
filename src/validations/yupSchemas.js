@@ -167,3 +167,12 @@ export const familyInfoSchema = yup.object().shape({
   marriedSister: yup.string().required("No. of married sisters is required."),
   familyLocation: yup.string().required("Family location is required."),
 });
+
+export const basicSearchSchema = yup.object().shape({
+  age: yup.string().required(),
+  religion: yup.string().required(),
+  motherTongue: yup.string().required(),
+  maritalStatus: yup.string().required(),
+  caste: yup.string().required(),
+  state: yup.string().required(),
+});

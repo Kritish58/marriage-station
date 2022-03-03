@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Sidebar } from "../components";
-import Constants from "../constants";
 import { routeConfig } from "../utils";
 import "./main.scss";
 import { Error404 } from "../pages";
@@ -12,16 +11,16 @@ export const UserRoutes = () => {
   const { user } = useSelector((state) => state.authState);
   const routes = useMemo(() => {
     return routeConfig.filter((c) =>
-      c.roles.some((idx) => idx === Constants.roles.NormalUser)
+      c.roles.some((idx) => idx === user.Roles[0].role)
     );
-  }, []);
+  }, [user]);
 
   return (
     <div className="d-flex user__main">
       <Sidebar user={user} />
       <Routes>
         {routes.map((idx) => {
-          const Element = idx.element;
+          let Element = idx.element;
           return (
             <Route
               path={idx.path}
@@ -31,7 +30,6 @@ export const UserRoutes = () => {
             />
           );
         })}
-
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>

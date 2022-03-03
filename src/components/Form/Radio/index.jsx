@@ -11,7 +11,7 @@ export const Radio = ({
   error,
 }) => {
   return (
-    <div className={`radioField py-2 ${className}`}>
+    <div className={`input radioField py-2 ${className}`}>
       <Label name={name} label={label} />
       <div className="radios">
         {values.map((option) => (

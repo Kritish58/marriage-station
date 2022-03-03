@@ -10,7 +10,7 @@ export const Textarea = ({
   error,
 }) => {
   return (
-    <div className="inputField my-4">
+    <div className="input inputField my-4">
       <Label label={label} name={name} />
       <textarea
         name={name}

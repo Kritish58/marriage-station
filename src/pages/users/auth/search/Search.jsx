@@ -1,83 +1,83 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Badge } from "react-bootstrap";
+import { Pagination } from "react-bootstrap";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../../../api";
+import { Spinner } from "../../../../components";
 import { ProfileCard } from "../../../../components/Card/Profile";
 import Constants from "../../../../constants";
+import { paramsCleaner } from "../../../../utils/paramsCleaner";
 import "../styles.scss";
 
-const Search = () => {
-  // const [page, setPage] = useState(0);
-  // const [count, setCount] = useState(0);
+export const Search = () => {
   const [users, setUsers] = useState([]);
-
-  const fetchUsers = async () => {
-    await API.get(
-      `${Constants.apiEndpoint.user.getAllUser}`
-      // {
-      //   params: { count, page },
-      // }
-    )
-      .then((res) => {
-        console.log(res);
-        setUsers(res.data.rows);
-      })
-      .catch((err) => toast.error(err));
-  };
-
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
+  let [queries] = useSearchParams();
   useEffect(() => {
+    let params = paramsCleaner(queries);
+    const fetchUsers = async () => {
+      await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
+        params,
+      })
+        .then((res) => {
+          console.log(res);
+          setCount(res.count);
+          setUsers(res.data.filteredData);
+        })
+        .catch((err) => toast.error(err));
+    };
+    setLoading(true);
     fetchUsers();
+    setLoading(false);
     return () => {
       setUsers([]);
     };
-  }, []);
+  }, [queries]);
 
-  return (
-    <div
-      className="user__pages"
-      style={{ maxHeight: "100vh", overflow: "auto" }}
-    >
-      <h2 className="user__pages__title">Search for profiles</h2>
-      {users.map((user) => (
-        <ProfileCard key={user.User.user_id} user={user} />
-      ))}
+  return loading ? (
+    <Spinner />
+  ) : count === 0 ? (
+    <h2 className="p-4">No match found</h2>
+  ) : (
+    <div className="search__page">
+      <h2 className="py-4">Search results</h2>
+      <div className="d-flex">
+        <aside className="filter__user" style={{ flex: 1, maxHeight: "75vh" }}>
+          <h4 className="strong">Filter</h4>
+          <section
+            className="filter__box rounded-3"
+            style={{ height: "100%", width: "100%", background: "white" }}
+          ></section>
+        </aside>
+        <aside className="user__list d-flex flex-column" style={{ flex: 3 }}>
+          <section style={{ maxHeight: "80vh", overflow: "auto" }}>
+            {users.map((user) => (
+              <ProfileCard key={user.User.user_id} user={user} />
+            ))}
+          </section>
+          <section className="align-self-end  p-4">
+            <Pagination>
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item>{1}</Pagination.Item>
+              <Pagination.Ellipsis />
+
+              <Pagination.Item>{10}</Pagination.Item>
+              <Pagination.Item>{11}</Pagination.Item>
+              <Pagination.Item active>{12}</Pagination.Item>
+              <Pagination.Item>{13}</Pagination.Item>
+              <Pagination.Item disabled>{14}</Pagination.Item>
+
+              <Pagination.Ellipsis />
+              <Pagination.Item>{20}</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
+          </section>
+        </aside>
+      </div>
     </div>
   );
 };
-
-export default Search;
-
-const profilePic = {
-  width: "13rem",
-  height: "14rem",
-};
-
-// const ProfileCard = ({ user }) => {
-//   return (
-//     <div className="d-flex bg-white container-fluid my-4 rounded-3">
-//       <div
-//         className="left rounded-3 bg-secondary position-relative"
-//         style={profilePic}
-//       ></div>
-//       <div className="right p-4">
-//         <h4 className="position-relative">
-//           {user.User.firstName}
-//           {user.User.lastName}
-//           <Badge
-//             style={{
-//               fontSize: "8px",
-//               fontWeight: "lighter",
-//               position: "absolute",
-//               top: 0,
-//               right: -50,
-//             }}
-//             bg={user.verified === "true" ? "success" : "secondary"}
-//           >
-//             {user.verified === "true" ? "Verified" : "Not verrified"}
-//           </Badge>
-//         </h4>
-//       </div>
-//     </div>
-//   );
-// };

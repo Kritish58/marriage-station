@@ -63,7 +63,7 @@ export const LogInPage = ({
       }
     } else {
       dispatch(setMobileNumber(`${countryCode}${values.mobileNumber}`));
-      navigate("/", { replace: true });
+      navigate("/verifyOTP", { replace: true });
     }
   };
 

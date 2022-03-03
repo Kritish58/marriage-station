@@ -1,0 +1,33 @@
+.search__page {
+  flex-grow: 1;
+  padding: 12px;
+  .search__toggle {
+    .search__menu {
+      cursor: pointer;
+      &:hover {
+        background: var(--dim-primary-color);
+        color: var(--primary-color);
+      }
+    }
+    .search__menu.active {
+      background: var(--primary-color);
+      color: white;
+    }
+  }
+  .search__box {
+    border: 5px solid var(--primary-color);
+    width: 100%;
+    padding: 2rem !important;
+    max-height: 75vh;
+    overflow-y: scroll;
+    .input {
+      font-size: 10px;
+      margin: 2px !important;
+      input {
+        // padding: 8px !important;
+        border-radius: 8px !important;
+      }
+      padding: 2px !important;
+    }
+  }
+}

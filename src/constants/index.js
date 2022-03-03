@@ -32,18 +32,12 @@ const Constants = {
     photo: {
       uploadProfilePic: "/pic",
     },
-    admin: {
-      dashboard: "/a-control/dashboard",
-    },
-    franchise: {
-      dashboard: "/a-control/dashboard",
-    },
   },
   roles: {
     Admin: "admin",
     UnverifiedUser: "Unverified",
     NoProfileUser: "NoProfileUser",
-    NormalUser: "User",
+    NormalUser: "user",
     All: "all",
   },
   //   patterns: {
