@@ -24,11 +24,8 @@ const App = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.authState);
   useEffect(() => {
-    let session = JSON.parse(
-      localStorage.getItem(Constants.keys.session) || "{}"
-    );
-    const tryLogIn = async (token) => {
-      let data = jwtDecode(token);
+    const tryLogIn = async (session) => {
+      let data = jwtDecode(session?.token);
       try {
         await API.get(
           `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
@@ -38,18 +35,23 @@ const App = () => {
         dispatch(authFailure());
       }
     };
+    let session = JSON.parse(
+      localStorage.getItem(Constants.keys.session) || "{}"
+    );
     if (session?.token) {
       dispatch(authPending());
-      tryLogIn(session?.token);
+      tryLogIn(session);
     }
   }, [dispatch]);
-  if (isLoading)
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  return (
+  // if (isLoading)
+  //   return (
+  //     <div>
+  //       <Spinner />
+  //     </div>
+  //   );
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <Router>
       <ToastContainer />
       <Routes>
@@ -57,12 +59,12 @@ const App = () => {
           path="/*"
           element={
             <AuthProtection>
-              <ImageVerification>
-                {/* <MobileVerification /> */}
-                <CompleteProfile>
-                  <UserRoutes />
-                </CompleteProfile>
-              </ImageVerification>
+              {/* <ImageVerification> */}
+              {/* <MobileVerification /> */}
+              {/* <CompleteProfile> */}
+              <UserRoutes />
+              {/* </CompleteProfile> */}
+              {/* </ImageVerification> */}
             </AuthProtection>
           }
         />

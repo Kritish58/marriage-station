@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Pagination } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../../../api";
@@ -8,38 +9,36 @@ import { Spinner } from "../../../../components";
 import { ProfileCard } from "../../../../components/Card/Profile";
 import Constants from "../../../../constants";
 import { paramsCleaner } from "../../../../utils/paramsCleaner";
-import "../styles.scss";
+import "./style.scss";
 
-export const Search = () => {
+export default function SearchResults() {
+  const { user } = useSelector((state) => state.authState);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
   let [queries] = useSearchParams();
   useEffect(() => {
-    let params = paramsCleaner(queries);
+    setLoading(true);
+    let params = paramsCleaner(queries, user.UserDetail.gender);
     const fetchUsers = async () => {
       await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
         params,
       })
         .then((res) => {
-          console.log(res);
           setCount(res.count);
           setUsers(res.data.filteredData);
         })
         .catch((err) => toast.error(err));
     };
-    setLoading(true);
     fetchUsers();
     setLoading(false);
     return () => {
       setUsers([]);
     };
-  }, [queries]);
+  }, [queries, user]);
 
-  return loading ? (
+  return loading || count === 0 ? (
     <Spinner />
-  ) : count === 0 ? (
-    <h2 className="p-4">No match found</h2>
   ) : (
     <div className="search__page">
       <h2 className="py-4">Search results</h2>
@@ -80,4 +79,4 @@ export const Search = () => {
       </div>
     </div>
   );
-};
+}

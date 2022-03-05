@@ -1,5 +1,4 @@
 import React from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
 import { Input, Radio, Select } from "../../../../../components";
 import Constants from "../../../../../constants";
 import { generateOptions } from "../../../../../utils";

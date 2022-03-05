@@ -2,27 +2,15 @@ import { useFormik } from "formik";
 import { useMemo, useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { Submit } from "../../../../components";
-import { basicSearchSchema } from "../../../../validations/yupSchemas";
 import AdvanceSearchInput from "./forms/advance";
 import BasicSearchInput from "./forms/basic";
 import "./style.scss";
-export const SearchPage = () => {
+export default function SearchPage() {
   const navigate = useNavigate();
   const [active, setActive] = useState("basic");
 
   // FORM INITIAL VALUES
-  const basicValues = useMemo(
-    () => ({
-      age: "",
-      religion: "",
-      motherTongue: "",
-      maritalStatus: "",
-      caste: "",
-      state: "",
-    }),
-    []
-  );
-  const advanceValues = useMemo(
+  const initialValues = useMemo(
     () => ({
       age: "",
       religion: "",
@@ -36,7 +24,7 @@ export const SearchPage = () => {
 
   // USE FORMIK
   const formik = useFormik({
-    initialValues: basicValues,
+    initialValues: initialValues,
     // validationSchema: basicSearchSchema,
     onSubmit: () => handleSubmit(formik.values),
   });
@@ -87,4 +75,4 @@ export const SearchPage = () => {
       </form>
     </section>
   );
-};
+}
