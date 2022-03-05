@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error404, ResetPassword, VerifyOTP } from "../pages";
+import AdminLogInPage from "../pages/admin/auth/Login";
 import { ForgotPasswordPage } from "../pages/users/forgotpassword";
 import { LogInPage } from "../pages/users/login";
 import { routeConfig } from "../utils";
@@ -27,7 +28,7 @@ export function AuthProtection({ children }) {
             />
           );
         })}
-        <Route exact path="/a-control" element={<div>Admin</div>} />
+        <Route exact path="/a-control" element={<AdminLogInPage />} />
         <Route path="/registration/*" element={<RegistrationRoutes />} />
         <Route exact path="/login" element={<LogInPage />} />
         <Route exact path="/register" element={<Navigate replace to="/" />} />

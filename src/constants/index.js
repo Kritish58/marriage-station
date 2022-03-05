@@ -34,6 +34,7 @@ const Constants = {
     },
   },
   roles: {
+    SuperAdmin: "superAdmin",
     Admin: "admin",
     UnverifiedUser: "Unverified",
     NoProfileUser: "NoProfileUser",

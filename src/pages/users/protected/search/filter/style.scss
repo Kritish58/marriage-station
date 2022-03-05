@@ -1,0 +1,8 @@
+.menu {
+  background: var(--admin-menu-bg);
+}
+.submenu {
+  background: var(--admin-submenu-bg);
+  max-height: 8rem;
+  overflow-y: auto;
+}

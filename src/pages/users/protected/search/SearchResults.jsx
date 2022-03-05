@@ -9,6 +9,7 @@ import { Spinner } from "../../../../components";
 import { ProfileCard } from "../../../../components/Card/Profile";
 import Constants from "../../../../constants";
 import { paramsCleaner } from "../../../../utils/paramsCleaner";
+import FilterBox from "./filter";
 import "./style.scss";
 
 export default function SearchResults() {
@@ -46,9 +47,16 @@ export default function SearchResults() {
         <aside className="filter__user" style={{ flex: 1, maxHeight: "75vh" }}>
           <h4 className="strong">Filter</h4>
           <section
-            className="filter__box rounded-3"
-            style={{ height: "100%", width: "100%", background: "white" }}
-          ></section>
+            className="filter__box rounded-3 p-2"
+            style={{
+              height: "100%",
+              width: "100%",
+              background: "white",
+              overflowY: "auto",
+            }}
+          >
+            <FilterBox />
+          </section>
         </aside>
         <aside className="user__list d-flex flex-column" style={{ flex: 3 }}>
           <section style={{ maxHeight: "80vh", overflow: "auto" }}>

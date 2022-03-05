@@ -36,7 +36,7 @@ export const LogInPage = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.authState);
-  const [useEmail, setUseEmail] = useState(true);
+  const [useEmail, setUseEmail] = useState(false);
   const [countryCode, setCountryCode] = useState("+977");
 
   const logInValues = useMemo(
@@ -120,7 +120,6 @@ export const LogInPage = ({
                 type="text"
                 name="mobileNumber"
                 className="flex-grow-1"
-                // style={{ margin: "2px !important" }}
                 placeholder="Enter your number"
                 values={logInForm.values.mobileNumber}
                 onChange={(value) =>

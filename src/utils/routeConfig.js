@@ -1,5 +1,6 @@
 import Constants from "../constants";
 import { Landing } from "../pages";
+import Dashboard from "../pages/admin/Dashboard";
 import Homepage from "../pages/users/protected/home/Hompage";
 import SearchPage from "../pages/users/protected/search/SearchPage";
 import SearchResults from "../pages/users/protected/search/SearchResults";
@@ -15,6 +16,12 @@ export const routeConfig = [
     title: "Homepage",
     element: Homepage,
     roles: [Constants.roles.NormalUser],
+  },
+  {
+    path: "/",
+    title: "Admin",
+    element: Dashboard,
+    roles: [Constants.roles.SuperAdmin],
   },
   {
     path: "/search",

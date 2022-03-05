@@ -1,0 +1,9 @@
+.admin__menu {
+  background: var(--admin-menu-bg);
+}
+.admin__submenu {
+  background: var(--admin-submenu-bg);
+  &:hover {
+    color: white !important;
+  }
+}

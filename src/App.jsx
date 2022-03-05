@@ -27,9 +27,9 @@ const App = () => {
     const tryLogIn = async (session) => {
       let data = jwtDecode(session?.token);
       try {
-        await API.get(
-          `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
-        );
+        // await API.get(
+        //   `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
+        // );
         dispatch(authSuccess(session));
       } catch (err) {
         dispatch(authFailure());
