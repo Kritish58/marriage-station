@@ -1,4 +1,4 @@
-import { CheckIcon, XIcon } from "@heroicons/react/outline";
+import { CheckIcon, UserIcon, XIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
 // import { ProgressBar } from "react-bootstrap";
 // import { CrossIcon } from "react-select/dist/declarations/src/components/indicators";
@@ -32,15 +32,12 @@ export const ProfileCard = ({ user }) => {
             height: 200,
             borderRadius: "12px",
             background: "gray",
+            color: "#00000022",
           }}
-        ></div>
+        >
+          <UserIcon />
+        </div>
       </div>
-      {/* <ProgressBar
-        style={{ width: "100%" }}
-        now={65}
-        label={`65%`}
-        variant="success"
-      /> */}
       <div className="profile__info m-2">
         <div className="d-flex justify-content-between">
           <div className="h4">{user.User.firstName[0]}****</div>

@@ -13,39 +13,63 @@ import FilterBox from "./filter";
 import "./style.scss";
 
 export default function SearchResults() {
+  let [queries] = useSearchParams();
   const { user } = useSelector((state) => state.authState);
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
-  let [queries] = useSearchParams();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [params, setParams] = useState(
+    paramsCleaner(queries, user.UserDetail.gender, pageNumber)
+  );
+
   useEffect(() => {
     setLoading(true);
-    let params = paramsCleaner(queries, user.UserDetail.gender);
-    const fetchUsers = async () => {
-      await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
-        params,
-      })
-        .then((res) => {
-          setCount(res.count);
-          setUsers(res.data.filteredData);
-        })
-        .catch((err) => toast.error(err));
+    Object.keys(params).forEach(
+      (key) => params[key].length === 0 && delete params[key]
+    );
+    console.table(params);
+    let data = {
+      caste: "Chhetri",
     };
-    fetchUsers();
+    // caste=Brahmin&&caste=Chhetri
+    data["caste"] = "Brahmin";
+    console.log(data);
+    // const fetchUsers = async () => {
+    //   await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
+    //     params,
+    //   })
+    //     .then((res) => {
+    //       setUsers(res.data.filteredData);
+    //       setCount(res.count);
+    //       setPageNumber(res.pageInfo.pageNumberInfo);
+    //     })
+    //     .catch((err) => toast.error(err));
+    // };
+    // fetchUsers();
     setLoading(false);
     return () => {
       setUsers([]);
     };
-  }, [queries, user]);
+  }, [queries, user, pageNumber, params]);
 
-  return loading || count === 0 ? (
+  const nextPage = () => {
+    setPageNumber(pageNumber + 1);
+  };
+  const prevPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+
+  return loading && count === 0 ? (
     <Spinner />
   ) : (
     <div className="search__page">
       <h2 className="py-4">Search results</h2>
       <div className="d-flex">
         <aside className="filter__user" style={{ flex: 1, maxHeight: "75vh" }}>
-          <h4 className="strong">Filter</h4>
           <section
             className="filter__box rounded-3 p-2"
             style={{
@@ -55,7 +79,13 @@ export default function SearchResults() {
               overflowY: "auto",
             }}
           >
-            <FilterBox />
+            <span style={{ fontWeight: "bold", padding: "8px" }}>
+              Re-fine your search
+            </span>
+            <FilterBox
+              params={params}
+              setParams={(value) => setParams(value)}
+            />
           </section>
         </aside>
         <aside className="user__list d-flex flex-column" style={{ flex: 3 }}>
@@ -64,23 +94,11 @@ export default function SearchResults() {
               <ProfileCard key={user.User.user_id} user={user} />
             ))}
           </section>
-          <section className="align-self-end  p-4">
+          <section className="align-self-end p-4">
             <Pagination>
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Ellipsis />
-
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Item>{11}</Pagination.Item>
-              <Pagination.Item active>{12}</Pagination.Item>
-              <Pagination.Item>{13}</Pagination.Item>
-              <Pagination.Item disabled>{14}</Pagination.Item>
-
-              <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
+              <Pagination.Prev disabled={pageNumber === 1} onClick={prevPage} />
+              <Pagination.Item>{pageNumber}</Pagination.Item>
+              <Pagination.Next onClick={nextPage} />
             </Pagination>
           </section>
         </aside>

@@ -8,10 +8,10 @@ import {
   LoginIcon,
 } from "@heroicons/react/outline";
 import "./index.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const menus = [
   {
@@ -27,30 +27,38 @@ const menus = [
   {
     label: "Matches",
     icon: UsersIcon,
-    route: "/",
+    route: "/matches",
   },
   {
     label: "Mailbox",
     icon: MailIcon,
-    route: "/",
+    route: "/mailbox",
   },
   {
     label: "Settings",
     icon: CogIcon,
-    route: "/",
+    route: "/settings",
   },
 ];
 
 export const Sidebar = ({ user }) => {
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState("");
   const checkActive = (value) => active === value;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/", { replace: true });
   };
+
+  useEffect(() => {
+    menus.map(
+      (menu) =>
+        location.pathname.startsWith(menu.route) && setActive(menu.label)
+    );
+  }, [location.pathname]);
   return (
     <div className="sidebar d-flex flex-column justify-content-between align-tems-center">
       <div className="d-flex flex-column sidebar__icons__box">
@@ -62,7 +70,6 @@ export const Sidebar = ({ user }) => {
             icon={menu.icon}
             label={menu.label}
             onClick={() => {
-              setActive(menu.label);
               navigate(menu.route);
             }}
           />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import API from "../api";
+import { Spinner } from "../components";
 import Constants from "../constants";
 import { ImageUpload } from "../pages";
 import { toaster } from "../utils";
@@ -28,7 +29,7 @@ export function ImageVerification({ children }) {
     setLoading(false);
   }, [profilePic, user]);
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <Spinner />;
   if (!profilePic)
     return (
       <Routes>
@@ -38,7 +39,9 @@ export function ImageVerification({ children }) {
             <ImageUpload setProfilePic={(value) => setProfilePic(value)} />
           }
         />
-        <Route path="*" element={<Navigate replace to="/uploadPic" />} />
+        {profilePic && (
+          <Route path="*" element={<Navigate replace to="/uploadPic" />} />
+        )}
       </Routes>
     );
   return children;
