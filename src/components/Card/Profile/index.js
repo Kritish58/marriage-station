@@ -1,17 +1,23 @@
 import { CheckIcon, UserIcon, XIcon } from "@heroicons/react/outline";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 // import { ProgressBar } from "react-bootstrap";
 // import { CrossIcon } from "react-select/dist/declarations/src/components/indicators";
 
 export const ProfileCard = ({ user }) => {
-  const { user: CurrentUser } = useSelector((state) => state.authState);
+  useEffect(() => {
+    Object.keys(user).forEach((key) => {
+      if (user[key] === "") user[key] = "N/A";
+      console.log(key + " = " + user[key]);
+    });
+  }, [user]);
+  // const { user: CurrentUser } = useSelector((state) => state.authState);
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // background: "white",
         margin: "2rem",
         padding: "1rem",
         borderRadius: "12px",
@@ -56,12 +62,12 @@ export const ProfileCard = ({ user }) => {
             </small>
           </span>
         </div>
-        <p>{user.User.user_id === CurrentUser.user_id ? "Self" : "Other"}</p>
+        <p>{user.age} years</p>
         <div>
           {user.height}, {user.religion}
         </div>
         <div>
-          BIT, {user?.workLocation}, {user?.city}, Nepal
+          {user.education}, {user.city}, Nepal
         </div>
       </div>
     </div>

@@ -26,12 +26,7 @@ import {
 } from "../../../validations/yupSchemas";
 import "./index.scss";
 
-export const LogInPage = ({
-  forgotPassword,
-  showLogIn,
-  handleLogInClose,
-  handleForgotPassword,
-}) => {
+export const LogInPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.authState);

@@ -78,6 +78,7 @@ export const Reg4 = () => {
           {/* HEIGHT SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
+            padding={1}
             name="height"
             label="Height"
             options={heightOptions}

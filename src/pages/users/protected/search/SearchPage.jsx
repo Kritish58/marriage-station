@@ -12,7 +12,8 @@ export default function SearchPage() {
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      age: "",
+      ageFrom: 18,
+      ageTo: 35,
       religion: "",
       motherTongue: "",
       maritalStatus: "",

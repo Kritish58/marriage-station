@@ -6,13 +6,13 @@ import "./style.scss";
 
 export default function FilterBox({ params, setParams }) {
   return (
-    <div>
+    <div className="filter">
       <FilterMenu
         label="Age"
         data={Constants.religions}
         values={params["age"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["age"] = values;
           setParams({ ...params });
         }}
@@ -22,7 +22,7 @@ export default function FilterBox({ params, setParams }) {
         data={Constants.religions}
         values={params["religion"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["religion"] = values;
           setParams({ ...params });
         }}
@@ -32,7 +32,7 @@ export default function FilterBox({ params, setParams }) {
         data={Constants.motherTongues}
         values={params["motherTongue"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["motherTongue"] = values;
           setParams({ ...params });
         }}
@@ -42,7 +42,7 @@ export default function FilterBox({ params, setParams }) {
         data={Constants.maritalStatus}
         values={params["maritalStatus"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["maritalStatus"] = values;
           setParams({ ...params });
         }}
@@ -52,7 +52,7 @@ export default function FilterBox({ params, setParams }) {
         data={Constants.caste}
         values={params["caste"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["caste"] = values;
           setParams({ ...params });
         }}
@@ -62,7 +62,7 @@ export default function FilterBox({ params, setParams }) {
         data={Constants.provinces}
         values={params["state"]}
         setValues={(values) => {
-          let data = {};
+          // let data = {};
           params["state"] = values;
           setParams({ ...params });
         }}

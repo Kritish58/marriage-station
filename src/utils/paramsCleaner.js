@@ -2,7 +2,7 @@ export const paramsCleaner = (queries, gender, pageNumber) => {
   let data = {};
   queries.forEach((value, key) => {
     if (value) {
-      data[key] = [value];
+      data[key] = value;
     }
   });
   data["perPage"] = 5; //query only 5 users per page

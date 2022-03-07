@@ -10,9 +10,9 @@ import { Submit } from "../../../components";
 import { useSelector } from "react-redux";
 import { toaster } from "../../../utils";
 import { useDispatch } from "react-redux";
-import { initializeNewUser } from "../../../redux/reducers";
+import { initializeNewUser, logout } from "../../../redux/reducers";
 
-export const ImageUpload = ({ setProfilePic }) => {
+export const ImageUpload = () => {
   const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,14 +36,7 @@ export const ImageUpload = ({ setProfilePic }) => {
       );
       toaster("success", uploadResponse.status);
       dispatch(initializeNewUser());
-      setProfilePic(true);
-      // await API.put(
-      //   `${Constants.apiEndpoint.user.updateDetails}/${user.UserDetail.userDetail_id}`,
-      //   {
-      //     active: "true",
-      //   }
-      // );
-      navigate("/verifyNumber", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       toaster("error", error);
     }
@@ -114,6 +107,16 @@ export const ImageUpload = ({ setProfilePic }) => {
           <Submit text="Upload" />
         </Form>
       </Formik>
+      <span
+        className="text-primary  user-select-none"
+        style={{ cursor: "pointer", position: "fixed", bottom: "10%" }}
+        onClick={() => {
+          dispatch(logout());
+          navigate("/", { replace: true });
+        }}
+      >
+        Logout
+      </span>
     </div>
   );
 };

@@ -26,28 +26,25 @@ export default function SearchResults() {
 
   useEffect(() => {
     setLoading(true);
-    Object.keys(params).forEach(
-      (key) => params[key].length === 0 && delete params[key]
-    );
+
+    // Object.keys(params).forEach(
+    //   (key) => params[key].length === 0 && delete params[key]
+    // );
+
     console.table(params);
-    let data = {
-      caste: "Chhetri",
+
+    const fetchUsers = async () => {
+      await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
+        params,
+      })
+        .then((res) => {
+          setUsers(res.data.filteredData);
+          setCount(res.count);
+          setPageNumber(res.pageInfo.pageNumberInfo);
+        })
+        .catch((err) => toast.error(err));
     };
-    // caste=Brahmin&&caste=Chhetri
-    data["caste"] = "Brahmin";
-    console.log(data);
-    // const fetchUsers = async () => {
-    //   await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
-    //     params,
-    //   })
-    //     .then((res) => {
-    //       setUsers(res.data.filteredData);
-    //       setCount(res.count);
-    //       setPageNumber(res.pageInfo.pageNumberInfo);
-    //     })
-    //     .catch((err) => toast.error(err));
-    // };
-    // fetchUsers();
+    fetchUsers();
     setLoading(false);
     return () => {
       setUsers([]);

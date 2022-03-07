@@ -10,6 +10,7 @@ import AdminSidebar from "../components/admin/Sidebar";
 
 export const UserRoutes = () => {
   const { user } = useSelector((state) => state.authState);
+
   const routes = useMemo(() => {
     return routeConfig.filter((c) =>
       c.roles.some((idx) => idx === user.Roles[0].role)
@@ -18,7 +19,7 @@ export const UserRoutes = () => {
 
   return user.Roles[0].role === "user" ? (
     <div className="d-flex user__main">
-      <Sidebar user={user} />
+      <Sidebar />
       <Routes>
         {routes.map((idx) => {
           let Element = idx.element;

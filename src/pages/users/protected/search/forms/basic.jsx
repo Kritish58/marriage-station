@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Radio, Select } from "../../../../../components";
+import { Input, Label, Radio, Select } from "../../../../../components";
 import Constants from "../../../../../constants";
 import { generateOptions } from "../../../../../utils";
 
@@ -18,18 +18,36 @@ const BasicSearchInput = ({ formik }) => {
 
   return (
     <section>
-      {/* AGE INPUT */}
-      <Input
-        type="text"
-        name="age"
-        label="Age"
-        placeholder="Enter age"
-        max={2}
-        value={formik.values.age}
-        onChange={(value) => formik.setFieldValue("age", value)}
-        error={formik.touched.age && formik.errors.age}
-      />
-
+      <section className="d-flex align-items-center">
+        <Label label="Age" name="Age" />
+        <Input
+          className="w-25"
+          type="number"
+          name="ageFrom"
+          placeholder=""
+          max={2}
+          value={formik.values.ageFrom}
+          onChange={(value) =>
+            value <= formik.values.ageTo &&
+            formik.setFieldValue("ageFrom", value)
+          }
+          error={formik.touched.ageFrom && formik.errors.ageFrom}
+        />
+        <span>To</span>
+        <Input
+          className="w-25"
+          type="number"
+          name="ageFrom"
+          placeholder=""
+          max={2}
+          value={formik.values.ageTo}
+          onChange={(value) =>
+            value >= formik.values.ageFrom &&
+            formik.setFieldValue("ageTo", value)
+          }
+          error={formik.touched.ageTo && formik.errors.ageTo}
+        />
+      </section>
       {/* RELIGION SELECTOR */}
       <Select
         padding={0}

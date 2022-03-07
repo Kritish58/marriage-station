@@ -51,6 +51,7 @@ export const Reg5 = () => {
           {/* HIGHEST EDUCATION SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
+            padding={1}
             name="highestEducation"
             label="Highest Education"
             options={educationOptions}
@@ -77,6 +78,7 @@ export const Reg5 = () => {
           {/* ANNUAL INCOME SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
+            padding={1}
             name="annualIncome"
             label="Annual Income"
             options={incomeOptions}

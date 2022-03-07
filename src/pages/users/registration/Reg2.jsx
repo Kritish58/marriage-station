@@ -73,6 +73,7 @@ export const Reg2 = () => {
           {/* RELIGION SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
+            padding={1}
             name="religion"
             label="Religion"
             options={religionOptions}
@@ -83,6 +84,7 @@ export const Reg2 = () => {
 
           {/* MOTHER TONGUE SELECTOR */}
           <Select
+            padding={1}
             name="motherTongue"
             label="Mother Tongue"
             options={motherTongueOptions}

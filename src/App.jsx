@@ -6,7 +6,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { Policies, Terms } from "./pages";
+import { ImageUpload, Policies, Terms } from "./pages";
 import { UserRoutes } from "./routes";
 import { useEffect } from "react";
 import Constants from "./constants";
@@ -45,12 +45,14 @@ const App = () => {
   }, [dispatch]);
   // if (isLoading)
   //   return (
-  //     <div>
-  //       <Spinner />
-  //     </div>
   //   );
   return isLoading ? (
-    <Spinner />
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{ width: "100vw", height: "100vh" }}
+    >
+      <Spinner />
+    </div>
   ) : (
     <Router>
       <ToastContainer />
@@ -59,12 +61,10 @@ const App = () => {
           path="/*"
           element={
             <AuthProtection>
-              <ImageVerification>
-                {/* <MobileVerification /> */}
-                <CompleteProfile>
-                  <UserRoutes />
-                </CompleteProfile>
-              </ImageVerification>
+              <ImageVerification />
+              <CompleteProfile>
+                <UserRoutes />
+              </CompleteProfile>
             </AuthProtection>
           }
         />

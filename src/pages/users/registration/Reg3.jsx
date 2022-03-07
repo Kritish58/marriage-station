@@ -50,6 +50,7 @@ export const Reg3 = () => {
           {/* CASTE SELECTOR */}
           {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
+            padding={1}
             name="caste"
             label="Caste"
             options={casteOptions}
