@@ -19,6 +19,17 @@ export default function SearchPage() {
       maritalStatus: "",
       caste: "",
       state: "",
+      city: "",
+      country: "",
+      education: "",
+      occupation: "",
+      annualIncome: "",
+      diet: "",
+      drink: "",
+      smoke: "",
+      bodyType: "",
+      star: "",
+      manglik: "",
     }),
     []
   );
@@ -26,7 +37,6 @@ export default function SearchPage() {
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    // validationSchema: basicSearchSchema,
     onSubmit: () => handleSubmit(formik.values),
   });
 

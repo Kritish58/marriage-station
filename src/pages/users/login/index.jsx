@@ -109,7 +109,6 @@ export const LogInPage = () => {
                 onChange={(value) => setCountryCode(value)}
               />
 
-              {/* TODO: LOGIN WITH OTP  */}
               <Input
                 type="text"
                 name="mobileNumber"

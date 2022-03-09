@@ -27,11 +27,9 @@ export default function SearchResults() {
   useEffect(() => {
     setLoading(true);
 
-    // Object.keys(params).forEach(
-    //   (key) => params[key].length === 0 && delete params[key]
-    // );
-
-    console.table(params);
+    Object.keys(params).forEach(
+      (key) => params[key].length === 0 && delete params[key]
+    );
 
     const fetchUsers = async () => {
       await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
@@ -53,10 +51,16 @@ export default function SearchResults() {
 
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
+    let data = params;
+    data["pageNumber"] = pageNumber + 1;
+    setParams(data);
   };
   const prevPage = () => {
     if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
+      let data = params;
+      data["pageNumber"] = pageNumber - 1;
+      setParams(data);
     }
   };
 
@@ -92,11 +96,22 @@ export default function SearchResults() {
             ))}
           </section>
           <section className="align-self-end p-4">
-            <Pagination>
+            {/* <Pagination>
               <Pagination.Prev disabled={pageNumber === 1} onClick={prevPage} />
               <Pagination.Item>{pageNumber}</Pagination.Item>
               <Pagination.Next onClick={nextPage} />
-            </Pagination>
+            </Pagination> */}
+            <section className="pagination">
+              {pageNumber > 1 && (
+                <button className="outline__button" onClick={prevPage}>
+                  Prev
+                </button>
+              )}
+              <span className="pageNumber">{pageNumber}</span>
+              <button className="outline__button" onClick={nextPage}>
+                Next
+              </button>
+            </section>
           </section>
         </aside>
       </div>

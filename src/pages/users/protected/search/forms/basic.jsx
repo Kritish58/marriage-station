@@ -5,16 +5,16 @@ import { generateOptions } from "../../../../../utils";
 
 const BasicSearchInput = ({ formik }) => {
   // GENERATE OPTIONS FOR RELIGION SELECTION
-  const religionOptions = generateOptions(Constants.religions);
+  const religionOptions = generateOptions(Constants.religions, "any");
 
   // GENERATE OPTIONS FOR MOTHER TONGUE SELECTION
-  const motherTongueOptions = generateOptions(Constants.motherTongues);
+  const motherTongueOptions = generateOptions(Constants.motherTongues, "any");
 
   // GENERATE OPTIONS FOR CASTE SELECTION
-  const casteOptions = generateOptions(Constants.caste);
+  const casteOptions = generateOptions(Constants.caste, "any");
 
   // GENERATE OPTIONS FOR STATE SELECTION
-  const provincesOptions = generateOptions(Constants.provinces);
+  const provincesOptions = generateOptions(Constants.provinces, "any");
 
   return (
     <section>

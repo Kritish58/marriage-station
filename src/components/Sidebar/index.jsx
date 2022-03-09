@@ -46,7 +46,7 @@ const menus = [
 ];
 
 export const Sidebar = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState();
   const checkActive = (value) => active === value;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -74,7 +74,6 @@ export const Sidebar = () => {
             (d) => d.userDetailId === user.UserDetail.userDetail_id && d
           );
           setImages(imgs[0]);
-          console.log(imgs[0].photo1.split("/"));
         }
       } catch (error) {
         dispatch(authFailure());
@@ -96,7 +95,7 @@ export const Sidebar = () => {
     <div className="sidebar d-flex flex-column justify-content-between align-tems-center">
       <div className="d-flex flex-column sidebar__icons__box">
         <CircularAvatar
-          profilePic={`https://marriagestation.com.np/ftpmarriagestation/${images.photo1}`}
+          profilePic={`ftp://@ftp.marriagestation.com.np/${images?.photo1}`}
           color="color"
         />
         {menus.map((menu) => (

@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import { ImageUpload, Policies, Terms } from "./pages";
 import { UserRoutes } from "./routes";
@@ -27,9 +28,9 @@ const App = () => {
     const tryLogIn = async (session) => {
       let data = jwtDecode(session?.token);
       try {
-        // await API.get(
-        //   `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
-        // );
+        await API.get(
+          `${Constants.apiEndpoint.user.getSelf}/${data.payload.user.user_id}`
+        );
         dispatch(authSuccess(session));
       } catch (err) {
         dispatch(authFailure());
@@ -70,7 +71,7 @@ const App = () => {
         />
         <Route exact path="/privacy-policies" element={<Policies />} />
         <Route exact path="/terms-conditions" element={<Terms />} />
-        <Route path="*" element={<h2>Not available</h2>} />
+        <Route path="*" element={<h2>Oh oh!</h2>} />
       </Routes>
     </Router>
   );

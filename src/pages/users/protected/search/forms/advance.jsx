@@ -88,66 +88,6 @@ const AdvanceSearchInput = ({ formik }) => {
         onChange={(value) => formik.setFieldValue("state", value)}
         error={formik.touched.state && formik.errors.state}
       />
-
-      {/* TODO: MARRITAL STATUS RADIO FIELD */}
-      <Radio
-        name="maritalStatus"
-        label="Marital Status"
-        values={Constants.maritalStatus}
-        value={formik.values.maritalStatus}
-        onChange={(value) => formik.setFieldValue("maritalStatus", value)}
-        error={formik.touched.maritalStatus && formik.errors.maritalStatus}
-      />
-
-      {/* TODO: CASTE SELECTOR */}
-      <Select
-        name="caste"
-        label="Caste"
-        options={casteOptions}
-        value={formik.values.caste}
-        onChange={(value) => formik.setFieldValue("caste", value)}
-        error={formik.touched.caste && formik.errors.caste}
-      />
-
-      {/* TODO: STATE SELECTOR */}
-      <Select
-        name="state"
-        label="State"
-        options={provincesOptions}
-        value={formik.values.state}
-        onChange={(value) => formik.setFieldValue("state", value)}
-        error={formik.touched.state && formik.errors.state}
-      />
-
-      {/* TODO: MARRITAL STATUS RADIO FIELD */}
-      <Radio
-        name="maritalStatus"
-        label="Marital Status"
-        values={Constants.maritalStatus}
-        value={formik.values.maritalStatus}
-        onChange={(value) => formik.setFieldValue("maritalStatus", value)}
-        error={formik.touched.maritalStatus && formik.errors.maritalStatus}
-      />
-
-      {/* TODO: CASTE SELECTOR */}
-      <Select
-        name="caste"
-        label="Caste"
-        options={casteOptions}
-        value={formik.values.caste}
-        onChange={(value) => formik.setFieldValue("caste", value)}
-        error={formik.touched.caste && formik.errors.caste}
-      />
-
-      {/* TODO: STATE SELECTOR */}
-      <Select
-        name="state"
-        label="State"
-        options={provincesOptions}
-        value={formik.values.state}
-        onChange={(value) => formik.setFieldValue("state", value)}
-        error={formik.touched.state && formik.errors.state}
-      />
     </section>
   );
 };

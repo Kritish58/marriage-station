@@ -1,0 +1,23 @@
+.action__button {
+  padding: 10px 20px;
+  margin: 2px;
+  color: white;
+  background: var(--primary-color);
+  &:hover {
+    background: var(--hover-primary-color);
+  }
+}
+
+.action__button.warning {
+  background: var(--dodgerblue);
+  &:hover {
+    background: var(--hover-dodgerblue);
+  }
+}
+
+.action__button.danger {
+  background: var(--danger);
+  &:hover {
+    background: var(--hover-danger);
+  }
+}

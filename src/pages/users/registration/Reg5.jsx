@@ -49,7 +49,6 @@ export const Reg5 = () => {
           className="m-4 p-4 container-lg rounded-3 flex__form"
         >
           {/* HIGHEST EDUCATION SELECTOR */}
-          {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
             padding={1}
             name="highestEducation"
