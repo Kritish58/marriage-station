@@ -60,7 +60,7 @@ export const part4Schema = yup.object().shape({
 });
 
 export const part5Schema = yup.object().shape({
-  highestEducation: yup.string().required("Education field is required."),
+  education: yup.string().required("Education field is required."),
   occupation: yup.string().required(),
   annualIncome: yup.string().required(),
   workLocation: yup.string().required(),

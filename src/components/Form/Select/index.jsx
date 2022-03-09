@@ -3,6 +3,7 @@ import SelectField from "react-select";
 import { Input, Error, Label } from "..";
 
 export const Select = ({
+  className,
   padding,
   name,
   label,
@@ -63,8 +64,8 @@ export const Select = ({
     // : isMulti
   };
   return (
-    <div className="input select__with__search my-2">
-      <Label name={name} label={label} />
+    <div className={`input select__with__search my-2 ${className}`}>
+      {label && <Label name={name} label={label} />}
       <SelectField
         isMulti={isMulti}
         styles={customStyles}
@@ -75,7 +76,7 @@ export const Select = ({
       />
       {others && (
         <Input
-          className="my-2"
+          className={`my-2 ${className}`}
           type="text"
           name={name}
           placeholder={`Enter ${label}`}

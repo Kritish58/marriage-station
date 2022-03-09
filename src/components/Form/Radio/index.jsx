@@ -12,7 +12,7 @@ export const Radio = ({
 }) => {
   return (
     <div className={`input radioField py-2 ${className}`}>
-      <Label name={name} label={label} />
+      {label && <Label name={name} label={label} />}
       <div className="radios">
         {values.map((option) => (
           <RadioPill

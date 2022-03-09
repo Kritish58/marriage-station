@@ -17,7 +17,7 @@ export const Reg5 = () => {
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      highestEducation: "",
+      education: "",
       occupation: "",
       annualIncome: "",
       workLocation: "",
@@ -51,16 +51,12 @@ export const Reg5 = () => {
           {/* HIGHEST EDUCATION SELECTOR */}
           <Select
             padding={1}
-            name="highestEducation"
+            name="education"
             label="Highest Education"
             options={educationOptions}
-            value={formik.values.highestEducation}
-            onChange={(value) =>
-              formik.setFieldValue("highestEducation", value)
-            }
-            error={
-              formik.touched.highestEducation && formik.errors.highestEducation
-            }
+            value={formik.values.education}
+            onChange={(value) => formik.setFieldValue("education", value)}
+            error={formik.touched.education && formik.errors.education}
           />
 
           {/* OCCUPATION INPUT */}
