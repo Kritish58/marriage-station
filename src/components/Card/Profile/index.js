@@ -1,4 +1,4 @@
-import { CheckIcon, UserIcon, XIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
@@ -13,8 +13,6 @@ export const ProfileCard = ({ user }) => {
     <div
       style={{
         display: "flex",
-        // flexDirection: "column",
-        // alignItems: "center",
         margin: "2rem",
         padding: "1rem",
         borderRadius: "12px",
@@ -47,7 +45,7 @@ export const ProfileCard = ({ user }) => {
           <div>
             {user.education}, {user.city}, Nepal
           </div>
-          <Link to="/">Read more</Link>
+          <Link to={`/account/${user.userId}`}>View more</Link>
         </section>
 
         <section>
