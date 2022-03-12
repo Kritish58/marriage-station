@@ -19,20 +19,22 @@ export const UserRoutes = () => {
   return user.Roles[0].role === "user" ? (
     <div className="d-flex user__main">
       <Sidebar />
-      <Routes>
-        {routes.map((idx) => {
-          let Element = idx.element;
-          return (
-            <Route
-              path={idx.path}
-              element={<Element />}
-              title={idx.title}
-              key={`page-${idx.path}`}
-            />
-          );
-        })}
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+      <aside style={{ flexGrow: "1" }}>
+        <Routes>
+          {routes.map((idx) => {
+            let Element = idx.element;
+            return (
+              <Route
+                path={idx.path}
+                element={<Element />}
+                title={idx.title}
+                key={`page-${idx.path}`}
+              />
+            );
+          })}
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </aside>
     </div>
   ) : (
     <div className="d-flex user__main">

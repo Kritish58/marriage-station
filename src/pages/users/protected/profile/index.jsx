@@ -27,7 +27,10 @@ const ViewProfile = () => {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="p-4 d-flex flex-column gap-4 align-items-start overflow-auto">
+    <div
+      style={{ height: "100vh", width: "100%" }}
+      className="p-4 d-flex flex-column gap-4 align-items-start overflow-auto"
+    >
       <section className="d-flex">
         <aside
           style={{
@@ -37,10 +40,10 @@ const ViewProfile = () => {
             background: "gray",
           }}
         ></aside>
-        <actions>
-          <button className="btn btn-success">Message</button>
-          <button className="btn btn-success">Shortlist</button>
-          <button className="btn btn-success">Blocklist</button>
+        <actions className="p-4 align-self-end d-flex gap-4">
+          <button className="btn btn-primary">Message</button>
+          <button className="btn btn-warning">Shortlist</button>
+          <button className="btn btn-danger">Blocklist</button>
         </actions>
       </section>
       <section className="basic">
