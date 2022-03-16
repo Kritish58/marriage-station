@@ -12,8 +12,8 @@ export const ProfileCard = ({ user }) => {
   return (
     <div
       style={{
+        width: "100%",
         display: "flex",
-        margin: "2rem",
         padding: "1rem",
         borderRadius: "12px",
       }}
@@ -45,7 +45,7 @@ export const ProfileCard = ({ user }) => {
           <div>
             {user.education}, {user.city}, Nepal
           </div>
-          <Link to={`/account/${user.userId}`}>View more</Link>
+          <Link to={`/search/viewProfile/${user.userId}`}>View more</Link>
         </section>
 
         <section>

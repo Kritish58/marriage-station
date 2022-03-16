@@ -18,6 +18,7 @@ const BasicSearchInput = ({ formik }) => {
 
   return (
     <section>
+      {/* AGE INPUT */}
       <section className="d-flex align-items-center">
         <Label className="m-2" label="Age from" name="Age" />
         <Input
@@ -48,6 +49,8 @@ const BasicSearchInput = ({ formik }) => {
           error={formik.touched.ageTo && formik.errors.ageTo}
         />
       </section>
+
+      {/* TODO: GENDER CHECKBOX */}
 
       {/* RELIGION SELECTOR */}
       <Label className="m-2" label="Religion" name="religion" />

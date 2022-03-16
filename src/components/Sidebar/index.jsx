@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authFailure, logout } from "../../redux/reducers";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toaster } from "../../utils";
 import API from "../../api";
 import Constants from "../../constants";
 import { Spinner } from "../Spinner";
@@ -79,6 +78,7 @@ export const Sidebar = () => {
         dispatch(authFailure());
       }
     };
+
     setLoading(true);
     fetchPhoto();
     menus.map(

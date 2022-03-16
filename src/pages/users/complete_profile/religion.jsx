@@ -27,7 +27,6 @@ export const ReligionInfo = () => {
   );
 
   const handleSubmit = async (values) => {
-    console.log(values); //FIXME:
     try {
       await API.put(
         `${Constants.apiEndpoint.user.updateDetails}/${

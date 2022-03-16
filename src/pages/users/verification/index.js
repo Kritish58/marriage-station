@@ -3,3 +3,4 @@ export { RegisterVerification } from "./mobile";
 export { FirebaseResetVerification } from "./forgot";
 export { ResetPassword } from "./reset";
 export { VerifyOTP } from "./otp";
+export { PartnerPreferences } from "./partner";

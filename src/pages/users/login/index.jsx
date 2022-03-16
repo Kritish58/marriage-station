@@ -1,7 +1,8 @@
+import { ArrowLeftIcon } from "@heroicons/react/outline";
 import { useFormik } from "formik";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../../../api";
 import {
   Error,
@@ -133,15 +134,24 @@ export const LogInPage = () => {
             <div className="d-grid place-items-center mt-4 mb-2">
               <Submit text="Log in" />
             </div>
-            <span
-              className="text-primary d-flex justify-content-center"
-              style={{ cursor: "pointer", textDecoration: "underline" }}
-              onClick={() => navigate("/forgot")}
-            >
-              Forgot password?
-            </span>
+            {useEmail && (
+              <span
+                className="text-primary d-flex justify-content-center"
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+                onClick={() => navigate("/forgot")}
+              >
+                Forgot password?
+              </span>
+            )}
           </>
         )}
+        <div
+          className="d-flex justify-content-center align-items-center pointer mt-4 primary__color"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeftIcon width={20} className="mx-1" /> Go back
+          <span></span>
+        </div>
       </form>
     </div>
   );

@@ -32,7 +32,6 @@ async function responseInterceptor(error, API) {
       return API(originalRequest);
     }
   } else if (error.response?.status === StatusCode.UNAUTHORIZED) {
-    console.log("Removing");
     localStorage.removeItem(Constants.keys.session);
   }
   return Promise.reject(error);

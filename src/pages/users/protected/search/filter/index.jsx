@@ -1,5 +1,5 @@
 import { XIcon } from "@heroicons/react/outline";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Constants from "../../../../../constants";
 import { addAnyOption } from "../../../../../utils/addAnyOption";
@@ -13,6 +13,15 @@ const provinces = addAnyOption(Constants.provinces);
 export default function FilterBox({ params, setParams }) {
   return (
     <div className="filter">
+      <FilterMenu
+        label="Looking for"
+        data={["male", "female"]}
+        value={params["gender"]}
+        setValue={(value) => {
+          params["gender"] = value;
+          setParams({ ...params });
+        }}
+      />
       <FilterMenu
         label="Religion"
         data={religions}
@@ -55,6 +64,15 @@ export default function FilterBox({ params, setParams }) {
         value={params["state"]}
         setValue={(value) => {
           params["state"] = value;
+          setParams({ ...params });
+        }}
+      />
+      <FilterMenu
+        label="Profiles Per Page"
+        data={["5", "10", "15", "20", "25", "30"]}
+        value={params["perPage"] ? params["perPage"] : "20"}
+        setValue={(value) => {
+          params["perPage"] = value;
           setParams({ ...params });
         }}
       />

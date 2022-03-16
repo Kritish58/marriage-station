@@ -32,13 +32,8 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .filter__user {
-    display: none;
-  }
-}
-
 .pagination {
+  width: 100%;
   display: flex;
   align-items: center;
   color: var(--primary-color);
@@ -54,6 +49,26 @@
     &:hover {
       background: var(--primary-color);
       color: white;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filter__user {
+    display: none;
+  }
+  .user__list {
+    .results__list {
+      padding: 0 !important;
+    }
+  }
+  .pagination {
+    .pageNumber {
+      font-size: 1rem;
+    }
+    .outline__button {
+      font-size: 1rem;
+      padding: 5px 20px;
     }
   }
 }

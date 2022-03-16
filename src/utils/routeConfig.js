@@ -37,7 +37,7 @@ export const routeConfig = [
     roles: [Constants.roles.NormalUser],
   },
   {
-    path: "/account/:id",
+    path: "search/viewProfile/:id",
     title: "View Profile",
     element: ViewProfile,
     roles: [Constants.roles.NormalUser],

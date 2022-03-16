@@ -6,7 +6,7 @@ import Constants from "../../../constants";
 import API from "../../../api";
 import { imageUplaodSchema } from "../../../validations/yupSchemas";
 import placeholderImage from "../../../assets/placeholder.jpg";
-import { Submit } from "../../../components";
+import { Spinner, Submit } from "../../../components";
 import { useSelector } from "react-redux";
 import { toaster } from "../../../utils";
 import { useDispatch } from "react-redux";
@@ -16,11 +16,13 @@ export const ImageUpload = () => {
   const { user } = useSelector((state) => state.authState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [photo1, setPhoto1] = useState("");
   const [displayImage, setDisplayImage] = useState("");
   const initialValues = useMemo(() => ({ photo1: "" }), []);
 
   const handleSubmit = async () => {
+    setLoading(true);
     const files = new FormData();
     files.append("userDetailId", user.UserDetail.userDetail_id);
     files.append("photo1", photo1);
@@ -40,6 +42,7 @@ export const ImageUpload = () => {
     } catch (error) {
       toaster("error", error);
     }
+    setLoading(false);
   };
 
   const imageHandler = (e) => {
@@ -104,12 +107,12 @@ export const ImageUpload = () => {
               </>
             )}
           </Field>
-          <Submit text="Upload" />
+          {loading ? <Spinner /> : <Submit text="Upload" />}
         </Form>
       </Formik>
       <span
-        className="text-primary  user-select-none"
-        style={{ cursor: "pointer", position: "fixed", bottom: "10%" }}
+        className="text-primary user-select-none mt-4"
+        style={{ cursor: "pointer", display: "flex", justifyContent: "center" }}
         onClick={() => {
           dispatch(logout());
           navigate("/", { replace: true });

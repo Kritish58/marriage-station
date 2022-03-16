@@ -31,7 +31,6 @@ export const VerifyOTP = () => {
         dispatch(authSuccess(res));
         navigate("/", { replace: true });
       } catch (err) {
-        console.log(err);
         toaster("error", err);
       }
     }

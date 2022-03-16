@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Pagination } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,7 +20,7 @@ export default function SearchResults() {
   const [count, setCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [params, setParams] = useState(
-    paramsCleaner(queries, user.UserDetail.gender, pageNumber)
+    paramsCleaner(queries, user.UserDetail.gender)
   );
 
   useEffect(() => {
@@ -33,7 +32,10 @@ export default function SearchResults() {
 
     const fetchUsers = async () => {
       await API.get(`${Constants.apiEndpoint.user.getAllUser}`, {
-        params,
+        params: {
+          ...params,
+          pageNumber,
+        },
       })
         .then((res) => {
           setUsers(res.data.filteredData);
@@ -90,17 +92,15 @@ export default function SearchResults() {
           </section>
         </aside>
         <aside className="user__list d-flex flex-column" style={{ flex: 3 }}>
-          <section style={{ maxHeight: "80vh", overflow: "auto" }}>
+          <section
+            style={{ maxHeight: "80vh", overflow: "auto" }}
+            className="d-flex flex-column gap-4 p-4 results__list"
+          >
             {users.map((user) => (
               <ProfileCard key={user.User.user_id} user={user} />
             ))}
           </section>
-          <section className="align-self-end p-4">
-            {/* <Pagination>
-              <Pagination.Prev disabled={pageNumber === 1} onClick={prevPage} />
-              <Pagination.Item>{pageNumber}</Pagination.Item>
-              <Pagination.Next onClick={nextPage} />
-            </Pagination> */}
+          <section className="align-self-end">
             <section className="pagination">
               {pageNumber > 1 && (
                 <button className="outline__button" onClick={prevPage}>

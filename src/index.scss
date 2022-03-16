@@ -37,6 +37,9 @@ button {
 .pointer {
   cursor: pointer !important;
 }
+.primary__color {
+  color: var(--primary-color);
+}
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

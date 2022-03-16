@@ -1,13 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
-import { ImageUpload, Policies, Terms } from "./pages";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Policies, Terms } from "./pages";
 import { UserRoutes } from "./routes";
 import { useEffect } from "react";
 import Constants from "./constants";
@@ -20,6 +14,7 @@ import API from "./api";
 import jwtDecode from "jwt-decode";
 import { useSelector } from "react-redux";
 import { Spinner } from "./components";
+import { PartnerPreferenceVerification } from "./routes/PartnerPreferences";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,9 +39,6 @@ const App = () => {
       tryLogIn(session);
     }
   }, [dispatch]);
-  // if (isLoading)
-  //   return (
-  //   );
   return isLoading ? (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -62,10 +54,12 @@ const App = () => {
           path="/*"
           element={
             <AuthProtection>
-              <ImageVerification />
-              <CompleteProfile>
-                <UserRoutes />
-              </CompleteProfile>
+              <PartnerPreferenceVerification>
+                <ImageVerification />
+                <CompleteProfile>
+                  <UserRoutes />
+                </CompleteProfile>
+              </PartnerPreferenceVerification>
             </AuthProtection>
           }
         />

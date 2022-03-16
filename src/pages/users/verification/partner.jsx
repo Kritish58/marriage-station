@@ -1,56 +1,93 @@
 import { useFormik } from "formik";
-import { useMemo } from "react";
-import { Form } from "react-bootstrap";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  Error,
-  Input,
-  Label,
-  Radio,
-  Select,
-  Submit,
-} from "../../../components";
+import API from "../../../api";
+import { Input, Label, Radio, Select, Submit } from "../../../components";
 import Constants from "../../../constants";
-import { generateOptions } from "../../../utils";
+import {
+  addAnyOption,
+  anyValueSetter,
+  generateOptions,
+  toaster,
+} from "../../../utils";
 
-export const PartnerPreferences = () => {
-  const { profile } = useSelector((state) => state.profile);
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
-
+export const PartnerPreferences = ({ setFound }) => {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.authState);
   // FORM INITIAL VALUES
   const initialValues = useMemo(
     () => ({
-      age: "",
-      religion: "",
+      lookingFor: "female",
+      complexion: "",
+      ageFrom: "21",
+      ageTo: "23",
       motherTongue: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      heightFrom: "21",
+      heightTo: "25",
+      bodyType: "",
+      smoke: "",
+      diet: "",
+      drink: "",
+      expectations: "",
+      religion: "",
+      manglik: "",
+      caste: "",
+      star: "",
+      education: "",
+      designation: "",
+      occupation: "",
+      annualIncome: "",
+      employedIn: "",
+      country: "",
+      city: "",
+      state: "",
+      residenceStatus: "",
+      userDetailId: "ee0c08e2-a7b4-49a6-8c1b-85281241536d",
     }),
     []
   );
 
   // HANDLE FORM SUBMIT
-  const handleSubmit = ({ confirmPassword, ...rest }) => {
-    // navigate("/registration/40");
+  const handleSubmit = async (values) => {
+    console.table(formik.values);
+    try {
+      let response = await API.post(
+        Constants.apiEndpoint.partnerPreferences.getPartnerPreferences,
+        {
+          ...values,
+          userDetailId: user.UserDetail.userDetail_id,
+        }
+      );
+      console.log(response);
+      setFound(true);
+      navigate("/", { replace: true });
+    } catch (error) {
+      toaster("error", error);
+    }
   };
 
   // USE FORMIK
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: () => handleSubmit(formik.values),
+    onSubmit: handleSubmit,
   });
 
   // GENERATE OPTIONS
-  const religionOptions = generateOptions(Constants.religions, "any");
-  const motherTongueOptions = generateOptions(Constants.motherTongues, "any");
-  const casteOptions = generateOptions(Constants.caste, "any");
-  const heightOptions = generateOptions(Constants.height, "any");
-  const educationOptions = generateOptions(Constants.education, "any");
-  const incomeOptions = generateOptions(Constants.income, "any");
+  const provinceOptions = generateOptions(Constants.provinces, "Any");
+  const religionOptions = generateOptions(Constants.religions, "Any");
+  const motherTongueOptions = generateOptions(Constants.motherTongues, "Any");
+  const casteOptions = generateOptions(Constants.caste, "Any");
+  const starOptions = generateOptions(Constants.star, "Any");
+  const educationOptions = generateOptions(Constants.education, "Any");
+  const incomeOptions = generateOptions(Constants.income, "Any");
+  const [districtOptions, setDistrictOptions] = useState([]);
+
+  const setProvince = (value) => {
+    console.log(value);
+    formik.setFieldValue("state", value);
+    setDistrictOptions(generateOptions(Object.keys(Constants[value]), "Any"));
+  };
 
   return (
     <div className="main reg2 p-4">
@@ -63,6 +100,16 @@ export const PartnerPreferences = () => {
           onSubmit={formik.handleSubmit}
           className="m-4 p-4 container-lg rounded-3 flex__form"
         >
+          {/* LOOKING FOR FIELD */}
+          <Radio
+            name="lookingFor"
+            label="Looking For"
+            values={["male", "female"]}
+            value={formik.values.lookingFor}
+            onChange={(value) => formik.setFieldValue("lookingFor", value)}
+            error={formik.touched.lookingFor && formik.errors.lookingFor}
+          />
+
           {/* AGE INPUT */}
           <Label className="d-block" label="Age" name="Age" />
           <section className="d-flex align-items-center justify-content-between">
@@ -70,7 +117,6 @@ export const PartnerPreferences = () => {
               className="w-25 d-block"
               type="number"
               name="ageFrom"
-              placeholder=""
               max={2}
               value={formik.values.ageFrom}
               onChange={(value) =>
@@ -84,7 +130,6 @@ export const PartnerPreferences = () => {
               className="w-25"
               type="number"
               name="ageFrom"
-              placeholder=""
               max={2}
               value={formik.values.ageTo}
               onChange={(value) =>
@@ -95,14 +140,90 @@ export const PartnerPreferences = () => {
             />
           </section>
 
+          {/* HEIGHT INPUT */}
+          <Label className="d-block" label="Height" name="height" />
+          <section className="d-flex align-items-center justify-content-between">
+            <Input
+              className="w-25 d-block"
+              type="number"
+              name="heightFrom"
+              placeholder=""
+              max={2}
+              value={formik.values.heightFrom}
+              onChange={(value) =>
+                value <= formik.values.heightTo &&
+                formik.setFieldValue("heightFrom", value)
+              }
+              error={formik.touched.heightFrom && formik.errors.heightFrom}
+            />
+            <span>To</span>
+            <Input
+              className="w-25"
+              type="number"
+              name="heightFrom"
+              placeholder=""
+              max={2}
+              value={formik.values.heightTo}
+              onChange={(value) =>
+                value >= formik.values.heightFrom &&
+                formik.setFieldValue("heightTo", value)
+              }
+              error={formik.touched.heightTo && formik.errors.heightTo}
+            />
+          </section>
+
+          {/* BODY TYPE RADIO FIELD */}
+          <Radio
+            name="bodyType"
+            label="Body Type"
+            values={addAnyOption(Constants.bodyType)}
+            value={
+              formik.values.bodyType === "" ? "Any" : formik.values.bodyType
+            }
+            onChange={(value) => anyValueSetter(formik, "bodyType", value)}
+            error={formik.touched.bodyType && formik.errors.bodyType}
+          />
+
+          {/* EATING HABIT RADIO FIELD */}
+          <Radio
+            name="diet"
+            label="Eating Habit"
+            values={addAnyOption(Constants.diet)}
+            value={formik.values.diet === "" ? "Any" : formik.values.diet}
+            onChange={(value) => anyValueSetter(formik, "diet", value)}
+            error={formik.touched.diet && formik.errors.diet}
+          />
+
+          {/* DRINKING HABIT RADIO FIELD */}
+          <Radio
+            name="drink"
+            label="Drinking Habit"
+            values={addAnyOption(Constants.drink)}
+            value={formik.values.drink === "" ? "Any" : formik.values.drink}
+            onChange={(value) => anyValueSetter(formik, "drink", value)}
+            error={formik.touched.drink && formik.errors.drink}
+          />
+
+          {/* SMOKING HABIT RADIO FIELD */}
+          <Radio
+            name="smoke"
+            label="Smoking Habit"
+            values={addAnyOption(Constants.smoke)}
+            value={formik.values.smoke === "" ? "Any" : formik.values.smoke}
+            onChange={(value) => anyValueSetter(formik, "smoke", value)}
+            error={formik.touched.smoke && formik.errors.smoke}
+          />
+
           {/* RELIGION SELECTOR */}
-          {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
             padding={1}
             name="religion"
             label="Religion"
             options={religionOptions}
-            value={formik.values.religion}
+            value={
+              formik.values.religion === "" ? "Any" : formik.values.religion
+            }
+            initiallySelected="Any"
             onChange={(value) =>
               formik.setFieldValue("religion", value === "any" ? "" : value)
             }
@@ -115,7 +236,12 @@ export const PartnerPreferences = () => {
             name="motherTongue"
             label="Mother Tongue"
             options={motherTongueOptions}
-            value={formik.values.motherTongue}
+            value={
+              formik.values.motherTongue === ""
+                ? "Any"
+                : formik.values.motherTongue
+            }
+            initiallySelected="Any"
             onChange={(value) =>
               formik.setFieldValue("motherTongue", value === "any" ? "" : value)
             }
@@ -128,152 +254,48 @@ export const PartnerPreferences = () => {
             name="caste"
             label="Caste"
             options={casteOptions}
-            value={formik.values.caste}
+            value={formik.values.caste === "" ? "Any" : formik.values.caste}
+            initiallySelected="Any"
             onChange={(value) =>
-              formik.setFieldValue("caste", value === "any" ? "" : value)
+              formik.setFieldValue("caste", value === "Any" ? "" : value)
             }
             error={formik.touched.caste && formik.errors.caste}
           />
 
-          {/* MARRY ANOTHER COMMUNITY CHECKBOX */}
-          <div className="singleCheckbox m-3">
-            <Form.Check
-              type="checkbox"
-              label="Willing to marry from another communities too"
-              value={formik.values.marryAnotherCommunity}
-              onChange={(event) =>
-                formik.setFieldValue(
-                  "marryAnotherCommunity",
-                  event.target.checked
-                )
-              }
-            />
-            {formik.touched.marryAnotherCommunity &&
-              formik.errors.marryAnotherCommunity && (
-                <Error className="d-inline mx-4">
-                  {formik.errors.marryAnotherCommunity}
-                </Error>
-              )}
-          </div>
-
-          {/* SUBCASTE FIELD */}
-          <Input
-            type="subcaste"
-            name="subcaste"
-            label="Sub-caste - (Optional)"
-            placeholder="Enter subcaste"
-            value={formik.values.subcaste}
-            onChange={(value) => formik.setFieldValue("subcaste", value)}
-            error={formik.touched.subcaste && formik.errors.subcaste}
-          />
-
-          {/* GOTHRA FIELD */}
-          <Input
-            type="gothra"
-            name="gothra"
-            label="Gothra - (Optional)"
-            placeholder="Enter gothra"
-            value={formik.values.gothra}
-            onChange={(value) => formik.setFieldValue("gothra", value)}
-            error={formik.touched.gothra && formik.errors.gothra}
+          {/* STAR SELECT INPUT */}
+          <Select
+            padding={1}
+            label="Star"
+            name="star"
+            options={starOptions}
+            value={formik.values.star === "" ? "Any" : formik.values.star}
+            onChange={(v) => formik.setFieldValue("star", v === "Any" ? "" : v)}
+            error={formik.touched.star && formik.errors.star}
           />
 
           {/* MANGLIK RADIO FIELD */}
           <Radio
             name="manglik"
             label="Manglik"
-            values={Constants.manglik}
-            value={formik.values.manglik}
-            onChange={(value) => formik.setFieldValue("manglik", value)}
+            values={addAnyOption(Constants.manglik)}
+            value={formik.values.manglik === "" ? "Any" : formik.values.manglik}
+            initiallySelected="Any"
+            onChange={(value) => anyValueSetter(formik, "manglik", value)}
             error={formik.touched.manglik && formik.errors.manglik}
           />
 
-          {/* MARRITAL STATUS RADIO FIELD */}
-          <Radio
-            name="maritalStatus"
-            label="Marital Status"
-            values={Constants.maritalStatus}
-            value={formik.values.maritalStatus}
-            onChange={(value) => formik.setFieldValue("maritalStatus", value)}
-            error={formik.touched.maritalStatus && formik.errors.maritalStatus}
-          />
-
-          {/* NO OF CHILDREN RADIO FIELD */}
-          {formik.values.maritalStatus !== "Never married" &&
-            formik.values.maritalStatus !== "" && (
-              <Radio
-                name="noOfChildren"
-                label="No of children"
-                values={Constants.noOfChildren}
-                value={formik.values.noOfChildren}
-                onChange={(value) =>
-                  formik.setFieldValue("noOfChildren", value)
-                }
-                error={
-                  formik.touched.noOfChildren && formik.errors.noOfChildren
-                }
-              />
-            )}
-
-          {/* HEIGHT SELECTOR */}
-          {/* <InputLabel name="religion" label="Religion" className="float" /> */}
-          <Select
-            padding={1}
-            name="height"
-            label="Height"
-            options={heightOptions}
-            value={formik.values.height}
-            onChange={(value) => formik.setFieldValue("height", value)}
-            error={formik.touched.height && formik.errors.height}
-          />
-
-          {/* FAMILY STATUS RADIO FIELD */}
-          <Radio
-            name="familyStatus"
-            label="Family Status"
-            values={Constants.familyStatus}
-            value={formik.values.familyStatus}
-            onChange={(value) => formik.setFieldValue("familyStatus", value)}
-            error={formik.touched.familyStatus && formik.errors.familyStatus}
-          />
-
-          {/* FAMILY TYPE RADIO FIELD */}
-          <Radio
-            name="familyType"
-            label="Family Type"
-            values={Constants.familyType}
-            value={formik.values.familyType}
-            onChange={(value) => formik.setFieldValue("familyType", value)}
-            error={formik.touched.familyType && formik.errors.familyType}
-          />
-
-          {/* FAMILY VALUES RADIO FIELD */}
-          <Radio
-            name="familyValues"
-            label="Family Values"
-            values={Constants.familyValues}
-            value={formik.values.familyValues}
-            onChange={(value) => formik.setFieldValue("familyValues", value)}
-            error={formik.touched.familyValues && formik.errors.familyValues}
-          />
-
-          {/* DISABILITY RADIO FIELD */}
-          <Radio
-            name="disability"
-            label="Any disability"
-            values={Constants.disability}
-            value={formik.values.disability}
-            onChange={(value) => formik.setFieldValue("disability", value)}
-            error={formik.touched.disability && formik.errors.disability}
-          />
           {/* HIGHEST EDUCATION SELECTOR */}
-          {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
             padding={1}
             name="highestEducation"
             label="Highest Education"
             options={educationOptions}
-            value={formik.values.highestEducation}
+            value={
+              formik.values.highestEducation === ""
+                ? "Any"
+                : formik.values.highestEducation
+            }
+            initiallySelected="Any"
             onChange={(value) =>
               formik.setFieldValue("highestEducation", value)
             }
@@ -294,13 +316,17 @@ export const PartnerPreferences = () => {
           />
 
           {/* ANNUAL INCOME SELECTOR */}
-          {/* <InputLabel name="religion" label="Religion" className="float" /> */}
           <Select
             padding={1}
             name="annualIncome"
             label="Annual Income"
             options={incomeOptions}
-            value={formik.values.annualIncome}
+            value={
+              formik.values.annualIncome === ""
+                ? "Any"
+                : formik.values.annualIncome
+            }
+            initiallySelected="Any"
             onChange={(value) => formik.setFieldValue("annualIncome", value)}
             error={formik.touched.annualIncome && formik.errors.annualIncome}
           />
@@ -316,6 +342,28 @@ export const PartnerPreferences = () => {
             error={formik.touched.workLocation && formik.errors.workLocation}
           />
 
+          {/* PROVINCE SELECT INPUT */}
+          <Select
+            padding={1}
+            label="Province"
+            name="state"
+            options={provinceOptions}
+            value={formik.values.state === "" ? "Any" : formik.values.state}
+            onChange={(v) => setProvince(v)}
+            error={formik.touched.state && formik.errors.state}
+          />
+
+          {/* DISTRICT SELECT INPUT */}
+          <Select
+            padding={1}
+            label="District"
+            name="city"
+            placeholder="Select province first"
+            options={districtOptions}
+            value={formik.values.city === "" ? "Any" : formik.values.city}
+            onChange={(v) => formik.setFieldValue("city", v)}
+            error={formik.touched.city && formik.errors.city}
+          />
           <div className="d-flex justify-content-center mt-4">
             <Submit text="Continue" />
           </div>

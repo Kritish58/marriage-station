@@ -3,6 +3,7 @@ import SelectField from "react-select";
 import { Input, Error, Label } from "..";
 
 export const Select = ({
+  placeholder,
   className,
   padding,
   name,
@@ -57,7 +58,7 @@ export const Select = ({
       if (isMulti) {
         onChange(value.map((v) => v.value));
       } else {
-        onChange(value.value);
+        onChange(value.value === "Any" ? "" : value.value);
       }
     }
     // ? setOthers(!others)
@@ -67,6 +68,7 @@ export const Select = ({
     <div className={`input select__with__search my-2 ${className}`}>
       {label && <Label name={name} label={label} />}
       <SelectField
+        placeholder={placeholder}
         isMulti={isMulti}
         styles={customStyles}
         value={defaultValue(options, value)}

@@ -32,6 +32,9 @@ const Constants = {
     photo: {
       uploadProfilePic: "/pic",
     },
+    partnerPreferences: {
+      getPartnerPreferences: "partnerPreference",
+    },
   },
   roles: {
     SuperAdmin: "superAdmin",

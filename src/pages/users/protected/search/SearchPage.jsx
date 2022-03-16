@@ -14,6 +14,7 @@ export default function SearchPage() {
     () => ({
       ageFrom: 18,
       ageTo: 35,
+      gender: "male",
       religion: "",
       motherTongue: "",
       maritalStatus: "",
