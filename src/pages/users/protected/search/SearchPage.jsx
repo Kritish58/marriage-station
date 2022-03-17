@@ -50,7 +50,7 @@ export default function SearchPage() {
 
   return (
     <section className="search__page">
-      <h2>Search</h2>
+      <h2 className="page__title">Search</h2>
       <form
         onSubmit={formik.handleSubmit}
         className="p-4 search__form basic__search__form"

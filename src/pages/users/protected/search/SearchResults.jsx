@@ -1,7 +1,8 @@
+import { ArrowLeftIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../../../api";
 import { Spinner } from "../../../../components";
@@ -12,6 +13,7 @@ import FilterBox from "./filter";
 import "./style.scss";
 
 export default function SearchResults() {
+  const navigate = useNavigate();
   let [queries] = useSearchParams();
   const { user } = useSelector((state) => state.authState);
 
@@ -94,27 +96,34 @@ export default function SearchResults() {
         <aside className="user__list d-flex flex-column" style={{ flex: 3 }}>
           <section
             style={{ maxHeight: "80vh", overflow: "auto" }}
-            className="d-flex flex-column gap-4 p-4 results__list"
+            className="p-4 results__list"
           >
             {users.map((user) => (
               <ProfileCard key={user.User.user_id} user={user} />
             ))}
           </section>
-          <section className="align-self-end">
-            <section className="pagination">
-              {pageNumber > 1 && (
-                <button className="outline__button" onClick={prevPage}>
-                  Prev
-                </button>
-              )}
-              <span className="pageNumber">{pageNumber}</span>
-              <button className="outline__button" onClick={nextPage}>
-                Next
-              </button>
-            </section>
-          </section>
         </aside>
       </div>
+      <section className="w-full d-flex justify-content-between align-items-center">
+        <div
+          className="d-flex justify-content-center align-items-center pointer primary__color"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeftIcon width={16} className="mx-1" />
+          <span>Back to search</span>
+        </div>
+        <section className="pagination">
+          {pageNumber > 1 && (
+            <button className="outline__button" onClick={prevPage}>
+              Prev
+            </button>
+          )}
+          <span className="pageNumber">{pageNumber}</span>
+          <button className="outline__button" onClick={nextPage}>
+            Next
+          </button>
+        </section>
+      </section>
     </div>
   );
 }

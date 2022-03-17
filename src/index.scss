@@ -1,15 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
 
 :root {
-  --primary-color: #239488;
-  --hover-primary-color: #23948899;
-  --dim-primary-color: #23948844;
-  --admin-menu-bg: #202c32;
-  --admin-submenu-bg: #202c3299;
-  --dodgerblue: #1e90ff;
-  --hover-dodgerblue: #1e90ff99;
-  --danger: #ff6347;
-  --hover-danger: #ff624799;
+  --body-color: #f3efe0 !important;
+  --primary-color: #239488 !important;
+  --hover-primary-color: #23948899 !important;
+  --dim-primary-color: #23948844 !important;
+  --admin-menu-bg: #202c32 !important;
+  --admin-submenu-bg: #202c3299 !important;
+  --dodgerblue: #1e90ff !important;
+  --hover-dodgerblue: #1e90ff99 !important;
+  --danger: #ff6347 !important;
+  --hover-danger: #ff624799 !important;
 }
 
 body {
@@ -37,9 +38,11 @@ button {
 .pointer {
   cursor: pointer !important;
 }
+
 .primary__color {
   color: var(--primary-color);
 }
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

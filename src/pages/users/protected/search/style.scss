@@ -1,5 +1,4 @@
 .search__page {
-  flex-grow: 1;
   padding: 0 12px;
   .search__toggle {
     .search__menu {
@@ -33,7 +32,6 @@
 }
 
 .pagination {
-  width: 100%;
   display: flex;
   align-items: center;
   color: var(--primary-color);
@@ -54,21 +52,30 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .filter__user {
-    display: none;
-  }
-  .user__list {
-    .results__list {
+  .search__page {
+    padding: 0.8rem 0.8rem;
+    .search__form {
       padding: 0 !important;
+      .search__box {
+        padding: 8px !important;
+      }
     }
-  }
-  .pagination {
-    .pageNumber {
-      font-size: 1rem;
+    .filter__user {
+      display: none;
     }
-    .outline__button {
-      font-size: 1rem;
-      padding: 5px 20px;
+    .user__list {
+      .results__list {
+        padding: 0 !important;
+      }
+    }
+    .pagination {
+      .pageNumber {
+        font-size: 1rem;
+      }
+      .outline__button {
+        font-size: 1rem;
+        padding: 5px 20px;
+      }
     }
   }
 }

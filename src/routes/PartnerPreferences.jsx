@@ -1,6 +1,6 @@
 import { Children, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import API from "../api";
 import { Spinner } from "../components";
 import Constants from "../constants";
