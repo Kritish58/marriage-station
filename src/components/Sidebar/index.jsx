@@ -14,7 +14,7 @@ const menus = [
    {
       label: 'Home',
       icon: HomeIcon,
-      route: '/',
+      route: '/home',
    },
    {
       label: 'Search',

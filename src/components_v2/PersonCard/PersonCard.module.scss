@@ -1,0 +1,40 @@
+.card {
+   img {
+      object-fit: cover;
+      height: 200px;
+      width: 200px;
+   }
+
+   .card-content {
+      flex-grow: 1;
+      padding: 0 16px;
+      .card-content-header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 0 20px;
+      }
+
+      .card-content-info {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 8px;
+         .card-content-info-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-size: 12px;
+            gap: 8px;
+         }
+         .card-content-info-base {
+            font-size: 12px;
+
+            .readmore {
+               cursor: pointer;
+               &:hover {
+                  text-decoration: underline;
+               }
+            }
+         }
+      }
+   }
+}
