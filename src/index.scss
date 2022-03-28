@@ -1,54 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
 :root {
-  --body-color: #f3efe0 !important;
-  --primary-color: #239488 !important;
-  --hover-primary-color: #23948899 !important;
-  --dim-primary-color: #23948844 !important;
-  --admin-menu-bg: #202c32 !important;
-  --admin-submenu-bg: #202c3299 !important;
-  --dodgerblue: #1e90ff !important;
-  --hover-dodgerblue: #1e90ff99 !important;
-  --danger: #ff6347 !important;
-  --hover-danger: #ff624799 !important;
+   --body-color: #f3efe0 !important;
+   --primary-color: #239488 !important;
+   --hover-primary-color: #23948899 !important;
+   --dim-primary-color: #23948844 !important;
+   --admin-menu-bg: #202c32 !important;
+   --admin-submenu-bg: #202c3299 !important;
+   --dodgerblue: #1e90ff !important;
+   --hover-dodgerblue: #1e90ff99 !important;
+   --danger: #ff6347 !important;
+   --hover-danger: #ff624799 !important;
+
+   --orange: #ed6402 !important;
 }
 
 body {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #f3efe0 !important;
-  font-family: "Poppins" !important;
+   margin: 0 !important;
+   padding: 0 !important;
+   background: #f3efe0 !important;
+   font-family: 'Poppins' !important;
 }
 
 * {
-  box-sizing: border-box !important;
+   box-sizing: border-box !important;
 }
 
 .main {
-  width: 100vw !important;
-  height: 100vh !important;
+   width: 100vw !important;
+   height: 100vh !important;
 }
 
 input,
 button {
-  border: none !important;
-  outline: none !important;
+   border: none !important;
+   outline: none !important;
 }
 
 .pointer {
-  cursor: pointer !important;
+   cursor: pointer !important;
 }
 
 .primary__color {
-  color: var(--primary-color);
+   color: var(--primary-color);
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
+   -webkit-touch-callout: none; /* iOS Safari */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Old versions of Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
