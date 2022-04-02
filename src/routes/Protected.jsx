@@ -11,25 +11,26 @@ import { RegistrationRoutes } from './RegistrationRoutes';
 export function AuthProtection({ children }) {
    const { isAuthenticated } = useSelector((state) => state.authState);
    const { mobileNumber } = useSelector((state) => state.otpLogin);
-   const routes = useMemo(() => {
+   const unAuthRoutes = useMemo(() => {
       return routeConfig.filter((c) => c.roles.length === 0);
    }, []);
-   if (!isAuthenticated)
-      return (
-         <Routes>
-            {routes.map((idx) => {
-               const Element = idx.element;
-               return <Route path={idx.path} element={<Element />} title={idx.title} key={`page-${idx.path}`} />;
-            })}
-            <Route exact path="/a-control" element={<AdminLogInPage />} />
-            <Route path="/registration/*" element={<RegistrationRoutes />} />
-            <Route exact path="/login" element={<LogInPage />} />
-            <Route exact path="/register" element={<Navigate replace to="/" />} />
-            <Route exact path="/forgot" element={<ForgotPasswordPage />} />
-            <Route path="/reset/:token" element={<ResetPassword />} />
-            {mobileNumber && <Route exact path="/verifyOTP" element={<VerifyOTP />} />}
-            <Route path="*" element={<Error404 />} />
-         </Routes>
-      );
-   return children;
+
+   return !isAuthenticated ? (
+      <Routes>
+         {unAuthRoutes.map((idx) => {
+            const Element = idx.element;
+            return <Route path={idx.path} element={<Element />} title={idx.title} key={`page-${idx.path}`} />;
+         })}
+         <Route exact path="/a-control" element={<AdminLogInPage />} />
+         <Route path="/registration/*" element={<RegistrationRoutes />} />
+         <Route exact path="/login" element={<LogInPage />} />
+         <Route exact path="/register" element={<Navigate replace to="/" />} />
+         <Route exact path="/forgot" element={<ForgotPasswordPage />} />
+         <Route path="/reset/:token" element={<ResetPassword />} />
+         {mobileNumber && <Route exact path="/verifyOTP" element={<VerifyOTP />} />}
+         <Route path="*" element={<Error404 />} />
+      </Routes>
+   ) : (
+      <>{children}</>
+   );
 }

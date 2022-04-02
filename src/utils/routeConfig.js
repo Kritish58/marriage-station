@@ -20,12 +20,6 @@ export const routeConfig = [
       roles: [Constants.roles.NormalUser],
    },
    {
-      path: '/',
-      title: 'Admin',
-      element: Dashboard,
-      roles: [Constants.roles.SuperAdmin],
-   },
-   {
       path: '/search',
       title: 'Search Page',
       element: SearchPage,
