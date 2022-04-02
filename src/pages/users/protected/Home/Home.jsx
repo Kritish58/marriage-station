@@ -1,12 +1,18 @@
 import cx from 'classnames';
+import { useState } from 'react';
+import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import styles from './Home.module.scss';
-import { Tab, Tabs } from 'react-bootstrap';
 import PersonCard from '../../../../components_v2/PersonCard';
 import ProfileCard from '../../../../components_v2/ProfileCard';
+import { Button } from 'rsuite';
+import CaretIcon from '../../../../icons/Caret';
+import VerifyIcon from '../../../../icons/VerifyIcon';
 
 export default function Home() {
+   const isUserVerified = true;
+
    const { user } = useSelector((state) => state.authState);
    if (!user) return <Navigate replace to="/privacy-policies" />;
 
@@ -15,6 +21,35 @@ export default function Home() {
          <div className={styles.content}>
             <div className={styles['content-profileCard']}>
                <ProfileCard />
+               <div className={styles['content-profileCard-options']}>
+                  <h6 className={styles.name}>Kritish Bhattarai</h6>
+                  <div className={styles['verify-section']}>
+                     {isUserVerified ? (
+                        <div className={styles.verified}>
+                           <VerifyIcon />
+                           <small>Verified</small>
+                        </div>
+                     ) : (
+                        <div className={styles.unverified}>
+                           <p>Please verify your profile for better responses</p>
+
+                           <Button block size="sm" color="yellow" appearance="primary">
+                              Verify
+                           </Button>
+                        </div>
+                     )}
+                  </div>
+
+                  <div className={styles.link}>
+                     <span>Go To Profile</span>
+                     <CaretIcon />
+                  </div>
+
+                  <div className={styles.link}>
+                     <span>Profile Settings</span>
+                     <CaretIcon />
+                  </div>
+               </div>
             </div>
 
             <div className={styles.tabs}>

@@ -9,8 +9,44 @@
       }
 
       .content-profileCard {
-         min-width: 270px;
-         max-width: 270px;
+         min-width: 232px;
+         max-width: 232px;
+
+         &-options {
+            .name {
+               margin: 6px 0 0;
+               text-align: center;
+            }
+
+            .verify-section {
+               margin-bottom: 20px;
+               .verified {
+                  color: var(--primary-color);
+                  text-align: center;
+               }
+
+               .unverified {
+                  p {
+                     font-size: 11px;
+                     line-height: 13px;
+                     text-align: center;
+                     margin: 4px 0;
+                  }
+               }
+            }
+
+            .link {
+               font-size: 14px;
+               display: flex;
+               align-items: center;
+               gap: 4px;
+               margin: 10px 0;
+               cursor: pointer;
+               &:hover {
+                  color: var(--primary-color);
+               }
+            }
+         }
       }
 
       .tabs {
