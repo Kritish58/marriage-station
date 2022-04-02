@@ -1,7 +1,7 @@
 import Constants from '../constants';
 import { Landing } from '../pages';
 import Dashboard from '../pages/admin/Dashboard';
-import Homepage from '../pages/users/protected/home/Hompage';
+import Home from '../pages/users/protected/Home';
 import PreferenceMatches from '../pages/users/protected/matches/PreferenceMatch';
 import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
@@ -15,8 +15,8 @@ export const routeConfig = [
    },
    {
       path: '/home',
-      title: 'Homepage',
-      element: Homepage,
+      title: 'Home',
+      element: Home,
       roles: [Constants.roles.NormalUser],
    },
    {

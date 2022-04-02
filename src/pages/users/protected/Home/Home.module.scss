@@ -1,0 +1,23 @@
+.home {
+   .content {
+      padding: 0 20px;
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      @media only screen and (max-width: 1200px) {
+         flex-direction: column;
+      }
+
+      .content-profileCard {
+         min-width: 270px;
+         max-width: 270px;
+      }
+
+      .tabs {
+         .tab-title {
+            font-size: 14px;
+            color: var(--primary-color);
+         }
+      }
+   }
+}

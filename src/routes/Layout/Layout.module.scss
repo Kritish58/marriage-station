@@ -1,0 +1,90 @@
+.layout-content {
+   position: relative;
+
+   .sidebar {
+      position: fixed;
+      height: 100vh;
+      width: 56px;
+      z-index: 10;
+
+      &-expanded {
+         width: 200px;
+      }
+
+      .logout {
+         position: absolute;
+         bottom: 0px;
+         color: white;
+         display: flex;
+         gap: 20px;
+         padding: 16px 8px 16px 16px;
+         cursor: pointer;
+         width: 100%;
+         &:hover {
+            background-color: var(--rs-sidenav-inverse-hover-bg);
+         }
+      }
+
+      .rsuite-sidenav {
+         width: 100%;
+         height: 100%;
+         background-color: var(--rs-sidenav-inverse-bg);
+         .nav-item {
+            padding: 16px 8px 16px 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            outline: none;
+            span {
+               margin-top: 2px;
+            }
+
+            &:hover {
+               background-color: var(--rs-sidenav-inverse-hover-bg) !important;
+            }
+         }
+      }
+   }
+   .topbar {
+      position: absolute;
+      top: 0;
+      left: 56px; //* width of Sidenav
+      width: calc(-56px - 20px + 100vw);
+      background-color: #f3efe0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+
+      &-expanded {
+         left: 200px;
+         width: calc(-200px - 20px + 100vw);
+      }
+
+      &-title {
+         margin: 0;
+      }
+
+      .menu {
+         cursor: pointer;
+         padding: 4px 8px;
+         border-radius: 4px;
+         &:hover {
+            color: white;
+            background-color: rgba(31, 146, 121, 0.8);
+         }
+      }
+   }
+}
+
+.main-content {
+   position: relative;
+   top: 56px; //* height of Topbar
+   margin-left: 56px; //* with of Sidenav
+
+   transition: margin-left 0.1s;
+
+   &-expanded {
+      margin-left: 200px;
+   }
+}

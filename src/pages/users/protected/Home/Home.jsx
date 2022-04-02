@@ -1,28 +1,17 @@
 import cx from 'classnames';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import styles from './HomePage.module.scss';
+import styles from './Home.module.scss';
 import { Tab, Tabs } from 'react-bootstrap';
 import PersonCard from '../../../../components_v2/PersonCard';
-import Hamburger from '../../../../icons/Hamburger';
 import ProfileCard from '../../../../components_v2/ProfileCard';
 
-export default function Homepage() {
+export default function Home() {
    const { user } = useSelector((state) => state.authState);
    if (!user) return <Navigate replace to="/privacy-policies" />;
 
    return (
       <div className={styles.home}>
-         <div className={styles.topbar}>
-            <Hamburger />
-            <h5 className={styles['topbar-title']}>Hello, {user.firstName}</h5>
-         </div>
-
-         <div className={cx('p-2 text-center small bg-light rounded', styles['verify-alert-box'])}>
-            <span>Your Profile is pending verification! Verify now to get better responses</span>
-            <button className="btn btn-sm btn-warning ">Verify Profile</button>
-         </div>
-
          <div className={styles.content}>
             <div className={styles['content-profileCard']}>
                <ProfileCard />
