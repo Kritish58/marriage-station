@@ -1,5 +1,6 @@
 .layout-content {
-   position: relative;
+   position: absolute;
+   top: 0;
 
    .sidebar {
       position: fixed;
@@ -55,10 +56,21 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px;
+      z-index: 10;
 
       &-expanded {
          left: 200px;
          width: calc(-200px - 20px + 100vw);
+      }
+
+      &-smallScreen {
+         left: 0;
+         top: 0;
+         width: 100vw;
+         position: fixed;
+         background-color: var(--primary-color);
+         color: white;
+         padding: 14px;
       }
 
       &-title {
@@ -78,6 +90,7 @@
 }
 
 .main-content {
+   padding-bottom: 20px;
    position: relative;
    top: 56px; //* height of Topbar
    margin-left: 56px; //* with of Sidenav
@@ -85,6 +98,12 @@
    transition: margin-left 0.1s;
 
    &-expanded {
+      //* sidebar expand or shrink on large screens
       margin-left: 200px;
+   }
+
+   &-smallScreen {
+      //* large screen sidebar is completely removed
+      margin-left: 0;
    }
 }
