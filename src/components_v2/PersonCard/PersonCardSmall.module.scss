@@ -1,19 +1,23 @@
 .card {
    display: flex;
    gap: 8px;
-   img {
-      object-fit: cover;
-      height: 120px;
-      width: 120px;
-   }
+   flex-direction: column;
 
    .content {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .header {
+      gap: 8px;
+
+      img {
+         object-fit: cover;
+         height: 120px;
+         width: 120px;
+      }
+
+      .details {
          display: flex;
+         flex-direction: column;
          justify-content: space-between;
+         align-items: flex-start;
          .text-info {
             display: flex;
             flex-direction: column;
@@ -21,13 +25,13 @@
          }
          .buttons {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            gap: 8px;
          }
       }
-      .footer {
-         display: flex;
-         gap: 8px;
-      }
+   }
+
+   .footer {
+      display: flex;
+      gap: 8px;
    }
 }

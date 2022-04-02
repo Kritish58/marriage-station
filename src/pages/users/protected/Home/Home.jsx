@@ -1,5 +1,3 @@
-import cx from 'classnames';
-import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -9,9 +7,13 @@ import ProfileCard from '../../../../components_v2/ProfileCard';
 import { Button } from 'rsuite';
 import CaretIcon from '../../../../icons/Caret';
 import VerifyIcon from '../../../../icons/VerifyIcon';
+import PersonCardSmall from '../../../../components_v2/PersonCard/PersonCardSmall';
+import useGetBreakpoint from '../../../../hooks/useGetBreakpoint';
 
 export default function Home() {
    const isUserVerified = true;
+
+   const breakpoint = useGetBreakpoint();
 
    const { user } = useSelector((state) => state.authState);
    if (!user) return <Navigate replace to="/privacy-policies" />;
@@ -20,7 +22,9 @@ export default function Home() {
       <div className={styles.home}>
          <div className={styles.content}>
             <div className={styles['content-profileCard']}>
-               <ProfileCard />
+               <div className={styles.profileCard}>
+                  <ProfileCard />
+               </div>
                <div className={styles['content-profileCard-options']}>
                   <h6 className={styles.name}>Kritish Bhattarai</h6>
                   <div className={styles['verify-section']}>
@@ -63,7 +67,7 @@ export default function Home() {
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
-                              <PersonCard />
+                              {breakpoint === 'xxl' || breakpoint === 'xl' ? <PersonCard /> : <PersonCardSmall />}
                            </div>
                         ))}
                      </div>

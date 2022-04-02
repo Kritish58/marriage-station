@@ -10,12 +10,28 @@
 
       .content-profileCard {
          min-width: 232px;
-         max-width: 232px;
+
+         @media (max-width: 1200px) {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+         }
+
+         .profileCard {
+            max-width: 232px;
+         }
 
          &-options {
+            flex-grow: 1;
+            width: 100%;
             .name {
                margin: 6px 0 0;
                text-align: center;
+
+               @media (max-width: 1200px) {
+                  text-align: left;
+                  font-size: 22px;
+               }
             }
 
             .verify-section {
@@ -23,6 +39,9 @@
                .verified {
                   color: var(--primary-color);
                   text-align: center;
+                  @media (max-width: 1200px) {
+                     text-align: left;
+                  }
                }
 
                .unverified {
