@@ -13,7 +13,7 @@
       }
    }
 
-   .details-content {
+   .details-content-list {
       background-color: white;
       padding: 10px 16px;
       border-radius: 4px;
@@ -36,5 +36,13 @@
             grid-template-columns: 1fr 2fr;
          }
       }
+   }
+
+   .details-content-paragraph {
+      background-color: white;
+      padding: 10px 16px;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 10px;
    }
 }

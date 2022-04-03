@@ -15,7 +15,7 @@ const DetailsCard = ({ title, type, data, onEditClick, Icon }) => {
          </div>
 
          {type === 'list' ? (
-            <div className={styles['details-content']}>
+            <div className={styles['details-content-list']}>
                {data.map((item, index) => (
                   <div className={styles['text-item']} key={index}>
                      <span>{item.title}</span>
@@ -24,7 +24,7 @@ const DetailsCard = ({ title, type, data, onEditClick, Icon }) => {
                ))}
             </div>
          ) : (
-            <div className={styles['details-content']}>{data}</div>
+            <div className={styles['details-content-paragraph']}>{data}</div>
          )}
       </div>
    );
