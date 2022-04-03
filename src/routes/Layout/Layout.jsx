@@ -16,6 +16,7 @@ import Logout from '../../icons/Logout';
 import useGetBreakpoint from '../../hooks/useGetBreakpoint';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/reducers';
+import { USER_ROUTES } from '../constants';
 
 const Layout = ({ children }) => {
    const { user } = useSelector((state) => state.authState);
@@ -26,9 +27,13 @@ const Layout = ({ children }) => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
-   const handleLogout = () => {
+   const handleLogout = () => () => {
       dispatch(logout());
       navigate('/', { replace: true });
+   };
+
+   const handleNavItemClick = (path) => () => {
+      navigate(path);
    };
 
    return (
@@ -62,25 +67,53 @@ const Layout = ({ children }) => {
                         onSelect={setActiveKey}>
                         <Sidenav.Body>
                            <Nav>
-                              <Nav.Item className={styles['nav-item']} eventKey="1" icon={<Home />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="1"
+                                 icon={<Home />}
+                                 onClick={handleNavItemClick(USER_ROUTES.home)}>
                                  {!!expanded && <span>Home</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="2" icon={<User />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="2"
+                                 icon={<User />}
+                                 onClick={handleNavItemClick(USER_ROUTES.myProfile)}>
                                  {!!expanded && <span>Profile</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="3" icon={<Matches />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="3"
+                                 icon={<Matches />}
+                                 onClick={handleNavItemClick(USER_ROUTES.matches)}>
                                  {!!expanded && <span>Matches</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="4" icon={<Search />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="4"
+                                 icon={<Search />}
+                                 onClick={handleNavItemClick(USER_ROUTES.search)}>
                                  {!!expanded && <span>Search</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="5" icon={<Mail />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="5"
+                                 icon={<Mail />}
+                                 onClick={handleNavItemClick(USER_ROUTES.mailbox)}>
                                  {!!expanded && <span>Mailbox</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="6" icon={<Money />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="6"
+                                 icon={<Money />}
+                                 onClick={handleNavItemClick(USER_ROUTES.upgrade)}>
                                  {!!expanded && <span>Upgrade</span>}
                               </Nav.Item>
-                              <Nav.Item className={styles['nav-item']} eventKey="7" icon={<Cog />}>
+                              <Nav.Item
+                                 className={styles['nav-item']}
+                                 eventKey="7"
+                                 icon={<Cog />}
+                                 onClick={handleNavItemClick(USER_ROUTES.settings)}>
                                  {!!expanded && <span>Settings</span>}
                               </Nav.Item>
                            </Nav>
