@@ -1,0 +1,87 @@
+.myProfile {
+   .content {
+      display: flex;
+      padding: 16px 0;
+      margin-top: 6px;
+      gap: 16px;
+
+      @media (max-width: 1200px) {
+         flex-direction: column;
+      }
+
+      .content-profileCard {
+         min-width: 232px;
+
+         @media (max-width: 1200px) {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+         }
+
+         .profileCard {
+            max-width: 232px;
+
+            position: relative;
+            .photo-edit-button {
+               width: calc(100% - 64px);
+               position: absolute;
+               bottom: 32px;
+               left: 32px;
+            }
+         }
+
+         &-options {
+            flex-grow: 1;
+            width: 100%;
+            .name {
+               margin: 6px 0 0;
+               text-align: center;
+
+               @media (max-width: 1200px) {
+                  text-align: left;
+                  font-size: 22px;
+               }
+            }
+
+            .verify-section {
+               margin-bottom: 20px;
+               .verified {
+                  color: var(--primary-color);
+                  text-align: center;
+                  @media (max-width: 1200px) {
+                     text-align: left;
+                  }
+               }
+
+               .unverified {
+                  p {
+                     font-size: 11px;
+                     line-height: 13px;
+                     text-align: center;
+                     margin: 4px 0;
+                  }
+               }
+            }
+
+            .link {
+               font-size: 14px;
+               display: flex;
+               align-items: center;
+               gap: 4px;
+               margin: 10px 0;
+               cursor: pointer;
+               &:hover {
+                  color: var(--primary-color);
+               }
+            }
+         }
+      }
+
+      .details-section {
+         flex-grow: 1;
+         display: flex;
+         flex-direction: column;
+         gap: 24px;
+      }
+   }
+}

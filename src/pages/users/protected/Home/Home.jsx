@@ -63,7 +63,7 @@ export default function Home() {
                   id="uncontrolled-tab-example"
                   className="mb-3 w-100">
                   <Tab eventKey="recently-joined" tabClassName={styles['tab-title']} title="Recently Joined">
-                     <h6 className="text-muted my-4">Recently Registered last 5 members</h6>
+                     <h6 className="text-muted my-4 lead">Recently Registered last 5 members</h6>
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
@@ -73,7 +73,7 @@ export default function Home() {
                      </div>
                   </Tab>
                   <Tab eventKey="short-listed" tabClassName={styles['tab-title']} title="Short Listed">
-                     <h6 className="text-muted my-4">Members in your short list</h6>
+                     <h6 className="text-muted my-4 lead">Members in your short list</h6>
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
@@ -83,7 +83,7 @@ export default function Home() {
                      </div>
                   </Tab>
                   <Tab eventKey="block-listed" tabClassName={styles['tab-title']} title="Block Listed">
-                     <h6 className="text-muted my-4">Members in your block list</h6>
+                     <h6 className="text-muted my-4 lead">Members in your block list</h6>
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
@@ -93,7 +93,7 @@ export default function Home() {
                      </div>
                   </Tab>
                   <Tab eventKey="i-viewed-profile" tabClassName={styles['tab-title']} title="I Viewed Profile">
-                     <h6 className="text-muted my-4">Members you checked profile of</h6>
+                     <h6 className="text-muted my-4 lead">Members you checked profile of</h6>
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
@@ -106,7 +106,7 @@ export default function Home() {
                      eventKey="who-viewed-my-profile"
                      tabClassName={styles['tab-title']}
                      title="Who Viewed My Profile">
-                     <h6 className="text-muted my-4">Members who checked your profile</h6>
+                     <h6 className="text-muted my-4 lead">Members who checked your profile</h6>
                      <div className="d-flex flex-wrap gap-3">
                         {[0, 1, 2, 3, 4].map((item) => (
                            <div key={item}>
