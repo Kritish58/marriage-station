@@ -3,6 +3,7 @@ import { Landing } from '../pages';
 import Dashboard from '../pages/admin/Dashboard';
 import Home from '../pages/users/protected/Home';
 import PreferenceMatches from '../pages/users/protected/matches/PreferenceMatch';
+import MyProfile from '../pages/users/protected/MyProfile';
 import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
 import SearchResults from '../pages/users/protected/search/SearchResults';
@@ -17,6 +18,12 @@ export const routeConfig = [
       path: '/home',
       title: 'Home',
       element: Home,
+      roles: [Constants.roles.NormalUser],
+   },
+   {
+      path: '/my-profile',
+      title: 'My Profile',
+      element: MyProfile,
       roles: [Constants.roles.NormalUser],
    },
    {
