@@ -17,11 +17,15 @@ import useGetBreakpoint from '../../hooks/useGetBreakpoint';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/reducers';
 import { USER_ROUTES } from '../constants';
+import BottomNav from '../../components_v2/BottomNav/BottomNav';
+import MobileSideNav from '../../components_v2/MobileSideNav';
 
 const Layout = ({ children }) => {
    const { user } = useSelector((state) => state.authState);
    const [expanded, setExpanded] = useState(true);
    const [activeKey, setActiveKey] = useState('1');
+
+   const [openMobileSidebar, setOpenMobileSidebar] = useState(false);
 
    const breakpoint = useGetBreakpoint();
    const dispatch = useDispatch();
@@ -36,6 +40,15 @@ const Layout = ({ children }) => {
       navigate(path);
    };
 
+   const menuClick = () => {
+      if (breakpoint === 'sm' || breakpoint === 'md') {
+         setOpenMobileSidebar((prev) => !prev);
+         return;
+      }
+
+      setExpanded((prev) => !prev);
+   };
+
    return (
       <div className="d-flex user__main">
          <div className={styles['layout-content']}>
@@ -45,12 +58,7 @@ const Layout = ({ children }) => {
                   expanded && styles['topbar-expanded'],
                   (breakpoint === 'sm' || breakpoint === 'md') && styles['topbar-smallScreen']
                )}>
-               <Hamburger
-                  className={styles.menu}
-                  onClick={() => {
-                     breakpoint !== 'sm' && breakpoint !== 'md' && setExpanded((prev) => !prev);
-                  }}
-               />
+               <Hamburger className={styles.menu} onClick={menuClick} />
                <h5 className={styles['topbar-title']}>Hello, {user.firstName}</h5>
             </div>
 
@@ -138,6 +146,9 @@ const Layout = ({ children }) => {
             style={{ flexGrow: '1' }}>
             {children}
          </aside>
+
+         <MobileSideNav isOpen={openMobileSidebar} />
+         {breakpoint === 'sm' && <BottomNav />}
       </div>
    );
 };

@@ -22,10 +22,18 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            @media (max-width: 575px) {
+               font-size: 13px;
+            }
          }
          .buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
+
+            @media (max-width: 575px) {
+               gap: 0;
+            }
          }
       }
    }
