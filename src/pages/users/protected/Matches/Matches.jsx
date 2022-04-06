@@ -63,7 +63,7 @@ const Matches = () => {
          </form>
 
          <hr />
-         <h4 className="mb-2"> Search Results: 2</h4>
+         <h4 className="mb-2 lead"> Search Results: 2</h4>
          <div className="d-flex gap-2 flex-wrap">
             {[0, 1, 2].map((item) => (
                <div>
