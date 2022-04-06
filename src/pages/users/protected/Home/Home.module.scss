@@ -14,14 +14,26 @@
             width: 100%;
             gap: 10px;
          }
+         @media (max-width: 575px) {
+            flex-direction: column;
+         }
 
          .profileCard {
             max-width: 232px;
+            @media (max-width: 1200px) {
+               margin: auto;
+            }
          }
 
          &-options {
             flex-grow: 1;
             width: 100%;
+            @media (max-width: 575px) {
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+            }
+
             .name {
                margin: 6px 0 0;
                text-align: center;
@@ -66,10 +78,27 @@
          }
       }
 
-      .tabs {
-         .tab-title {
-            font-size: 14px;
-            color: var(--primary-color);
+      .tabs-container {
+         .tabs {
+            width: 100%;
+            // * hide scrollbar
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-color: transparent transparent; //hide scrollbar for firefox
+            &::-webkit-scrollbar {
+               display: none;
+            }
+            &::-moz-scrollbar {
+               display: none;
+            }
+            // * hide scrollbar
+
+            flex-wrap: nowrap !important;
+            .tab-title {
+               font-size: 14px;
+               color: var(--primary-color);
+               white-space: nowrap;
+            }
          }
       }
    }

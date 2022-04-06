@@ -15,8 +15,6 @@ export default function Home() {
 
    const breakpoint = useGetBreakpoint();
 
-   console.log(breakpoint);
-
    const { user } = useSelector((state) => state.authState);
    if (!user) return <Navigate replace to="/privacy-policies" />;
 
@@ -58,12 +56,12 @@ export default function Home() {
                </div>
             </div>
 
-            <div className={styles.tabs}>
+            <div className={styles['tabs-container']}>
                <Tabs
+                  className={styles.tabs}
                   variant="tabs"
                   defaultActiveKey="recently-joined"
-                  id="uncontrolled-tab-example"
-                  className="mb-3 w-100">
+                  id="uncontrolled-tab-example">
                   <Tab eventKey="recently-joined" tabClassName={styles['tab-title']} title="Recently Joined">
                      <h6 className="text-muted my-4 lead">Recently Registered last 5 members</h6>
                      <div className="d-flex flex-wrap gap-3">

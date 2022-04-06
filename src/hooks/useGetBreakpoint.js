@@ -14,24 +14,24 @@ const useGetBreakpoint = () => {
    const handleWindowResize = () => {
       const innerWidth = window.innerWidth;
 
-      if (innerWidth >= BREAKPOINTS.xxl) {
-         setBreakpoint('xxl');
+      if (innerWidth <= BREAKPOINTS.sm) {
+         setBreakpoint('sm');
          return;
       }
-      if (innerWidth >= BREAKPOINTS.xl) {
-         setBreakpoint('xl');
-         return;
-      }
-      if (innerWidth >= BREAKPOINTS.lg) {
-         setBreakpoint('lg');
-         return;
-      }
-      if (innerWidth >= BREAKPOINTS.md) {
+      if (innerWidth <= BREAKPOINTS.md) {
          setBreakpoint('md');
          return;
       }
-      if (innerWidth >= BREAKPOINTS.sm) {
-         setBreakpoint('sm');
+      if (innerWidth <= BREAKPOINTS.lg) {
+         setBreakpoint('lg');
+         return;
+      }
+      if (innerWidth <= BREAKPOINTS.xl) {
+         setBreakpoint('xl');
+         return;
+      }
+      if (innerWidth <= BREAKPOINTS.xxl) {
+         setBreakpoint('xxl');
          return;
       }
    };
