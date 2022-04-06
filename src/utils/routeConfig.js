@@ -2,7 +2,7 @@ import Constants from '../constants';
 import { Landing } from '../pages';
 import Dashboard from '../pages/admin/Dashboard';
 import Home from '../pages/users/protected/Home';
-import PreferenceMatches from '../pages/users/protected/matches/PreferenceMatch';
+import Matches from '../pages/users/protected/Matches';
 import MyProfile from '../pages/users/protected/MyProfile';
 import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
@@ -47,7 +47,7 @@ export const routeConfig = [
    {
       path: '/matches',
       title: 'Matches',
-      element: PreferenceMatches,
+      element: Matches,
       roles: [Constants.roles.NormalUser],
    },
 ];
