@@ -11,31 +11,33 @@ const BREAKPOINTS = {
 const useGetBreakpoint = () => {
    const [breakpoint, setBreakpoint] = useState('xl');
 
-   useEffect(() => {
-      const handleWindowResize = () => {
-         const innerWidth = window.innerWidth;
+   const handleWindowResize = () => {
+      const innerWidth = window.innerWidth;
 
-         if (innerWidth >= BREAKPOINTS.xxl) {
-            setBreakpoint('xxl');
-            return;
-         }
-         if (innerWidth >= BREAKPOINTS.xl) {
-            setBreakpoint('xl');
-            return;
-         }
-         if (innerWidth >= BREAKPOINTS.lg) {
-            setBreakpoint('lg');
-            return;
-         }
-         if (innerWidth >= BREAKPOINTS.md) {
-            setBreakpoint('md');
-            return;
-         }
-         if (innerWidth >= BREAKPOINTS.sm) {
-            setBreakpoint('sm');
-            return;
-         }
-      };
+      if (innerWidth >= BREAKPOINTS.xxl) {
+         setBreakpoint('xxl');
+         return;
+      }
+      if (innerWidth >= BREAKPOINTS.xl) {
+         setBreakpoint('xl');
+         return;
+      }
+      if (innerWidth >= BREAKPOINTS.lg) {
+         setBreakpoint('lg');
+         return;
+      }
+      if (innerWidth >= BREAKPOINTS.md) {
+         setBreakpoint('md');
+         return;
+      }
+      if (innerWidth >= BREAKPOINTS.sm) {
+         setBreakpoint('sm');
+         return;
+      }
+   };
+
+   useEffect(() => {
+      handleWindowResize();
 
       window.addEventListener('resize', handleWindowResize);
 

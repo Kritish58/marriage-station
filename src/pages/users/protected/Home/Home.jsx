@@ -15,6 +15,8 @@ export default function Home() {
 
    const breakpoint = useGetBreakpoint();
 
+   console.log(breakpoint);
+
    const { user } = useSelector((state) => state.authState);
    if (!user) return <Navigate replace to="/privacy-policies" />;
 
