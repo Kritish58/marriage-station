@@ -7,6 +7,8 @@ import MyProfile from '../pages/users/protected/MyProfile';
 import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
 import SearchResults from '../pages/users/protected/search/SearchResults';
+import SearchV2 from '../pages/users/protected/SearchV2';
+
 export const routeConfig = [
    {
       path: '/',
@@ -29,7 +31,7 @@ export const routeConfig = [
    {
       path: '/search',
       title: 'Search Page',
-      element: SearchPage,
+      element: SearchV2,
       roles: [Constants.roles.NormalUser],
    },
    {
