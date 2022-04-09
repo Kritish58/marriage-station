@@ -3,6 +3,7 @@ import { useState } from 'react';
 import RegularBasicSearch from './components/RegularBasicSearch';
 import RegularAdvancedSearch from './components/RegularAdvancedSearch';
 import useGetBreakpoint from '../../../../hooks/useGetBreakpoint';
+import { useNavigate } from 'react-router-dom';
 
 const SEARCH_TABS = {
    id: 'idSearch',
@@ -11,6 +12,7 @@ const SEARCH_TABS = {
 
 const SearchV2 = () => {
    const breakpoint = useGetBreakpoint();
+   const navigate = useNavigate();
 
    const [activeTab, setActiveTab] = useState(SEARCH_TABS.regular);
 
@@ -21,6 +23,10 @@ const SearchV2 = () => {
             <Nav.Item eventKey={SEARCH_TABS.id}>ID Search</Nav.Item>
          </Nav>
       );
+   };
+
+   const handleSearchClick = () => {
+      navigate('/search-results');
    };
 
    const RegularSearch = () => {
@@ -46,7 +52,7 @@ const SearchV2 = () => {
                </div>
             </div>
 
-            <Button size="lg" appearance="primary" color="green" block>
+            <Button onClick={handleSearchClick} size="lg" appearance="primary" color="green" block>
                Search
             </Button>
          </div>
