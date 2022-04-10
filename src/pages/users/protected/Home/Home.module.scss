@@ -83,6 +83,7 @@
             width: 100%;
             // * hide scrollbar
             overflow-x: auto;
+            overflow-y: hidden;
             -ms-overflow-style: none;
             scrollbar-color: transparent transparent; //hide scrollbar for firefox
             &::-webkit-scrollbar {

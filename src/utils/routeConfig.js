@@ -8,6 +8,7 @@ import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
 import SearchResults from '../pages/users/protected/search/SearchResults';
 import SearchV2 from '../pages/users/protected/SearchV2';
+import Upgrade from '../pages/users/protected/Upgrade';
 
 export const routeConfig = [
    {
@@ -26,6 +27,12 @@ export const routeConfig = [
       path: '/my-profile',
       title: 'My Profile',
       element: MyProfile,
+      roles: [Constants.roles.NormalUser],
+   },
+   {
+      path: '/upgrade',
+      title: 'Upgrade',
+      element: Upgrade,
       roles: [Constants.roles.NormalUser],
    },
    {
