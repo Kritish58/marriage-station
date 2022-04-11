@@ -8,6 +8,7 @@ import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
 import SearchResults from '../pages/users/protected/search/SearchResults';
 import SearchV2 from '../pages/users/protected/SearchV2';
+import Settings from '../pages/users/protected/Settings';
 import Upgrade from '../pages/users/protected/Upgrade';
 
 export const routeConfig = [
@@ -57,6 +58,12 @@ export const routeConfig = [
       path: '/matches',
       title: 'Matches',
       element: Matches,
+      roles: [Constants.roles.NormalUser],
+   },
+   {
+      path: '/settings',
+      title: 'Settings',
+      element: Settings,
       roles: [Constants.roles.NormalUser],
    },
 ];

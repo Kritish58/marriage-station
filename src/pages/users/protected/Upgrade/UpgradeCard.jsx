@@ -1,11 +1,10 @@
 import { CalendarIcon, CheckIcon } from '@heroicons/react/outline';
 import { Button } from 'rsuite';
-import PropTypes from 'prop-types';
 
 const UpgradeCard = ({ title, duration, profileViews, liveChat, personalMessage, price, onClick }) => {
    return (
-      <div className="py-2 px-3 border bg-white rounded" style={{ maxWidth: 300 }}>
-         <h3 className=" text-center mb-2" style={{ fontWeight: 400, color: 'var(--primary-color)' }}>
+      <div className="py-3 px-4 border bg-white rounded" style={{ maxWidth: 400 }}>
+         <h3 className=" text-center mb-4" style={{ fontWeight: 400, color: 'var(--primary-color)' }}>
             {title}
          </h3>
          <div className="d-flex gap-2 my-3">
@@ -53,16 +52,6 @@ const UpgradeCard = ({ title, duration, profileViews, liveChat, personalMessage,
          </div>
       </div>
    );
-};
-
-UpgradeCard.propTypes = {
-   title: PropTypes.string,
-   duration: PropTypes.string,
-   profileViews: PropTypes.string,
-   liveChat: PropTypes.string,
-   personalMessage: PropTypes.string,
-   price: PropTypes.string,
-   onClick: PropTypes.func,
 };
 
 export default UpgradeCard;

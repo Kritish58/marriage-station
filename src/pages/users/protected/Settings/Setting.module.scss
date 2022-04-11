@@ -1,0 +1,20 @@
+.pageLink {
+   padding: 8px;
+   cursor: pointer;
+   color: #666;
+   border-radius: 4px;
+   margin: 4px 0;
+
+   &:hover {
+      color: var(--primary-color);
+   }
+
+   &-active {
+      background-color: var(--primary-color);
+      color: white;
+
+      &:hover {
+         color: white;
+      }
+   }
+}
