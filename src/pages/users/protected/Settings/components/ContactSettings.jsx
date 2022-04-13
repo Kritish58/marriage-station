@@ -1,13 +1,15 @@
 import { Button, Radio } from 'rsuite';
+import cx from 'classnames';
+import styles from '../Setting.module.scss';
 
 const ContactSettings = () => {
    return (
-      <div>
+      <div className={styles.pageContent}>
          <p className="lead text-muted">Contact Settings</p>
-         <small className="text-muted">
+         <div className={cx(styles.description, 'small text-muted')}>
             Your opted settings for receiving alerts through emails are mentioned here. You may choose to edit the
             existing settings.
-         </small>
+         </div>
 
          <div className="my-2 d-flex flex-column">
             <Radio>Show to all paid members</Radio>

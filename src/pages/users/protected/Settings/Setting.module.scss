@@ -1,20 +1,32 @@
-.pageLink {
-   padding: 8px;
-   cursor: pointer;
-   color: #666;
-   border-radius: 4px;
-   margin: 4px 0;
+@use '../../../../styles/mixins.scss' as *;
 
-   &:hover {
-      color: var(--primary-color);
-   }
+.sideNav {
+   @include hideHorizontalScroll;
 
-   &-active {
-      background-color: var(--primary-color);
-      color: white;
-
+   .pageLink {
+      padding: 8px;
+      cursor: pointer;
+      color: #666;
+      border-radius: 4px;
+      margin: 4px 0;
+      white-space: nowrap;
       &:hover {
-         color: white;
+         color: var(--primary-color);
       }
+
+      &-active {
+         background-color: var(--primary-color);
+         color: white;
+
+         &:hover {
+            color: white;
+         }
+      }
+   }
+}
+
+.pageContent {
+   .description {
+      max-width: 600px;
    }
 }

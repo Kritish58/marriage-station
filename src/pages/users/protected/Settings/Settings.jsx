@@ -6,6 +6,7 @@ import DeleteProfile from './components/DeleteProfile';
 import EditEmail from './components/EditEmail';
 import PhotoVisibility from './components/PhotoVisibility';
 import SettingsSideNav from './components/SettingsSideNav';
+import useGetBreakpoint from '../../../../hooks/useGetBreakpoint';
 
 export const SETTING_PAGES = {
    editEmail: 'editEmail',
@@ -18,6 +19,27 @@ export const SETTING_PAGES = {
 
 const Settings = () => {
    const [activePage, setActivePage] = useState(SETTING_PAGES.editEmail);
+   const breakpoint = useGetBreakpoint();
+
+   const sideNavLarge = {
+      minWidth: 220,
+      height: 'fit-content',
+      display: 'flex',
+      flexDirection: 'column',
+   };
+   const sideNavSmall = {
+      position: 'absolute',
+      display: 'flex',
+      gap: 16,
+      overflowX: 'auto',
+      width: 'calc(100% - 40px)',
+   };
+
+   const pageContent = {
+      flexGrow: 1,
+      height: 'fit-content',
+      marginTop: breakpoint === 'md' || breakpoint === 'sm' ? 72 : 0,
+   };
 
    const handlePageChange = (page) => () => {
       setActivePage(page);
@@ -53,11 +75,11 @@ const Settings = () => {
          <p className="mb-2 lead">Profile Settings</p>
          <div className="d-flex gap-3">
             <SettingsSideNav
-               style={{ minWidth: 220, height: 'fit-content' }}
+               style={breakpoint === 'md' || breakpoint === 'sm' ? sideNavSmall : sideNavLarge}
                activePage={activePage}
                handlePageChange={handlePageChange}
             />
-            <div className="p-3 bg-white border rounded" style={{ flexGrow: 1, height: 'fit-content' }}>
+            <div className="p-3 bg-white border rounded" style={pageContent}>
                {renderPageContent()}
             </div>
          </div>

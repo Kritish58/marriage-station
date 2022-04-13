@@ -1,13 +1,16 @@
 import { Button, Input } from 'rsuite';
+import cx from 'classnames';
+import styles from '../Setting.module.scss';
 
 const EditEmail = () => {
    return (
-      <div>
+      <div className={styles.pageContent}>
          <p className="lead text-muted">Edit Email Address</p>
-         <small>
+
+         <div className={cx(styles.description, 'small text-muted')}>
             A valid e-mail id will be used to send you partner search mailers, member to member communication mailers
             and special offers.
-         </small>
+         </div>
 
          <div className="mt-4 mb-3 d-flex gap-2 flex-wrap">
             <Input className="border" placeholder="Enter New Email" style={{ maxWidth: 300 }} />

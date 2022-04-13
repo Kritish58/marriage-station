@@ -1,13 +1,15 @@
 import { Button, Input } from 'rsuite';
+import cx from 'classnames';
+import styles from '../Setting.module.scss';
 
 const ChangePassword = () => {
    return (
-      <div>
+      <div className={styles.pageContent}>
          <p className="lead text-muted">Change Password</p>
-         <small>
+         <div className={cx(styles.description, 'small text-muted')}>
             Your password must have a minimum of 6 characters. We recommend you choose an alphanumeric password. E.g.:
             Matri123
-         </small>
+         </div>
 
          <div className="my-2  mt-3 d-flex flex-column gap-3 flex-wrap">
             <div className="">

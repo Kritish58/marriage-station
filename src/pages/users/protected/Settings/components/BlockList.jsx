@@ -1,11 +1,15 @@
 import { Button, Input } from 'rsuite';
+import cx from 'classnames';
+import styles from '../Setting.module.scss';
 import PersonCard from '../../../../../components_v2/PersonCard/PersonCard';
 
 const BlockList = () => {
    return (
-      <div>
+      <div className={styles.pageContent}>
          <p className="lead text-muted">Block List</p>
-         <small>Contains all those profiles whom you consider not worth interacting and have blocked.</small>
+         <div className={cx(styles.description, 'small text-muted')}>
+            Contains all those profiles whom you consider not worth interacting and have blocked.
+         </div>
 
          <div className="mt-4 mb-3 d-flex gap-2 flex-wrap">
             <Input className="border" placeholder="Profile id" style={{ maxWidth: 300 }} />

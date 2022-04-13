@@ -4,7 +4,7 @@ import styles from '../Setting.module.scss';
 
 const SettingsSideNav = ({ style, activePage, handlePageChange }) => {
    return (
-      <div style={style} className="d-flex flex-column p-3 py-2 border rounded bg-white">
+      <div style={style} className={cx(styles.sideNav, 'p-3 py-2 border rounded bg-white')}>
          <span
             className={cx(styles.pageLink, activePage === SETTING_PAGES.editEmail && styles['pageLink-active'])}
             onClick={handlePageChange(SETTING_PAGES.editEmail)}>

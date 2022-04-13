@@ -1,13 +1,16 @@
 import { Button, Input, Radio } from 'rsuite';
+import cx from 'classnames';
+import styles from '../Setting.module.scss';
 
 const PhotoVisibility = () => {
    return (
-      <div>
+      <div className={styles.pageContent}>
          <p className="lead text-muted">Photo Visibility</p>
-         <small className="text-muted">
+
+         <div className={cx(styles.description, 'small text-muted')}>
             Limit your visibility to others by selecting from three options below.You can password protect your photos
             so that only those to whom you send password can view them.
-         </small>
+         </div>
 
          <div className="my-2 d-flex flex-column">
             <Radio> Hide for All</Radio>
