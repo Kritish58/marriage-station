@@ -52,7 +52,11 @@ const Settings = () => {
       <div>
          <p className="mb-2 lead">Profile Settings</p>
          <div className="d-flex gap-3">
-            <SettingsSideNav style={{ minWidth: 220 }} activePage={activePage} handlePageChange={handlePageChange} />
+            <SettingsSideNav
+               style={{ minWidth: 220, height: 'fit-content' }}
+               activePage={activePage}
+               handlePageChange={handlePageChange}
+            />
             <div className="p-3 bg-white border rounded" style={{ flexGrow: 1, height: 'fit-content' }}>
                {renderPageContent()}
             </div>
