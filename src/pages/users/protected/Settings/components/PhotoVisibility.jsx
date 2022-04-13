@@ -4,7 +4,7 @@ const PhotoVisibility = () => {
    return (
       <div>
          <p className="lead text-muted">Photo Visibility</p>
-         <small>
+         <small className="text-muted">
             Limit your visibility to others by selecting from three options below.You can password protect your photos
             so that only those to whom you send password can view them.
          </small>
