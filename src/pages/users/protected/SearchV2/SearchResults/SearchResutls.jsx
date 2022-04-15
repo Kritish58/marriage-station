@@ -1,10 +1,4 @@
-import {
-   ArrowCircleDownIcon,
-   ArrowCircleLeftIcon,
-   ArrowDownIcon,
-   ArrowLeftIcon,
-   ArrowNarrowLeftIcon,
-} from '@heroicons/react/outline';
+import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dropdown, Nav, Sidenav, Checkbox } from 'rsuite';
