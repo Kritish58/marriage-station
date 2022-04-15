@@ -10,6 +10,7 @@ import SearchResults from '../pages/users/protected/SearchV2/SearchResults';
 import SearchV2 from '../pages/users/protected/SearchV2';
 import Settings from '../pages/users/protected/Settings';
 import Upgrade from '../pages/users/protected/Upgrade';
+import MailBox from '../pages/users/protected/MailBox';
 
 export const routeConfig = [
    {
@@ -58,6 +59,12 @@ export const routeConfig = [
       path: '/matches',
       title: 'Matches',
       element: Matches,
+      roles: [Constants.roles.NormalUser],
+   },
+   {
+      path: '/mailbox',
+      title: 'MailBox',
+      element: MailBox,
       roles: [Constants.roles.NormalUser],
    },
    {

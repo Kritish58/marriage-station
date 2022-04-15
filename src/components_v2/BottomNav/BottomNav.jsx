@@ -2,6 +2,7 @@ import cx from 'classnames';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../../icons/Home';
+import Mail from '../../icons/Mail';
 import MatchesIcon from '../../icons/Matches';
 import SearchIcon from '../../icons/Search';
 import UserIcon from '../../icons/User';
@@ -12,6 +13,7 @@ const NAV_ITEMS = {
    profile: 'my-profile',
    search: 'search',
    matches: 'matches',
+   mailbox: 'mailbox',
 };
 
 const BottomNav = () => {
@@ -43,6 +45,12 @@ const BottomNav = () => {
             onClick={handleNavItemClick(NAV_ITEMS.search)}>
             <SearchIcon />
             <small>Search</small>
+         </div>
+         <div
+            className={cx(styles['nav-item'], activeNav === NAV_ITEMS.mailbox && styles['nav-item-active'])}
+            onClick={handleNavItemClick(NAV_ITEMS.mailbox)}>
+            <Mail />
+            <small>Mailbox</small>
          </div>
          <div
             className={cx(styles['nav-item'], activeNav === NAV_ITEMS.matches && styles['nav-item-active'])}
