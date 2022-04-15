@@ -32,21 +32,21 @@ export default function SearchResults() {
                   </Dropdown>
                   <Dropdown eventKey="4" title="Marital Status">
                      {Constants.maritalStatus.map((item, index) => (
-                        <Dropdown.Item eventKey={`3-${index}`}>
+                        <Dropdown.Item eventKey={`4-${index}`}>
                            <Checkbox>{item}</Checkbox>
                         </Dropdown.Item>
                      ))}
                   </Dropdown>
                   <Dropdown eventKey="5" title="Caste">
                      {Constants.caste.map((item, index) => (
-                        <Dropdown.Item eventKey={`3-${index}`}>
+                        <Dropdown.Item eventKey={`5-${index}`}>
                            <Checkbox>{item}</Checkbox>
                         </Dropdown.Item>
                      ))}
                   </Dropdown>
                   <Dropdown eventKey="6" title="State">
                      {Constants.provinces.map((item, index) => (
-                        <Dropdown.Item eventKey={`3-${index}`}>
+                        <Dropdown.Item eventKey={`6-${index}`}>
                            <Checkbox>{item}</Checkbox>
                         </Dropdown.Item>
                      ))}
