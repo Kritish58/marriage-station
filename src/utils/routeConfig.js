@@ -6,7 +6,7 @@ import Matches from '../pages/users/protected/Matches';
 import MyProfile from '../pages/users/protected/MyProfile';
 import ViewProfile from '../pages/users/protected/profile';
 import SearchPage from '../pages/users/protected/search/SearchPage';
-import SearchResults from '../pages/users/protected/search/SearchResults';
+import SearchResults from '../pages/users/protected/SearchV2/SearchResults';
 import SearchV2 from '../pages/users/protected/SearchV2';
 import Settings from '../pages/users/protected/Settings';
 import Upgrade from '../pages/users/protected/Upgrade';

@@ -69,6 +69,7 @@ export default function SearchResults() {
    ) : (
       <div className="search__page">
          <h2 className="py-4">Search results</h2>
+
          <div className="d-flex">
             <aside className="filter__user" style={{ flex: 1, maxHeight: '75vh' }}>
                <section

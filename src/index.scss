@@ -60,3 +60,11 @@ button {
    user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.rs-dropdown-toggle {
+   padding: 14px 20px !important;
+}
+.rs-dropdown-item {
+   padding: 0px !important;
+   padding-left: 14px !important;
+}
