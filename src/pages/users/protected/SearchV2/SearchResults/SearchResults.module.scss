@@ -1,9 +1,18 @@
 .searchResults {
+   display: flex;
+   gap: 16px;
+
+   @media (max-width: 810px) {
+      flex-direction: column;
+   }
+
    .sideNav {
-      max-width: 200px;
-      .nav {
-         .dropdown-title {
-         }
+      border-radius: 4px;
+      width: 220px;
+      height: fit-content;
+
+      @media (max-width: 810px) {
+         width: 100%;
       }
    }
 }
